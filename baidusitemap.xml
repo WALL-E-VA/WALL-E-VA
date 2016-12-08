@@ -110,23 +110,6 @@
 
     
   <url>
-    <loc>http://sharecode.cc/2016/09/01/BF-Algorithm-for-Pattern-Matching-in-String/</loc>
-    <lastmod>2016-11-07T09:22:09.437Z</lastmod>
-    <data>
-        <display>
-        <title>Algorithm BF for Pattern Matching in String</title>
-        <pubTime>2016-09-01T01:22:51.000Z</pubTime>
-        
-        <tag>Algorithm</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://sharecode.cc/2016/08/26/Algorithm-Insertion-Sort-CS/</loc>
     <lastmod>2016-11-07T09:22:09.437Z</lastmod>
     <data>
@@ -150,6 +133,23 @@
         <display>
         <title>Algorithm - Bubble Sort - C#</title>
         <pubTime>2016-08-08T07:40:18.000Z</pubTime>
+        
+        <tag>Algorithm</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://sharecode.cc/2016/09/01/BF-Algorithm-for-Pattern-Matching-in-String/</loc>
+    <lastmod>2016-11-07T09:22:09.437Z</lastmod>
+    <data>
+        <display>
+        <title>Algorithm BF for Pattern Matching in String</title>
+        <pubTime>2016-09-01T01:22:51.000Z</pubTime>
         
         <tag>Algorithm</tag>
          
