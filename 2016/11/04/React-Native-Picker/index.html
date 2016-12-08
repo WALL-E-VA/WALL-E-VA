@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>React Native - Picker | http://sharecode.cc/</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="选择框
+selectedValue 当前选中值
+
+mode Android Only 展现方式
+
+dialog:对话框形式 
+dropdown:下拉框形式
+
+
+prompt Android Only 当以对话框形式显示时的提示标题
+
+onValueChange 当选项变化时的回调 
+
+itemValue:当前选中的值
+itemPosition:当前选中的项的索引
+
+
+
+Demo1234567891">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Native - Picker">
+<meta property="og:url" content="http://sharecode.cc/2016/11/04/React-Native-Picker/index.html">
+<meta property="og:site_name" content="http://sharecode.cc/">
+<meta property="og:description" content="选择框
+selectedValue 当前选中值
+
+mode Android Only 展现方式
+
+dialog:对话框形式 
+dropdown:下拉框形式
+
+
+prompt Android Only 当以对话框形式显示时的提示标题
+
+onValueChange 当选项变化时的回调 
+
+itemValue:当前选中的值
+itemPosition:当前选中的项的索引
+
+
+
+Demo1234567891">
+<meta property="og:image" content="http://og24yrsh2.bkt.clouddn.com/Picker.gif">
+<meta property="og:updated_time" content="2016-11-07T07:53:13.946Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React Native - Picker">
+<meta name="twitter:description" content="选择框
+selectedValue 当前选中值
+
+mode Android Only 展现方式
+
+dialog:对话框形式 
+dropdown:下拉框形式
+
+
+prompt Android Only 当以对话框形式显示时的提示标题
+
+onValueChange 当选项变化时的回调 
+
+itemValue:当前选中的值
+itemPosition:当前选中的项的索引
+
+
+
+Demo1234567891">
+<meta name="twitter:image" content="http://og24yrsh2.bkt.clouddn.com/Picker.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="http://sharecode.cc/" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://sharecode.cc"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">http://sharecode.cc/</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Tianmin&#39;s Blog</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-React-Native-Picker" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/04/React-Native-Picker/" class="article-date">
+  <time datetime="2016-11-04T09:27:37.000Z" itemprop="datePublished">2016-11-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React Native - Picker
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="选择框"><a href="#选择框" class="headerlink" title="选择框"></a>选择框</h3><ul>
+<li><p>selectedValue 当前选中值</p>
+</li>
+<li><p>mode <code>Android Only</code> 展现方式</p>
+<ol>
+<li>dialog:对话框形式 </li>
+<li>dropdown:下拉框形式</li>
+</ol>
+</li>
+<li><p>prompt <code>Android Only</code> 当以对话框形式显示时的提示标题</p>
+</li>
+<li><p>onValueChange 当选项变化时的回调 </p>
+<ol>
+<li>itemValue:当前选中的值</li>
+<li>itemPosition:当前选中的项的索引</li>
+</ol>
+</li>
+</ul>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">    View,</div><div class="line">    StyleSheet,</div><div class="line">    Picker,</div><div class="line">    ToastAndroid,</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'react-native'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">PickerDemo</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentWillMount() &#123;</div><div class="line">        <span class="keyword">this</span>.City = [<span class="string">'Beijing'</span>,<span class="string">'ShangHai'</span>];</div><div class="line">        <span class="keyword">this</span>.BeijingDist = [<span class="string">'东城'</span>,<span class="string">'崇文'</span>, <span class="string">'西城'</span>,<span class="string">'宣武'</span>];</div><div class="line">        <span class="keyword">this</span>.ShangHaiDist = [<span class="string">'黄浦'</span>,<span class="string">'卢湾'</span>,<span class="string">'徐汇'</span>,<span class="string">'长宁'</span>,<span class="string">'静安'</span>];</div><div class="line"></div><div class="line">        <span class="keyword">this</span>.state = &#123;</div><div class="line">            <span class="attr">selectedCity</span>: <span class="keyword">this</span>.City[<span class="number">0</span>],</div><div class="line">            <span class="attr">selectedDistrict</span>: <span class="keyword">this</span>.BeijingDist[<span class="number">0</span>],</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">let</span> CityOption = <span class="keyword">this</span>.City.map(<span class="function"><span class="keyword">function</span>(<span class="params">city</span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> (</div><div class="line">                &lt;Picker.Item label = &#123;city&#125; value = &#123;city&#125;/&gt;</div><div class="line">            );</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        let District = null;</div><div class="line"></div><div class="line">        if (this.state.selectedCity === this.City[0]) &#123;</div><div class="line">            District = this.BeijingDist;</div><div class="line">        &#125; else &#123;</div><div class="line">            District = this.ShangHaiDist;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        let DistOption = District.map(function (dist) &#123;</div><div class="line">            return (</div><div class="line">                &lt;Picker.Item label=&#123;dist&#125; value=&#123;dist&#125; /&gt;</div><div class="line">            );</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        return (</div><div class="line">            &lt;View style=&#123;styles.flex&#125;&gt;</div><div class="line">                &lt;Picker</div><div class="line">                    selectedValue = &#123;this.state.selectedCity&#125;</div><div class="line">                    onValueChange = &#123;(city) =&gt; &#123;this.setState(&#123;selectedCity:city&#125;)&#125;&#125;</div><div class="line">                    mode = 'dropdown'</div><div class="line">                &gt;</div><div class="line">                    &#123;CityOption&#125;</div><div class="line">                &lt;/Picker&gt;</div><div class="line">                &lt;Picker</div><div class="line">                    selectedValue = &#123;this.state.selectedDistrict&#125;</div><div class="line">                    onValueChange = &#123;this.onDistrictChange&#125;</div><div class="line">                    mode = 'dialog'</div><div class="line">                    prompt = '选择区'</div><div class="line">                &gt;</div><div class="line">                    &#123;DistOption&#125;</div><div class="line">                &lt;/Picker&gt;</div><div class="line">            &lt;/View&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    onDistrictChange = (itemValue, itemPosition) =&gt; &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">            selectedDistrict: itemValue,</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        ToastAndroid.showWithGravity(`Selected index is $&#123;itemPosition&#125;`,ToastAndroid.SHORT,ToastAndroid.CENTER);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentWillUpdate(nextProps, nextStates) &#123;</div><div class="line">        //只变换区时执行一次。</div><div class="line">        //变换城市是执行两次，因为selectedCity和selectedDistrict相继发生变化，引起重新render()</div><div class="line">        ToastAndroid.showWithGravity(`City changed from $&#123;this.state.selectedDistrict&#125; to $&#123;nextStates.selectedDistrict&#125;`,ToastAndroid.SHORT,ToastAndroid.CENTER);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const styles = StyleSheet.create(&#123;</div><div class="line">    flex: &#123;</div><div class="line">        flex:1,</div><div class="line">        justifyContent: 'center'</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="http://og24yrsh2.bkt.clouddn.com/Picker.gif" alt="Picker Demo"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sharecode.cc/2016/11/04/React-Native-Picker/" data-id="ciwg1d7eu000gn4gemyzduyxx" class="article-share-link">分享</a>
+      
+        <a href="http://sharecode.cc/2016/11/04/React-Native-Picker/#ds-thread" class="article-comment-link">留言</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/11/08/Write-Class-Diagram-PlantUML/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          使用PlantUML画类图
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/11/03/Design-Pattern-Observer/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Design Pattern - Observer</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+      <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016/11/04/React-Native-Picker/" data-title="React Native - Picker" data-url="http://sharecode.cc/2016/11/04/React-Native-Picker/"></div>
+	<!-- 多说评论框 end -->
+</div>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title tagcloud">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/React-Native-Android/" style="font-size: 15px;">React Native Android</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/Hexo_Hightlight/">Hexo - Hightlight source code with Google Code Prettify</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/06/Aspnet-Core-Web-GetStarted/">ASP.NET Core中的Program和Startup类</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/06/Aspnet-Core-Trouble-Shooting/">ASP.NET Core 开发常见问题汇总</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/08/Write-Class-Diagram-PlantUML/">使用PlantUML画类图</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/04/React-Native-Picker/">React Native - Picker</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+     
+
+  <div class="widget-wrap">
+    <h3 class="widget-title lastest-comments">最新评论</h3>
+    <div class="widget">
+         <div class="hot-comments">
+    <!-- 多说最新评论 start -->
+	<div class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="1" data-excerpt-length="70"></div>
+    <!-- 多说最新评论 end -->
+</div>
+    </div>
+  </div>
+
+
+
+  
+     
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title archive">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 Tianmin&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;181949031@qq.com
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+    	<script type="text/javascript">
+        var duoshuoQuery = {short_name:"giscafe"};
+      </script>
+      <script src="/duoshuo/embed.js"></script>
+
+
+ <script src="/jquery/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

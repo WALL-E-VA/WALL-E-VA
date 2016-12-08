@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>http://sharecode.cc/</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="http://sharecode.cc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="http://sharecode.cc/">
+<meta property="og:url" content="http://sharecode.cc/page/2/index.html">
+<meta property="og:site_name" content="http://sharecode.cc/">
+<meta property="og:description" content="http://sharecode.cc/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="http://sharecode.cc/">
+<meta name="twitter:description" content="http://sharecode.cc/">
+  
+    <link rel="alternate" href="/atom.xml" title="http://sharecode.cc/" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://sharecode.cc"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">http://sharecode.cc/</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Tianmin&#39;s Blog</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Write-Class-Diagram-PlantUML" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/08/Write-Class-Diagram-PlantUML/" class="article-date">
+  <time datetime="2016-11-08T08:58:37.000Z" itemprop="datePublished">2016-11-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/08/Write-Class-Diagram-PlantUML/">使用PlantUML画类图</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="类图-Class-Diagram-表示类与类之间的关系，利用PlantUML来描述这些关系的基本用法如下："><a href="#类图-Class-Diagram-表示类与类之间的关系，利用PlantUML来描述这些关系的基本用法如下：" class="headerlink" title="类图(Class Diagram)表示类与类之间的关系，利用PlantUML来描述这些关系的基本用法如下："></a>类图(Class Diagram)表示类与类之间的关系，利用PlantUML来描述这些关系的基本用法如下：</h3><ol>
+<li><p>泛化(Generalization)</p>
+<ul>
+<li>继承(Extend) - 子类继承父类</li>
+<li>实现(Implement) - 具体类实现公共借口</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Extend &lt;&lt;Folder&gt;&gt; &#123;</div><div class="line">        class Animal &#123;</div><div class="line">            +name string</div><div class="line">            +void breathe()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class Human&#123;</div><div class="line">            +name string</div><div class="line">            +void breathe()</div><div class="line">            +void Inovate()</div><div class="line">            +void Drive(ICar car)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    package implement &lt;&lt;Folder&gt;&gt; &#123;</div><div class="line">        interface ICar &#123;</div><div class="line">            +name string</div><div class="line">            +void Run()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class BMW &#123;</div><div class="line">            +name string</div><div class="line">            +void Run()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /&apos;泛化 - 继承类&apos;/</div><div class="line">    Human -up--|&gt; Animal : extends</div><div class="line"></div><div class="line">    /&apos;泛化 - 实现接口&apos;/</div><div class="line">    BMW -up..|&gt; ICar : implements</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Generalization.png" alt="Generalization"></p>
+</li>
+</ul>
+<ol>
+<li><p>依赖(Dependency)</p>
+<p> 一个类依赖于另外一个类，是一种临时性，有偶然性质的关系，例如人使用手机打电话就是一种临时性的联系，只有人在需要打电话时才产生依赖关系，所以对象之间耦合度低或说联系较弱。在面向对象的语言中般实现为形参，局部变量或静态方法调用。</p>
+</li>
+</ol>
+<ul>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    class Person &#123;</div><div class="line">        +void Call(Phone phone)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    Class Phone</div><div class="line"></div><div class="line">    /&apos;依赖关系用虚线单项箭头表示..&gt;箭头指向被依赖对象&apos;/</div><div class="line">    Person -right..&gt; Phone : use</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Dependency.png" alt="Dependency"></p>
+</li>
+</ul>
+<ol>
+<li><p>关联(Association)</p>
+<p> 关联表示类与类之间的关系，非偶然且长期的关系，关联的对象之间是平等的。关联关系可以是单向的、双向的、自关联及多维关联。</p>
+<ul>
+<li>单向关联 - 只有关联对象知道这种关系，被关联对象不知道这种关系，单向箭头指向被关联对象</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Unidirectional &lt;&lt;cloud&gt;&gt; &#123;</div><div class="line">        class person</div><div class="line">        class TV</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /&apos;单项关联用实线箭头表示--&gt;&apos;/</div><div class="line">    person -right--&gt; TV : watch</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/UnidirectionalAssociation.png" alt="UnidirectionalAssociation"></p>
+<ul>
+<li>双向关联 - 实体之间默认的关联关系，被关联对象彼此都知道关联关系，没有箭头指向</li>
+</ul>
+</li>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Bidirectional &lt;&lt;Frame&gt;&gt; &#123;</div><div class="line">        class boyfriend</div><div class="line">        class girlfirend</div><div class="line"></div><div class="line">        /&apos;双向关联的对象用实线连接--&apos;/</div><div class="line">        boyfriend -right--girlfirend : marry</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/BidirectionalAssociation.png" alt="BidirectionalAssociation"></p>
+<ul>
+<li>多维关联 - 表示多个实体之间的关系</li>
+</ul>
+</li>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package N-ary &lt;&lt;Association&gt;&gt; &#123;</div><div class="line">        class owner</div><div class="line">        class buyer</div><div class="line">        class agent &#123;</div><div class="line">            void coordinate()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        owner -- buyer</div><div class="line">        (owner,buyer) -- agent</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/N-aryAssociation.png" alt="N-aryAssociation"></p>
+<ul>
+<li>自身关联 - 表示同一个实体多个实例之间的联系</li>
+</ul>
+</li>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    class bug</div><div class="line"></div><div class="line">    bug &quot;0..*&quot; -up-- &quot;1..*&quot; bug : propagate</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/SelfAssociation.png" alt="SelfAssociation"></p>
+</li>
+</ul>
+<ol>
+<li><p>聚合(Aggregation)</p>
+<p> 聚合表示一种整体和局部的关系，整体和局部是一种不平等的关系，可以理解为”has - a”的关系，局部对象的生命周期独立于整体对象，例如人群和张三的关系，张三离开人群还在。</p>
+</li>
+</ol>
+<ul>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Aggregation &lt;&lt;Frame&gt;&gt;&#123;</div><div class="line">        class crowd &#123;</div><div class="line">            ~List&lt;person&gt; people</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class person</div><div class="line"></div><div class="line">        /&apos;聚合用空心菱形实线表示o--&apos;/</div><div class="line">        crowd o---right person : have</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Aggregation.png" alt="Aggregation"></p>
+</li>
+</ul>
+<ol>
+<li><p>组合(Composition)</p>
+<p> 组合也表示一种整体和局部的关系，可以理解为”contain - a”的关系，整体和局部具有相同的生命周期，例如人和心、肺的关系。</p>
+</li>
+</ol>
+<ul>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Composition &lt;&lt;frame&gt;&gt; &#123;</div><div class="line">        class Human &#123;</div><div class="line">            -Heart heart</div><div class="line">            -Lung lung </div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class Heart</div><div class="line">        class Lung</div><div class="line"></div><div class="line">        /&apos;组合用实心菱形实线表示*--&apos;/</div><div class="line">        Human *-- Heart : contains</div><div class="line">        Human *-- Lung</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Composition.png" alt="Composition"></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sharecode.cc/2016/11/08/Write-Class-Diagram-PlantUML/" data-id="ciwg1d7ex000in4geg596840m" class="article-share-link">分享</a>
+      
+        <a href="http://sharecode.cc/2016/11/08/Write-Class-Diagram-PlantUML/#ds-thread" class="article-comment-link">留言</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Class-Diagram/">Class Diagram</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PlantUML/">PlantUML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-React-Native-Picker" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/04/React-Native-Picker/" class="article-date">
+  <time datetime="2016-11-04T09:27:37.000Z" itemprop="datePublished">2016-11-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/04/React-Native-Picker/">React Native - Picker</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="选择框"><a href="#选择框" class="headerlink" title="选择框"></a>选择框</h3><ul>
+<li><p>selectedValue 当前选中值</p>
+</li>
+<li><p>mode <code>Android Only</code> 展现方式</p>
+<ol>
+<li>dialog:对话框形式 </li>
+<li>dropdown:下拉框形式</li>
+</ol>
+</li>
+<li><p>prompt <code>Android Only</code> 当以对话框形式显示时的提示标题</p>
+</li>
+<li><p>onValueChange 当选项变化时的回调 </p>
+<ol>
+<li>itemValue:当前选中的值</li>
+<li>itemPosition:当前选中的项的索引</li>
+</ol>
+</li>
+</ul>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">    View,</div><div class="line">    StyleSheet,</div><div class="line">    Picker,</div><div class="line">    ToastAndroid,</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'react-native'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">PickerDemo</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentWillMount() &#123;</div><div class="line">        <span class="keyword">this</span>.City = [<span class="string">'Beijing'</span>,<span class="string">'ShangHai'</span>];</div><div class="line">        <span class="keyword">this</span>.BeijingDist = [<span class="string">'东城'</span>,<span class="string">'崇文'</span>, <span class="string">'西城'</span>,<span class="string">'宣武'</span>];</div><div class="line">        <span class="keyword">this</span>.ShangHaiDist = [<span class="string">'黄浦'</span>,<span class="string">'卢湾'</span>,<span class="string">'徐汇'</span>,<span class="string">'长宁'</span>,<span class="string">'静安'</span>];</div><div class="line"></div><div class="line">        <span class="keyword">this</span>.state = &#123;</div><div class="line">            <span class="attr">selectedCity</span>: <span class="keyword">this</span>.City[<span class="number">0</span>],</div><div class="line">            <span class="attr">selectedDistrict</span>: <span class="keyword">this</span>.BeijingDist[<span class="number">0</span>],</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">let</span> CityOption = <span class="keyword">this</span>.City.map(<span class="function"><span class="keyword">function</span>(<span class="params">city</span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> (</div><div class="line">                &lt;Picker.Item label = &#123;city&#125; value = &#123;city&#125;/&gt;</div><div class="line">            );</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        let District = null;</div><div class="line"></div><div class="line">        if (this.state.selectedCity === this.City[0]) &#123;</div><div class="line">            District = this.BeijingDist;</div><div class="line">        &#125; else &#123;</div><div class="line">            District = this.ShangHaiDist;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        let DistOption = District.map(function (dist) &#123;</div><div class="line">            return (</div><div class="line">                &lt;Picker.Item label=&#123;dist&#125; value=&#123;dist&#125; /&gt;</div><div class="line">            );</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        return (</div><div class="line">            &lt;View style=&#123;styles.flex&#125;&gt;</div><div class="line">                &lt;Picker</div><div class="line">                    selectedValue = &#123;this.state.selectedCity&#125;</div><div class="line">                    onValueChange = &#123;(city) =&gt; &#123;this.setState(&#123;selectedCity:city&#125;)&#125;&#125;</div><div class="line">                    mode = 'dropdown'</div><div class="line">                &gt;</div><div class="line">                    &#123;CityOption&#125;</div><div class="line">                &lt;/Picker&gt;</div><div class="line">                &lt;Picker</div><div class="line">                    selectedValue = &#123;this.state.selectedDistrict&#125;</div><div class="line">                    onValueChange = &#123;this.onDistrictChange&#125;</div><div class="line">                    mode = 'dialog'</div><div class="line">                    prompt = '选择区'</div><div class="line">                &gt;</div><div class="line">                    &#123;DistOption&#125;</div><div class="line">                &lt;/Picker&gt;</div><div class="line">            &lt;/View&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    onDistrictChange = (itemValue, itemPosition) =&gt; &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">            selectedDistrict: itemValue,</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        ToastAndroid.showWithGravity(`Selected index is $&#123;itemPosition&#125;`,ToastAndroid.SHORT,ToastAndroid.CENTER);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentWillUpdate(nextProps, nextStates) &#123;</div><div class="line">        //只变换区时执行一次。</div><div class="line">        //变换城市是执行两次，因为selectedCity和selectedDistrict相继发生变化，引起重新render()</div><div class="line">        ToastAndroid.showWithGravity(`City changed from $&#123;this.state.selectedDistrict&#125; to $&#123;nextStates.selectedDistrict&#125;`,ToastAndroid.SHORT,ToastAndroid.CENTER);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const styles = StyleSheet.create(&#123;</div><div class="line">    flex: &#123;</div><div class="line">        flex:1,</div><div class="line">        justifyContent: 'center'</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="http://og24yrsh2.bkt.clouddn.com/Picker.gif" alt="Picker Demo"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sharecode.cc/2016/11/04/React-Native-Picker/" data-id="ciwg1d7eu000gn4gemyzduyxx" class="article-share-link">分享</a>
+      
+        <a href="http://sharecode.cc/2016/11/04/React-Native-Picker/#ds-thread" class="article-comment-link">留言</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Design-Pattern-Observer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/03/Design-Pattern-Observer/" class="article-date">
+  <time datetime="2016-11-03T07:39:27.000Z" itemprop="datePublished">2016-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/03/Design-Pattern-Observer/">Design Pattern - Observer</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><ol>
+<li><p>当一个对象的行为或状态变化引起另外一组对象的行为或状态变化时，或者说一组对象需要关心某一个对象的变化而作出相应的变化时，可以使用观察者模式。</p>
+</li>
+<li><p>它定义了多对一的依赖关系，即多个观察者对一个被观察对象的依赖。</p>
+</li>
+<li><p>观察者模式可以实现观察者和被观察对象之间的解耦，各自对立变化不会影响彼此，被观察对象只需知晓观察着的抽象接口(行为)，不用关心观察者的具体行为，也不用关心观察着的数量。</p>
+</li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> System;</div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">Observer</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">class</span> <span class="title">Program</span></div><div class="line">    &#123;</div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">//定义观察者即读者</span></div><div class="line">            Subscriber objSA = <span class="keyword">new</span> Subscriber(<span class="string">"Subscriber A"</span>);</div><div class="line">            Subscriber objSB = <span class="keyword">new</span> Subscriber(<span class="string">"Subscriber B"</span>);</div><div class="line"></div><div class="line">            <span class="comment">//定义被观察对象即订阅号</span></div><div class="line">            WeChatSubscrptionAccount objWSA = <span class="keyword">new</span> WeChatSubscrptionAccount(<span class="string">"WeChatSubscrption"</span>);</div><div class="line"></div><div class="line">            <span class="comment">//通过委托让订阅号知道需要通知哪些读者</span></div><div class="line">            objWSA.AddObserver(<span class="keyword">new</span> NotifyObserver(objSA.DoSomething));</div><div class="line">            objWSA.AddObserver(<span class="keyword">new</span> NotifyObserver(objSB.DoSomething));</div><div class="line"></div><div class="line">            <span class="comment">//被观察者行为即订阅号发布新文章</span></div><div class="line">            objWSA.CreateNewArticle(<span class="keyword">new</span> EventArgs());</div><div class="line">            Console.Read();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//委托用来引用观察者抽象行为，即读、不读、退订或其它</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">delegate</span> <span class="keyword">void</span> <span class="title">NotifyObserver</span>(<span class="params">Subject Sender, EventArgs e</span>)</span>;</div><div class="line"></div><div class="line">    <span class="comment">//抽象被观察对象</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Subject</span> &#123;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">string</span> Name;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Subject</span>(<span class="params"><span class="keyword">string</span> strName</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.Name = strName;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//定义被观察对象的行为</span></div><div class="line">        <span class="keyword">public</span> <span class="keyword">event</span> NotifyObserver SubjectAct;</div><div class="line"></div><div class="line">        <span class="comment">//当被观察对象的行为发生时，观察者会做出相应的反应</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnSubjectAct</span>(<span class="params">EventArgs e</span>)</span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">//如果已经有观察者</span></div><div class="line">            <span class="keyword">if</span> (SubjectAct != <span class="literal">null</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="comment">//观察者的具体行为</span></div><div class="line">                SubjectAct(<span class="keyword">this</span>, e);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//被观察对象保持观察者的抽象行为</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">AddObserver</span>(<span class="params">NotifyObserver objObserverAct</span>)</span></div><div class="line">        &#123;</div><div class="line">            SubjectAct += objObserverAct;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//被观察对象移除观察者的抽象行为</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">RemoveObserver</span>(<span class="params">NotifyObserver objObserverAct</span>)</span></div><div class="line">        &#123;</div><div class="line">            SubjectAct -= objObserverAct;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//具体被观察对象，微信订阅号</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">WeChatSubscrptionAccount</span> : <span class="title">Subject</span> &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">WeChatSubscrptionAccount</span>(<span class="params"><span class="keyword">string</span> strName</span>) : <span class="title">base</span>(<span class="params">strName</span>) </span>&#123; &#125;</div><div class="line"></div><div class="line">        <span class="comment">//当新文章创建后要通知所有订阅者</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CreateNewArticle</span>(<span class="params">EventArgs e</span>)</span></div><div class="line">        &#123;</div><div class="line">            Console.WriteLine(<span class="string">"Send new article."</span>);</div><div class="line"></div><div class="line">            <span class="comment">//通知所有订阅者</span></div><div class="line">            <span class="keyword">this</span>.OnSubjectAct(e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//观察者</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">Observer</span> &#123;</div><div class="line">        <span class="comment">//观察者抽象行为</span></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">DoSomething</span>(<span class="params">Subject Sender, EventArgs e</span>)</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//具体观察者，读者</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Subscriber</span> : <span class="title">Observer</span> &#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">string</span> Name;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Subscriber</span>(<span class="params"><span class="keyword">string</span> strName</span>)</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">this</span>.Name = strName;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//读者具体行为</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DoSomething</span>(<span class="params">Subject Sender, EventArgs e</span>) </span>&#123;</div><div class="line">            Console.WriteLine(<span class="string">$"<span class="subst">&#123;<span class="keyword">this</span>.Name&#125;</span> is going to do something about <span class="subst">&#123;Sender.Name&#125;</span>."</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sharecode.cc/2016/11/03/Design-Pattern-Observer/" data-id="ciwg1d7ed0009n4gepvfe6nyc" class="article-share-link">分享</a>
+      
+        <a href="http://sharecode.cc/2016/11/03/Design-Pattern-Observer/#ds-thread" class="article-comment-link">留言</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">下一页&raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title tagcloud">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/React-Native-Android/" style="font-size: 15px;">React Native Android</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/Hexo_Hightlight/">Hexo - Hightlight source code with Google Code Prettify</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/06/Aspnet-Core-Web-GetStarted/">ASP.NET Core中的Program和Startup类</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/06/Aspnet-Core-Trouble-Shooting/">ASP.NET Core 开发常见问题汇总</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/08/Write-Class-Diagram-PlantUML/">使用PlantUML画类图</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/04/React-Native-Picker/">React Native - Picker</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+     
+
+  <div class="widget-wrap">
+    <h3 class="widget-title lastest-comments">最新评论</h3>
+    <div class="widget">
+         <div class="hot-comments">
+    <!-- 多说最新评论 start -->
+	<div class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="1" data-excerpt-length="70"></div>
+    <!-- 多说最新评论 end -->
+</div>
+    </div>
+  </div>
+
+
+
+  
+     
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title archive">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 Tianmin&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;181949031@qq.com
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+    	<script type="text/javascript">
+        var duoshuoQuery = {short_name:"giscafe"};
+      </script>
+      <script src="/duoshuo/embed.js"></script>
+
+
+ <script src="/jquery/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

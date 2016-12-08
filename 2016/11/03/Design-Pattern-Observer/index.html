@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Design Pattern - Observer | http://sharecode.cc/</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="观察者模式
+当一个对象的行为或状态变化引起另外一组对象的行为或状态变化时，或者说一组对象需要关心某一个对象的变化而作出相应的变化时，可以使用观察者模式。
+
+它定义了多对一的依赖关系，即多个观察者对一个被观察对象的依赖。
+
+观察者模式可以实现观察者和被观察对象之间的解耦，各自对立变化不会影响彼此，被观察对象只需知晓观察着的抽象接口(行为)，不用关心观察者的具体行为，也不用关心观察着的数量。
+
+
+12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Design Pattern - Observer">
+<meta property="og:url" content="http://sharecode.cc/2016/11/03/Design-Pattern-Observer/index.html">
+<meta property="og:site_name" content="http://sharecode.cc/">
+<meta property="og:description" content="观察者模式
+当一个对象的行为或状态变化引起另外一组对象的行为或状态变化时，或者说一组对象需要关心某一个对象的变化而作出相应的变化时，可以使用观察者模式。
+
+它定义了多对一的依赖关系，即多个观察者对一个被观察对象的依赖。
+
+观察者模式可以实现观察者和被观察对象之间的解耦，各自对立变化不会影响彼此，被观察对象只需知晓观察着的抽象接口(行为)，不用关心观察者的具体行为，也不用关心观察着的数量。
+
+
+12">
+<meta property="og:updated_time" content="2016-11-08T06:59:42.676Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Design Pattern - Observer">
+<meta name="twitter:description" content="观察者模式
+当一个对象的行为或状态变化引起另外一组对象的行为或状态变化时，或者说一组对象需要关心某一个对象的变化而作出相应的变化时，可以使用观察者模式。
+
+它定义了多对一的依赖关系，即多个观察者对一个被观察对象的依赖。
+
+观察者模式可以实现观察者和被观察对象之间的解耦，各自对立变化不会影响彼此，被观察对象只需知晓观察着的抽象接口(行为)，不用关心观察者的具体行为，也不用关心观察着的数量。
+
+
+12">
+  
+    <link rel="alternate" href="/atom.xml" title="http://sharecode.cc/" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://sharecode.cc"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">http://sharecode.cc/</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Tianmin&#39;s Blog</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Design-Pattern-Observer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/03/Design-Pattern-Observer/" class="article-date">
+  <time datetime="2016-11-03T07:39:27.000Z" itemprop="datePublished">2016-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Design Pattern - Observer
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><ol>
+<li><p>当一个对象的行为或状态变化引起另外一组对象的行为或状态变化时，或者说一组对象需要关心某一个对象的变化而作出相应的变化时，可以使用观察者模式。</p>
+</li>
+<li><p>它定义了多对一的依赖关系，即多个观察者对一个被观察对象的依赖。</p>
+</li>
+<li><p>观察者模式可以实现观察者和被观察对象之间的解耦，各自对立变化不会影响彼此，被观察对象只需知晓观察着的抽象接口(行为)，不用关心观察者的具体行为，也不用关心观察着的数量。</p>
+</li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> System;</div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">Observer</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">class</span> <span class="title">Program</span></div><div class="line">    &#123;</div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">//定义观察者即读者</span></div><div class="line">            Subscriber objSA = <span class="keyword">new</span> Subscriber(<span class="string">"Subscriber A"</span>);</div><div class="line">            Subscriber objSB = <span class="keyword">new</span> Subscriber(<span class="string">"Subscriber B"</span>);</div><div class="line"></div><div class="line">            <span class="comment">//定义被观察对象即订阅号</span></div><div class="line">            WeChatSubscrptionAccount objWSA = <span class="keyword">new</span> WeChatSubscrptionAccount(<span class="string">"WeChatSubscrption"</span>);</div><div class="line"></div><div class="line">            <span class="comment">//通过委托让订阅号知道需要通知哪些读者</span></div><div class="line">            objWSA.AddObserver(<span class="keyword">new</span> NotifyObserver(objSA.DoSomething));</div><div class="line">            objWSA.AddObserver(<span class="keyword">new</span> NotifyObserver(objSB.DoSomething));</div><div class="line"></div><div class="line">            <span class="comment">//被观察者行为即订阅号发布新文章</span></div><div class="line">            objWSA.CreateNewArticle(<span class="keyword">new</span> EventArgs());</div><div class="line">            Console.Read();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//委托用来引用观察者抽象行为，即读、不读、退订或其它</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">delegate</span> <span class="keyword">void</span> <span class="title">NotifyObserver</span>(<span class="params">Subject Sender, EventArgs e</span>)</span>;</div><div class="line"></div><div class="line">    <span class="comment">//抽象被观察对象</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Subject</span> &#123;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">string</span> Name;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Subject</span>(<span class="params"><span class="keyword">string</span> strName</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.Name = strName;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//定义被观察对象的行为</span></div><div class="line">        <span class="keyword">public</span> <span class="keyword">event</span> NotifyObserver SubjectAct;</div><div class="line"></div><div class="line">        <span class="comment">//当被观察对象的行为发生时，观察者会做出相应的反应</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnSubjectAct</span>(<span class="params">EventArgs e</span>)</span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">//如果已经有观察者</span></div><div class="line">            <span class="keyword">if</span> (SubjectAct != <span class="literal">null</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="comment">//观察者的具体行为</span></div><div class="line">                SubjectAct(<span class="keyword">this</span>, e);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//被观察对象保持观察者的抽象行为</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">AddObserver</span>(<span class="params">NotifyObserver objObserverAct</span>)</span></div><div class="line">        &#123;</div><div class="line">            SubjectAct += objObserverAct;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//被观察对象移除观察者的抽象行为</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">RemoveObserver</span>(<span class="params">NotifyObserver objObserverAct</span>)</span></div><div class="line">        &#123;</div><div class="line">            SubjectAct -= objObserverAct;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//具体被观察对象，微信订阅号</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">WeChatSubscrptionAccount</span> : <span class="title">Subject</span> &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">WeChatSubscrptionAccount</span>(<span class="params"><span class="keyword">string</span> strName</span>) : <span class="title">base</span>(<span class="params">strName</span>) </span>&#123; &#125;</div><div class="line"></div><div class="line">        <span class="comment">//当新文章创建后要通知所有订阅者</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CreateNewArticle</span>(<span class="params">EventArgs e</span>)</span></div><div class="line">        &#123;</div><div class="line">            Console.WriteLine(<span class="string">"Send new article."</span>);</div><div class="line"></div><div class="line">            <span class="comment">//通知所有订阅者</span></div><div class="line">            <span class="keyword">this</span>.OnSubjectAct(e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//观察者</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">Observer</span> &#123;</div><div class="line">        <span class="comment">//观察者抽象行为</span></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">DoSomething</span>(<span class="params">Subject Sender, EventArgs e</span>)</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//具体观察者，读者</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Subscriber</span> : <span class="title">Observer</span> &#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">string</span> Name;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Subscriber</span>(<span class="params"><span class="keyword">string</span> strName</span>)</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">this</span>.Name = strName;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//读者具体行为</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DoSomething</span>(<span class="params">Subject Sender, EventArgs e</span>) </span>&#123;</div><div class="line">            Console.WriteLine(<span class="string">$"<span class="subst">&#123;<span class="keyword">this</span>.Name&#125;</span> is going to do something about <span class="subst">&#123;Sender.Name&#125;</span>."</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sharecode.cc/2016/11/03/Design-Pattern-Observer/" data-id="ciwg1d7ed0009n4gepvfe6nyc" class="article-share-link">分享</a>
+      
+        <a href="http://sharecode.cc/2016/11/03/Design-Pattern-Observer/#ds-thread" class="article-comment-link">留言</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/11/04/React-Native-Picker/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          React Native - Picker
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/13/React-Native-DrawerLayoutAndroid/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">React Native DrawerLayoutAndroid(抽屉) 组件的使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+      <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016/11/03/Design-Pattern-Observer/" data-title="Design Pattern - Observer" data-url="http://sharecode.cc/2016/11/03/Design-Pattern-Observer/"></div>
+	<!-- 多说评论框 end -->
+</div>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title tagcloud">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/React-Native-Android/" style="font-size: 15px;">React Native Android</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/08/Hexo_Hightlight/">Hexo - Hightlight source code with Google Code Prettify</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/06/Aspnet-Core-Web-GetStarted/">ASP.NET Core中的Program和Startup类</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/06/Aspnet-Core-Trouble-Shooting/">ASP.NET Core 开发常见问题汇总</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/08/Write-Class-Diagram-PlantUML/">使用PlantUML画类图</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/04/React-Native-Picker/">React Native - Picker</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+     
+
+  <div class="widget-wrap">
+    <h3 class="widget-title lastest-comments">最新评论</h3>
+    <div class="widget">
+         <div class="hot-comments">
+    <!-- 多说最新评论 start -->
+	<div class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="1" data-excerpt-length="70"></div>
+    <!-- 多说最新评论 end -->
+</div>
+    </div>
+  </div>
+
+
+
+  
+     
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title archive">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 Tianmin&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;181949031@qq.com
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+    	<script type="text/javascript">
+        var duoshuoQuery = {short_name:"giscafe"};
+      </script>
+      <script src="/duoshuo/embed.js"></script>
+
+
+ <script src="/jquery/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
