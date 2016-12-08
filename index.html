@@ -72,75 +72,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Hexo_Hightlight" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/12/08/Hexo_Hightlight/" class="article-date">
-  <time datetime="2016-12-08T06:14:45.326Z" itemprop="datePublished">2016-12-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/08/Hexo_Hightlight/">Hexo - Hightlight source code with Google Code Prettify</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>It’s not recommended way to do hightlight since it breaks rule <a href="https://github.com/DavidAnson/markdownlint/blob/v0.2.0/doc/Rules.md#md033---inline-html" target="_blank" rel="external">no-inline-html</a></em></p>
-<h3 id="Download-Prettify"><a href="#Download-Prettify" class="headerlink" title="Download Prettify"></a>Download Prettify</h3><ol>
-<li>Download js from <a href="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js" target="_blank" rel="external">cdn.rawgit.com</a> or <a href="//cdn.bootcss.com/prettify/r298/prettify.min.js">www.bootcdn.cn</a></li>
-<li>Save it to themes\landscape\source\js\</li>
-<li>Download you prefer css from <a href="https://jmblog.github.io/color-themes-for-google-code-prettify/" target="_blank" rel="external">https://jmblog.github.io/color-themes-for-google-code-prettify/</a></li>
-<li>Rename it as prettify.css, then save to source\css\prettify\</li>
-</ol>
-<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><ol>
-<li><p>Add below code at the bottom of layout_partial\after-footer.ejs</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;%- js(<span class="string">'js/script'</span>,<span class="string">'js/run_prettify'</span>) %&gt;</div><div class="line">&lt;%- css('css/prettify/prettify') %&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>Using raw HTML <code>&lt;PRE&gt;</code> block in MD file as below</p>
- <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">pre</span> <span class="attr">class</span>=<span class="string">"prettyprint linenums lang-cs"</span>&gt;</span></div><div class="line">int a = 0;</div><div class="line">string s = string.empty</div><div class="line"><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>Above markdown will display C# code as expectation</p>
-<pre class="prettyprint linenums lang-cs">
-int a = 0;
-string s = string.empty
-</pre>
-
-</li>
-</ol>
-<h3 id="Hightlight-Style-Optional"><a href="#Hightlight-Style-Optional" class="headerlink" title="Hightlight Style (Optional)"></a>Hightlight Style (Optional)</h3><ol>
-<li><p>You could find some customized style via blew links<br> <a href="https://jmblog.github.io/color-themes-for-google-code-prettify/" target="_blank" rel="external">https://jmblog.github.io/color-themes-for-google-code-prettify/</a><br> <a href="https://rawgit.com/google/code-prettify/master/styles/index.html" target="_blank" rel="external">https://rawgit.com/google/code-prettify/master/styles/index.html</a></p>
-</li>
-<li><p>Replace source\css\prettify\prettify.css with you downlaod CSS</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://sharecode.cc/2016/12/08/Hexo_Hightlight/" data-id="ciwg1d7el000cn4gezwk33u0r" class="article-share-link">分享</a>
-      
-        <a href="http://sharecode.cc/2016/12/08/Hexo_Hightlight/#ds-thread" class="article-comment-link">留言</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-Aspnet-Core-Web-GetStarted" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/12/06/Aspnet-Core-Web-GetStarted/" class="article-date">
@@ -278,6 +209,137 @@ string s = string.empty
 
 
   
+    <article id="post-Write-Class-Diagram-PlantUML" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/08/Write-Class-Diagram-PlantUML/" class="article-date">
+  <time datetime="2016-11-08T08:58:37.000Z" itemprop="datePublished">2016-11-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/08/Write-Class-Diagram-PlantUML/">使用PlantUML画类图</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="类图-Class-Diagram-表示类与类之间的关系，利用PlantUML来描述这些关系的基本用法如下："><a href="#类图-Class-Diagram-表示类与类之间的关系，利用PlantUML来描述这些关系的基本用法如下：" class="headerlink" title="类图(Class Diagram)表示类与类之间的关系，利用PlantUML来描述这些关系的基本用法如下："></a>类图(Class Diagram)表示类与类之间的关系，利用PlantUML来描述这些关系的基本用法如下：</h3><ol>
+<li><p>泛化(Generalization)</p>
+<ul>
+<li>继承(Extend) - 子类继承父类</li>
+<li>实现(Implement) - 具体类实现公共借口</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Extend &lt;&lt;Folder&gt;&gt; &#123;</div><div class="line">        class Animal &#123;</div><div class="line">            +name string</div><div class="line">            +void breathe()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class Human&#123;</div><div class="line">            +name string</div><div class="line">            +void breathe()</div><div class="line">            +void Inovate()</div><div class="line">            +void Drive(ICar car)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    package implement &lt;&lt;Folder&gt;&gt; &#123;</div><div class="line">        interface ICar &#123;</div><div class="line">            +name string</div><div class="line">            +void Run()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class BMW &#123;</div><div class="line">            +name string</div><div class="line">            +void Run()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /&apos;泛化 - 继承类&apos;/</div><div class="line">    Human -up--|&gt; Animal : extends</div><div class="line"></div><div class="line">    /&apos;泛化 - 实现接口&apos;/</div><div class="line">    BMW -up..|&gt; ICar : implements</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Generalization.png" alt="Generalization"></p>
+</li>
+</ul>
+<ol>
+<li><p>依赖(Dependency)</p>
+<p> 一个类依赖于另外一个类，是一种临时性，有偶然性质的关系，例如人使用手机打电话就是一种临时性的联系，只有人在需要打电话时才产生依赖关系，所以对象之间耦合度低或说联系较弱。在面向对象的语言中般实现为形参，局部变量或静态方法调用。</p>
+</li>
+</ol>
+<ul>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    class Person &#123;</div><div class="line">        +void Call(Phone phone)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    Class Phone</div><div class="line"></div><div class="line">    /&apos;依赖关系用虚线单项箭头表示..&gt;箭头指向被依赖对象&apos;/</div><div class="line">    Person -right..&gt; Phone : use</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Dependency.png" alt="Dependency"></p>
+</li>
+</ul>
+<ol>
+<li><p>关联(Association)</p>
+<p> 关联表示类与类之间的关系，非偶然且长期的关系，关联的对象之间是平等的。关联关系可以是单向的、双向的、自关联及多维关联。</p>
+<ul>
+<li>单向关联 - 只有关联对象知道这种关系，被关联对象不知道这种关系，单向箭头指向被关联对象</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Unidirectional &lt;&lt;cloud&gt;&gt; &#123;</div><div class="line">        class person</div><div class="line">        class TV</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /&apos;单项关联用实线箭头表示--&gt;&apos;/</div><div class="line">    person -right--&gt; TV : watch</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/UnidirectionalAssociation.png" alt="UnidirectionalAssociation"></p>
+<ul>
+<li>双向关联 - 实体之间默认的关联关系，被关联对象彼此都知道关联关系，没有箭头指向</li>
+</ul>
+</li>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Bidirectional &lt;&lt;Frame&gt;&gt; &#123;</div><div class="line">        class boyfriend</div><div class="line">        class girlfirend</div><div class="line"></div><div class="line">        /&apos;双向关联的对象用实线连接--&apos;/</div><div class="line">        boyfriend -right--girlfirend : marry</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/BidirectionalAssociation.png" alt="BidirectionalAssociation"></p>
+<ul>
+<li>多维关联 - 表示多个实体之间的关系</li>
+</ul>
+</li>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package N-ary &lt;&lt;Association&gt;&gt; &#123;</div><div class="line">        class owner</div><div class="line">        class buyer</div><div class="line">        class agent &#123;</div><div class="line">            void coordinate()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        owner -- buyer</div><div class="line">        (owner,buyer) -- agent</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/N-aryAssociation.png" alt="N-aryAssociation"></p>
+<ul>
+<li>自身关联 - 表示同一个实体多个实例之间的联系</li>
+</ul>
+</li>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    class bug</div><div class="line"></div><div class="line">    bug &quot;0..*&quot; -up-- &quot;1..*&quot; bug : propagate</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/SelfAssociation.png" alt="SelfAssociation"></p>
+</li>
+</ul>
+<ol>
+<li><p>聚合(Aggregation)</p>
+<p> 聚合表示一种整体和局部的关系，整体和局部是一种不平等的关系，可以理解为”has - a”的关系，局部对象的生命周期独立于整体对象，例如人群和张三的关系，张三离开人群还在。</p>
+</li>
+</ol>
+<ul>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Aggregation &lt;&lt;Frame&gt;&gt;&#123;</div><div class="line">        class crowd &#123;</div><div class="line">            ~List&lt;person&gt; people</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class person</div><div class="line"></div><div class="line">        /&apos;聚合用空心菱形实线表示o--&apos;/</div><div class="line">        crowd o---right person : have</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Aggregation.png" alt="Aggregation"></p>
+</li>
+</ul>
+<ol>
+<li><p>组合(Composition)</p>
+<p> 组合也表示一种整体和局部的关系，可以理解为”contain - a”的关系，整体和局部具有相同的生命周期，例如人和心、肺的关系。</p>
+</li>
+</ol>
+<ul>
+<li><p>Demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Composition &lt;&lt;frame&gt;&gt; &#123;</div><div class="line">        class Human &#123;</div><div class="line">            -Heart heart</div><div class="line">            -Lung lung </div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class Heart</div><div class="line">        class Lung</div><div class="line"></div><div class="line">        /&apos;组合用实心菱形实线表示*--&apos;/</div><div class="line">        Human *-- Heart : contains</div><div class="line">        Human *-- Lung</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+</li>
+<li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Composition.png" alt="Composition"></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sharecode.cc/2016/11/08/Write-Class-Diagram-PlantUML/" data-id="ciwg1d7ex000in4geg596840m" class="article-share-link">分享</a>
+      
+        <a href="http://sharecode.cc/2016/11/08/Write-Class-Diagram-PlantUML/#ds-thread" class="article-comment-link">留言</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Class-Diagram/">Class Diagram</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PlantUML/">PlantUML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UML/">UML</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
 
 
   <nav id="page-nav">
@@ -306,10 +368,6 @@ string s = string.empty
       <ul>
         
           <li>
-            <a href="/2016/12/08/Hexo_Hightlight/">Hexo - Hightlight source code with Google Code Prettify</a>
-          </li>
-        
-          <li>
             <a href="/2016/12/06/Aspnet-Core-Web-GetStarted/">ASP.NET Core中的Program和Startup类</a>
           </li>
         
@@ -323,6 +381,10 @@ string s = string.empty
         
           <li>
             <a href="/2016/11/04/React-Native-Picker/">React Native - Picker</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/03/Hexo_Hightlight/">Hexo - Hightlight source code with Google Code Prettify</a>
           </li>
         
       </ul>
@@ -389,7 +451,7 @@ string s = string.empty
 
 
     	<script type="text/javascript">
-        var duoshuoQuery = {short_name:"giscafe"};
+        var duoshuoQuery = {short_name:"wall-e-va"};
       </script>
       <script src="/duoshuo/embed.js"></script>
 

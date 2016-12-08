@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sharecode.cc/"/>
-  <updated>2016-08-09T09:01:34.323Z</updated>
+  <updated>2016-12-08T06:24:30.879Z</updated>
   <id>http://sharecode.cc/</id>
   
   <author>
@@ -14,54 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Hexo - Hightlight source code with Google Code Prettify</title>
-    <link href="http://sharecode.cc/2016/12/08/Hexo_Hightlight/"/>
-    <id>http://sharecode.cc/2016/12/08/Hexo_Hightlight/</id>
-    <published>2016-12-08T06:14:45.326Z</published>
-    <updated>2016-08-09T09:01:34.323Z</updated>
-    
-    <content type="html"><![CDATA[<p><em>It’s not recommended way to do hightlight since it breaks rule <a href="https://github.com/DavidAnson/markdownlint/blob/v0.2.0/doc/Rules.md#md033---inline-html" target="_blank" rel="external">no-inline-html</a></em></p>
-<h3 id="Download-Prettify"><a href="#Download-Prettify" class="headerlink" title="Download Prettify"></a>Download Prettify</h3><ol>
-<li>Download js from <a href="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js" target="_blank" rel="external">cdn.rawgit.com</a> or <a href="//cdn.bootcss.com/prettify/r298/prettify.min.js">www.bootcdn.cn</a></li>
-<li>Save it to themes\landscape\source\js\</li>
-<li>Download you prefer css from <a href="https://jmblog.github.io/color-themes-for-google-code-prettify/" target="_blank" rel="external">https://jmblog.github.io/color-themes-for-google-code-prettify/</a></li>
-<li>Rename it as prettify.css, then save to source\css\prettify\</li>
-</ol>
-<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><ol>
-<li><p>Add below code at the bottom of layout_partial\after-footer.ejs</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;%- js(<span class="string">'js/script'</span>,<span class="string">'js/run_prettify'</span>) %&gt;</div><div class="line">&lt;%- css('css/prettify/prettify') %&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>Using raw HTML <code>&lt;PRE&gt;</code> block in MD file as below</p>
- <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">pre</span> <span class="attr">class</span>=<span class="string">"prettyprint linenums lang-cs"</span>&gt;</span></div><div class="line">int a = 0;</div><div class="line">string s = string.empty</div><div class="line"><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>Above markdown will display C# code as expectation</p>
-<pre class="prettyprint linenums lang-cs">
-int a = 0;
-string s = string.empty
-</pre>
-
-</li>
-</ol>
-<h3 id="Hightlight-Style-Optional"><a href="#Hightlight-Style-Optional" class="headerlink" title="Hightlight Style (Optional)"></a>Hightlight Style (Optional)</h3><ol>
-<li><p>You could find some customized style via blew links<br> <a href="https://jmblog.github.io/color-themes-for-google-code-prettify/" target="_blank" rel="external">https://jmblog.github.io/color-themes-for-google-code-prettify/</a><br> <a href="https://rawgit.com/google/code-prettify/master/styles/index.html" target="_blank" rel="external">https://rawgit.com/google/code-prettify/master/styles/index.html</a></p>
-</li>
-<li><p>Replace source\css\prettify\prettify.css with you downlaod CSS</p>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;em&gt;It’s not recommended way to do hightlight since it breaks rule &lt;a href=&quot;https://github.com/DavidAnson/markdownlint/blob/v0.2.0/doc/Ru
-    
-    </summary>
-    
-    
-      <category term="Hexo" scheme="http://sharecode.cc/tags/Hexo/"/>
-    
-  </entry>
   
   <entry>
     <title>ASP.NET Core中的Program和Startup类</title>
@@ -317,6 +269,54 @@ string s = string.empty
     
     
       <category term="React Native" scheme="http://sharecode.cc/tags/React-Native/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo - Hightlight source code with Google Code Prettify</title>
+    <link href="http://sharecode.cc/2016/11/03/Hexo_Hightlight/"/>
+    <id>http://sharecode.cc/2016/11/03/Hexo_Hightlight/</id>
+    <published>2016-11-03T07:39:27.000Z</published>
+    <updated>2016-12-08T08:04:03.760Z</updated>
+    
+    <content type="html"><![CDATA[<p><em>It’s not recommended way to do hightlight since it breaks rule <a href="https://github.com/DavidAnson/markdownlint/blob/v0.2.0/doc/Rules.md#md033---inline-html" target="_blank" rel="external">no-inline-html</a></em></p>
+<h3 id="Download-Prettify"><a href="#Download-Prettify" class="headerlink" title="Download Prettify"></a>Download Prettify</h3><ol>
+<li>Download js from <a href="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js" target="_blank" rel="external">cdn.rawgit.com</a> or <a href="//cdn.bootcss.com/prettify/r298/prettify.min.js">www.bootcdn.cn</a></li>
+<li>Save it to themes\landscape\source\js\</li>
+<li>Download you prefer css from <a href="https://jmblog.github.io/color-themes-for-google-code-prettify/" target="_blank" rel="external">https://jmblog.github.io/color-themes-for-google-code-prettify/</a></li>
+<li>Rename it as prettify.css, then save to source\css\prettify\</li>
+</ol>
+<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><ol>
+<li><p>Add below code at the bottom of layout_partial\after-footer.ejs</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;%- js(<span class="string">'js/script'</span>,<span class="string">'js/run_prettify'</span>) %&gt;</div><div class="line">&lt;%- css('css/prettify/prettify') %&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Using raw HTML <code>&lt;PRE&gt;</code> block in MD file as below</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">pre</span> <span class="attr">class</span>=<span class="string">"prettyprint linenums lang-cs"</span>&gt;</span></div><div class="line">int a = 0;</div><div class="line">string s = string.empty</div><div class="line"><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>Above markdown will display C# code as expectation</p>
+<pre class="prettyprint linenums lang-cs">
+int a = 0;
+string s = string.empty
+</pre>
+
+</li>
+</ol>
+<h3 id="Hightlight-Style-Optional"><a href="#Hightlight-Style-Optional" class="headerlink" title="Hightlight Style (Optional)"></a>Hightlight Style (Optional)</h3><ol>
+<li><p>You could find some customized style via blew links<br> <a href="https://jmblog.github.io/color-themes-for-google-code-prettify/" target="_blank" rel="external">https://jmblog.github.io/color-themes-for-google-code-prettify/</a><br> <a href="https://rawgit.com/google/code-prettify/master/styles/index.html" target="_blank" rel="external">https://rawgit.com/google/code-prettify/master/styles/index.html</a></p>
+</li>
+<li><p>Replace source\css\prettify\prettify.css with you downlaod CSS</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;em&gt;It’s not recommended way to do hightlight since it breaks rule &lt;a href=&quot;https://github.com/DavidAnson/markdownlint/blob/v0.2.0/doc/Ru
+    
+    </summary>
+    
+    
+      <category term="Hexo" scheme="http://sharecode.cc/tags/Hexo/"/>
     
   </entry>
   
