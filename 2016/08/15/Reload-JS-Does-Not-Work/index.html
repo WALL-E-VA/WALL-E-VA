@@ -17,7 +17,7 @@ Increase the const MAX_WAIT_TIME in %yourproject%\node_modules\react-native\node
 Try below solution might help.
 
 Increase the const MAX_WAIT_TIME in %yourproject%\node_modules\react-native\node_mo">
-<meta property="og:updated_time" content="2016-11-07T07:00:50.168Z">
+<meta property="og:updated_time" content="2016-12-14T08:15:12.120Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Reload JS Does Not Work">
 <meta name="twitter:description" content="Js change does not reflect on device/simulator when you try reload JS from packager.
@@ -30,8 +30,6 @@ Increase the const MAX_WAIT_TIME in %yourproject%\node_modules\react-native\node
   
     <link rel="icon" href="/favicon.png">
   
-  
-    
   
   <link rel="stylesheet" href="/css/style.css">
   
@@ -106,14 +104,56 @@ Increase the const MAX_WAIT_TIME in %yourproject%\node_modules\react-native\node
 <p>Try below solution might help.</p>
 <ol>
 <li><p>Increase the const MAX_WAIT_TIME in %yourproject%\node_modules\react-native\node_modules\node-haste\lib\FileWatcher\index.js<br>or %yourproject%node_modules\react-native\packager\react-packager\src\node-haste\FileWatcher\index.js</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> MAX_WAIT_TIME = <span class="number">360000</span>;</div></pre></td></tr></table></figure>
+<pre><code class="brush:js"> var MAX_WAIT_TIME = 360000;
+</code></pre>
 <p> Try blew if step 1 does not work</p>
 </li>
 <li><p>Change function ‘_createWatcher’</p>
 <p> From:</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">key: <span class="string">'_createWatcher'</span>,</div><div class="line">    <span class="attr">value</span>: <span class="function"><span class="keyword">function</span> _createWatcher(<span class="params">rootConfig</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> watcher = <span class="keyword">new</span> WatcherClass(rootConfig.dir, &#123;</div><div class="line">        <span class="attr">glob</span>: rootConfig.globs,</div><div class="line">        <span class="attr">dot</span>: <span class="literal">false</span></div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> rejectTimeout = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> reject(<span class="keyword">new</span> <span class="built_in">Error</span>(timeoutMessage(WatcherClass)));</div><div class="line">        &#125;, MAX_WAIT_TIME);</div><div class="line"></div><div class="line">        watcher.once(<span class="string">'ready'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        clearTimeout(rejectTimeout);</div><div class="line">        resolve(watcher);</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<pre><code class="brush:js">     key: &#39;_createWatcher&#39;,
+         value: function _createWatcher(rootConfig) {
+         var watcher = new WatcherClass(rootConfig.dir, {
+             glob: rootConfig.globs,
+             dot: false
+         });
+
+         return new Promise(function (resolve, reject) {
+             var rejectTimeout = setTimeout(function () {
+             return reject(new Error(timeoutMessage(WatcherClass)));
+             }, MAX_WAIT_TIME);
+
+             watcher.once(&#39;ready&#39;, function () {
+             clearTimeout(rejectTimeout);
+             resolve(watcher);
+             });
+         });
+         }
+</code></pre>
 <p> To:</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">key: <span class="string">'_createWatcher'</span>,</div><div class="line">    <span class="attr">value</span>: <span class="function"><span class="keyword">function</span> _createWatcher(<span class="params">rootConfig</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> watcher = <span class="keyword">new</span> WatcherClass(rootConfig.dir, &#123;</div><div class="line">        <span class="attr">glob</span>: rootConfig.globs,</div><div class="line">        <span class="attr">dot</span>: <span class="literal">false</span></div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">const</span> rejectTimeout = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        reject(<span class="keyword">new</span> <span class="built_in">Error</span>([</div><div class="line">            <span class="string">'Watcher took too long to load'</span>,</div><div class="line">            <span class="string">'Try running `watchman version` from your terminal'</span>,</div><div class="line">            <span class="string">'https://facebook.github.io/watchman/docs/troubleshooting.html'</span>,</div><div class="line">        ].join(<span class="string">'\n'</span>)));</div><div class="line">        &#125;, MAX_WAIT_TIME);</div><div class="line"></div><div class="line">        watcher.once(<span class="string">'ready'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        clearTimeout(rejectTimeout);</div><div class="line">        resolve(watcher);</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<pre><code class="brush:js">     key: &#39;_createWatcher&#39;,
+         value: function _createWatcher(rootConfig) {
+         var watcher = new WatcherClass(rootConfig.dir, {
+             glob: rootConfig.globs,
+             dot: false
+         });
+
+         return new Promise(function (resolve, reject) {
+
+             const rejectTimeout = setTimeout(function() {
+             reject(new Error([
+                 &#39;Watcher took too long to load&#39;,
+                 &#39;Try running `watchman version` from your terminal&#39;,
+                 &#39;https://facebook.github.io/watchman/docs/troubleshooting.html&#39;,
+             ].join(&#39;\n&#39;)));
+             }, MAX_WAIT_TIME);
+
+             watcher.once(&#39;ready&#39;, function () {
+             clearTimeout(rejectTimeout);
+             resolve(watcher);
+             });
+         });
+         }
+</code></pre>
 </li>
 </ol>
 <p>Referrence:<em><a href="https://github.com/facebook/react-native/issues/7257" target="_blank" rel="external">https://github.com/facebook/react-native/issues/7257</a></em></p>
@@ -121,13 +161,13 @@ Increase the const MAX_WAIT_TIME in %yourproject%\node_modules\react-native\node
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sharecode.cc/2016/08/15/Reload-JS-Does-Not-Work/" data-id="ciwg3xuw3000pmwgeohrazw1u" class="article-share-link">分享</a>
+      <a data-url="http://sharecode.cc/2016/08/15/Reload-JS-Does-Not-Work/" data-id="ciwonydis000nc0gepnf3nd87" class="article-share-link">分享</a>
       
         <a href="http://sharecode.cc/2016/08/15/Reload-JS-Does-Not-Work/#ds-thread" class="article-comment-link">留言</a>
       
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native-Android/">React Native Android</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
 
     </footer>
   </div>
@@ -185,7 +225,7 @@ var duoshuoQuery = {short_name:"wall-e-va"};
   <div class="widget-wrap">
     <h3 class="widget-title tagcloud">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/React-Native-Android/" style="font-size: 15px;">React Native Android</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
+      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
     </div>
   </div>
 
@@ -294,6 +334,18 @@ var duoshuoQuery = {short_name:"wall-e-va"};
 
 <script src="/js/script.js"></script>
 
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushXml.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushCSharp.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/styles/shCoreEclipse.min.css"/>
+
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "code";
+  SyntaxHighlighter.all();
+</script>
   </div>
 </body>
 </html>

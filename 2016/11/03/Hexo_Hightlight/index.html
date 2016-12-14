@@ -19,7 +19,7 @@ Download Prettify
 Download js from cdn.rawgit.com or www.bootcdn.cn
 Save it to themes\landscape\source\js\
 Download you pr">
-<meta property="og:updated_time" content="2016-12-08T08:04:03.760Z">
+<meta property="og:updated_time" content="2016-12-14T08:10:43.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo - Hightlight source code with Google Code Prettify">
 <meta name="twitter:description" content="It’s not recommended way to do hightlight since it breaks rule no-inline-html
@@ -33,8 +33,6 @@ Download you pr">
   
     <link rel="icon" href="/favicon.png">
   
-  
-    
   
   <link rel="stylesheet" href="/css/style.css">
   
@@ -114,10 +112,16 @@ Download you pr">
 </ol>
 <h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><ol>
 <li><p>Add below code at the bottom of layout_partial\after-footer.ejs</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;%- js(<span class="string">'js/script'</span>,<span class="string">'js/run_prettify'</span>) %&gt;</div><div class="line">&lt;%- css('css/prettify/prettify') %&gt;</div></pre></td></tr></table></figure>
+<pre><code class="brush:js"> &lt;%- js(&#39;js/script&#39;,&#39;js/run_prettify&#39;) %&gt;
+ &lt;%- css(&#39;css/prettify/prettify&#39;) %&gt;
+</code></pre>
 </li>
 <li><p>Using raw HTML <code>&lt;PRE&gt;</code> block in MD file as below</p>
- <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">pre</span> <span class="attr">class</span>=<span class="string">"prettyprint linenums lang-cs"</span>&gt;</span></div><div class="line">int a = 0;</div><div class="line">string s = string.empty</div><div class="line"><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></div></pre></td></tr></table></figure>
+<pre><code class="brush:html"> &lt;pre class=&quot;prettyprint linenums lang-cs&quot;&gt;
+ int a = 0;
+ string s = string.empty
+ &lt;/pre&gt;
+</code></pre>
 </li>
 <li><p>Above markdown will display C# code as expectation</p>
 <pre class="prettyprint linenums lang-cs">
@@ -137,7 +141,7 @@ string s = string.empty
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sharecode.cc/2016/11/03/Hexo_Hightlight/" data-id="ciwg3xuvb000dmwgewyyq9h9v" class="article-share-link">分享</a>
+      <a data-url="http://sharecode.cc/2016/11/03/Hexo_Hightlight/" data-id="ciwonydi3000bc0ge5x7p3pzm" class="article-share-link">分享</a>
       
         <a href="http://sharecode.cc/2016/11/03/Hexo_Hightlight/#ds-thread" class="article-comment-link">留言</a>
       
@@ -201,7 +205,7 @@ var duoshuoQuery = {short_name:"wall-e-va"};
   <div class="widget-wrap">
     <h3 class="widget-title tagcloud">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/React-Native-Android/" style="font-size: 15px;">React Native Android</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
+      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
     </div>
   </div>
 
@@ -310,6 +314,18 @@ var duoshuoQuery = {short_name:"wall-e-va"};
 
 <script src="/js/script.js"></script>
 
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushXml.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushCSharp.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/styles/shCoreEclipse.min.css"/>
+
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "code";
+  SyntaxHighlighter.all();
+</script>
   </div>
 </body>
 </html>

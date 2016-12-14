@@ -23,7 +23,7 @@ itemPosition:当前选中的项的索引
 
 
 
-Demo1234567891">
+Demo    &amp;#39;u">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React Native - Picker">
 <meta property="og:url" content="http://sharecode.cc/2016/11/04/React-Native-Picker/index.html">
@@ -46,9 +46,9 @@ itemPosition:当前选中的项的索引
 
 
 
-Demo1234567891">
+Demo    &amp;#39;u">
 <meta property="og:image" content="http://og24yrsh2.bkt.clouddn.com/Picker.gif">
-<meta property="og:updated_time" content="2016-11-07T07:53:13.946Z">
+<meta property="og:updated_time" content="2016-12-14T08:09:08.816Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native - Picker">
 <meta name="twitter:description" content="选择框
@@ -69,7 +69,7 @@ itemPosition:当前选中的项的索引
 
 
 
-Demo1234567891">
+Demo    &amp;#39;u">
 <meta name="twitter:image" content="http://og24yrsh2.bkt.clouddn.com/Picker.gif">
   
     <link rel="alternate" href="/atom.xml" title="萝卜就着茶" type="application/atom+xml">
@@ -77,8 +77,6 @@ Demo1234567891">
   
     <link rel="icon" href="/favicon.png">
   
-  
-    
   
   <link rel="stylesheet" href="/css/style.css">
   
@@ -167,13 +165,103 @@ Demo1234567891">
 </ol>
 </li>
 </ul>
-<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">    View,</div><div class="line">    StyleSheet,</div><div class="line">    Picker,</div><div class="line">    ToastAndroid,</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'react-native'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">PickerDemo</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentWillMount() &#123;</div><div class="line">        <span class="keyword">this</span>.City = [<span class="string">'Beijing'</span>,<span class="string">'ShangHai'</span>];</div><div class="line">        <span class="keyword">this</span>.BeijingDist = [<span class="string">'东城'</span>,<span class="string">'崇文'</span>, <span class="string">'西城'</span>,<span class="string">'宣武'</span>];</div><div class="line">        <span class="keyword">this</span>.ShangHaiDist = [<span class="string">'黄浦'</span>,<span class="string">'卢湾'</span>,<span class="string">'徐汇'</span>,<span class="string">'长宁'</span>,<span class="string">'静安'</span>];</div><div class="line"></div><div class="line">        <span class="keyword">this</span>.state = &#123;</div><div class="line">            <span class="attr">selectedCity</span>: <span class="keyword">this</span>.City[<span class="number">0</span>],</div><div class="line">            <span class="attr">selectedDistrict</span>: <span class="keyword">this</span>.BeijingDist[<span class="number">0</span>],</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">let</span> CityOption = <span class="keyword">this</span>.City.map(<span class="function"><span class="keyword">function</span>(<span class="params">city</span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> (</div><div class="line">                &lt;Picker.Item label = &#123;city&#125; value = &#123;city&#125;/&gt;</div><div class="line">            );</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        let District = null;</div><div class="line"></div><div class="line">        if (this.state.selectedCity === this.City[0]) &#123;</div><div class="line">            District = this.BeijingDist;</div><div class="line">        &#125; else &#123;</div><div class="line">            District = this.ShangHaiDist;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        let DistOption = District.map(function (dist) &#123;</div><div class="line">            return (</div><div class="line">                &lt;Picker.Item label=&#123;dist&#125; value=&#123;dist&#125; /&gt;</div><div class="line">            );</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        return (</div><div class="line">            &lt;View style=&#123;styles.flex&#125;&gt;</div><div class="line">                &lt;Picker</div><div class="line">                    selectedValue = &#123;this.state.selectedCity&#125;</div><div class="line">                    onValueChange = &#123;(city) =&gt; &#123;this.setState(&#123;selectedCity:city&#125;)&#125;&#125;</div><div class="line">                    mode = 'dropdown'</div><div class="line">                &gt;</div><div class="line">                    &#123;CityOption&#125;</div><div class="line">                &lt;/Picker&gt;</div><div class="line">                &lt;Picker</div><div class="line">                    selectedValue = &#123;this.state.selectedDistrict&#125;</div><div class="line">                    onValueChange = &#123;this.onDistrictChange&#125;</div><div class="line">                    mode = 'dialog'</div><div class="line">                    prompt = '选择区'</div><div class="line">                &gt;</div><div class="line">                    &#123;DistOption&#125;</div><div class="line">                &lt;/Picker&gt;</div><div class="line">            &lt;/View&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    onDistrictChange = (itemValue, itemPosition) =&gt; &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">            selectedDistrict: itemValue,</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        ToastAndroid.showWithGravity(`Selected index is $&#123;itemPosition&#125;`,ToastAndroid.SHORT,ToastAndroid.CENTER);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentWillUpdate(nextProps, nextStates) &#123;</div><div class="line">        //只变换区时执行一次。</div><div class="line">        //变换城市是执行两次，因为selectedCity和selectedDistrict相继发生变化，引起重新render()</div><div class="line">        ToastAndroid.showWithGravity(`City changed from $&#123;this.state.selectedDistrict&#125; to $&#123;nextStates.selectedDistrict&#125;`,ToastAndroid.SHORT,ToastAndroid.CENTER);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const styles = StyleSheet.create(&#123;</div><div class="line">    flex: &#123;</div><div class="line">        flex:1,</div><div class="line">        justifyContent: 'center'</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><pre><code class="brush:js">    &#39;use strict&#39;
+
+    import React, { Component } from &#39;react&#39;;
+
+    import {
+        View,
+        StyleSheet,
+        Picker,
+        ToastAndroid,
+    } from &#39;react-native&#39;
+
+    export default class PickerDemo extends Component {
+        constructor(props) {
+            super(props);
+        }
+
+        componentWillMount() {
+            this.City = [&#39;Beijing&#39;,&#39;ShangHai&#39;];
+            this.BeijingDist = [&#39;东城&#39;,&#39;崇文&#39;, &#39;西城&#39;,&#39;宣武&#39;];
+            this.ShangHaiDist = [&#39;黄浦&#39;,&#39;卢湾&#39;,&#39;徐汇&#39;,&#39;长宁&#39;,&#39;静安&#39;];
+
+            this.state = {
+                selectedCity: this.City[0],
+                selectedDistrict: this.BeijingDist[0],
+            };
+        }
+
+        render() {
+            let CityOption = this.City.map(function(city) {
+                return (
+                    &lt;Picker.Item label = {city} value = {city}/&gt;
+                );
+            });
+
+            let District = null;
+
+            if (this.state.selectedCity === this.City[0]) {
+                District = this.BeijingDist;
+            } else {
+                District = this.ShangHaiDist;
+            }
+
+            let DistOption = District.map(function (dist) {
+                return (
+                    &lt;Picker.Item label={dist} value={dist} /&gt;
+                );
+            });
+
+            return (
+                &lt;View style={styles.flex}&gt;
+                    &lt;Picker
+                        selectedValue = {this.state.selectedCity}
+                        onValueChange = {(city) =&gt; {this.setState({selectedCity:city})}}
+                        mode = &#39;dropdown&#39;
+                    &gt;
+                        {CityOption}
+                    &lt;/Picker&gt;
+                    &lt;Picker
+                        selectedValue = {this.state.selectedDistrict}
+                        onValueChange = {this.onDistrictChange}
+                        mode = &#39;dialog&#39;
+                        prompt = &#39;选择区&#39;
+                    &gt;
+                        {DistOption}
+                    &lt;/Picker&gt;
+                &lt;/View&gt;
+            );
+        }
+
+        onDistrictChange = (itemValue, itemPosition) =&gt; {
+            this.setState({
+                selectedDistrict: itemValue,
+            });
+
+            ToastAndroid.showWithGravity(`Selected index is ${itemPosition}`,ToastAndroid.SHORT,ToastAndroid.CENTER);
+        }
+
+        componentWillUpdate(nextProps, nextStates) {
+            //只变换区时执行一次。
+            //变换城市是执行两次，因为selectedCity和selectedDistrict相继发生变化，引起重新render()
+            ToastAndroid.showWithGravity(`City changed from ${this.state.selectedDistrict} to ${nextStates.selectedDistrict}`,ToastAndroid.SHORT,ToastAndroid.CENTER);
+        }
+    }
+
+    const styles = StyleSheet.create({
+        flex: {
+            flex:1,
+            justifyContent: &#39;center&#39;
+        }
+    });
+</code></pre>
 <h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="http://og24yrsh2.bkt.clouddn.com/Picker.gif" alt="Picker Demo"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sharecode.cc/2016/11/04/React-Native-Picker/" data-id="ciwg3xuvr000lmwgeea9wmknt" class="article-share-link">分享</a>
+      <a data-url="http://sharecode.cc/2016/11/04/React-Native-Picker/" data-id="ciwonydio000lc0geueg3x9rf" class="article-share-link">分享</a>
       
         <a href="http://sharecode.cc/2016/11/04/React-Native-Picker/#ds-thread" class="article-comment-link">留言</a>
       
@@ -237,7 +325,7 @@ var duoshuoQuery = {short_name:"wall-e-va"};
   <div class="widget-wrap">
     <h3 class="widget-title tagcloud">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/React-Native-Android/" style="font-size: 15px;">React Native Android</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
+      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
     </div>
   </div>
 
@@ -346,6 +434,18 @@ var duoshuoQuery = {short_name:"wall-e-va"};
 
 <script src="/js/script.js"></script>
 
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushXml.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushCSharp.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/styles/shCoreEclipse.min.css"/>
+
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "code";
+  SyntaxHighlighter.all();
+</script>
   </div>
 </body>
 </html>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sharecode.cc/"/>
-  <updated>2016-12-08T06:24:30.879Z</updated>
+  <updated>2016-12-14T07:56:57.502Z</updated>
   <id>http://sharecode.cc/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://sharecode.cc/2016/12/06/Aspnet-Core-Web-GetStarted/"/>
     <id>http://sharecode.cc/2016/12/06/Aspnet-Core-Web-GetStarted/</id>
     <published>2016-12-06T07:35:01.000Z</published>
-    <updated>2016-12-08T06:24:30.879Z</updated>
+    <updated>2016-12-14T07:56:57.502Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><p><strong>ASP.NET Core简介</strong></p>
@@ -29,22 +29,102 @@
 </li>
 <li><p><strong>Program类</strong></p>
 <p> 这个类在应用的根目下，是一个控制台程序，其中<code>Main</code>方法来构建Web服务器,使用<code>WebHostBuilder</code>来创建Web应用的宿主，这一过程使用建造者模式。方法中指定使用什么Web服务器，可以指定多个选项如<code>UseKestrel()</code>和<code>UseIISIntegration</code>,时用<code>UseStartup&lt;TStartup&gt;()</code>方法来指定应用的启动类，在TStartup类中配置应用的请求管道，用<code>UseContentRoo()</code>方法指定应用的根目录。<code>Build()</code>方法创建Web应用的宿主，<code>Run()</code>方法运行Web应用并开始监听HTTP请求。其中以<code>Use</code>为前缀的方法都由<code>IWebHostBuilder</code>接口的扩展方法来提供。</p>
- <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Program</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">var</span> host = <span class="keyword">new</span> WebHostBuilder()</div><div class="line">            .UseKestrel()</div><div class="line">            .UseContentRoot(Directory.GetCurrentDirectory())</div><div class="line">            .UseIISIntegration()</div><div class="line">            .UseStartup&lt;Startup&gt;()</div><div class="line">            .Build();</div><div class="line"></div><div class="line">        host.Run();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="brush:csharp">     public class Program
+     {
+         public static void Main(string[] args)
+         {
+             var host = new WebHostBuilder()
+                 .UseKestrel()
+                 .UseContentRoot(Directory.GetCurrentDirectory())
+                 .UseIISIntegration()
+                 .UseStartup&lt;Startup&gt;()
+                 .Build();
+
+             host.Run();
+         }
+     }
+</code></pre>
 </li>
 <li><p><strong>Startup类</strong></p>
 <p> <code>Startup</code>类用来定义请求的处理管道、配置应用所需要时用的服务。ASP.NET应用最少要包含一个<code>Startup</code>类，当一个应用启动时，ASP.NET会在主程序集的所有命名空间中检索名字为<code>Startup</code>的类。<code>Startup</code>类不必须是公有的。如果有多个<code>Startup</code>类的情况，ASP.NET将会在工程的根命名空间中寻找一个，如果没有找到将继续按命名空间的字母顺序寻找。可以为不同的<a href="#">环境</a>分别定义<code>Startup</code>类，在运行时会根据不同的环境在挑选一个合适的。</p>
 <ul>
 <li><p><code>Startup</code>类的构造函数</p>
 <p><code>Startup</code>可以进行构造函数依赖注入，依赖通过<a href="#">内置的依赖注入容器<code>dependency injection</code></a>来提供，通过<code>IHostingEnvironment</code>的实例<code>env</code>来设定<a href="#">IConfigurationRoot</a>实例变量<code>Configuration</code>所需的数据源以便在<code>ConfigureService</code>和<code>Configure</code>方法中读取。</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> IConfigurationRoot Configuration &#123; <span class="keyword">get</span>; &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Startup</span>(<span class="params">IHostingEnvironment env</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> builder = <span class="keyword">new</span> ConfigurationBuilder()</div><div class="line">        .SetBasePath(env.ContentRootPath)</div><div class="line">        .AddJsonFile(<span class="string">"appsettings.json"</span>, optional: <span class="literal">true</span>, reloadOnChange: <span class="literal">true</span>)</div><div class="line">        <span class="comment">//通过IHostingEnvironment的实例env来设定实例变量Configuration所需的数据源</span></div><div class="line">        .AddJsonFile(<span class="string">$"appsettings.<span class="subst">&#123;env.EnvironmentName&#125;</span>.json"</span>, optional: <span class="literal">true</span>);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (env.IsDevelopment())</div><div class="line">    &#123;</div><div class="line">        <span class="comment">// For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709</span></div><div class="line">        builder.AddUserSecrets();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    builder.AddEnvironmentVariables();</div><div class="line">    Configuration = builder.Build();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="brush:csharp">  public IConfigurationRoot Configuration { get; }
+
+  public Startup(IHostingEnvironment env)
+  {
+      var builder = new ConfigurationBuilder()
+          .SetBasePath(env.ContentRootPath)
+          .AddJsonFile(&quot;appsettings.json&quot;, optional: true, reloadOnChange: true)
+          //通过IHostingEnvironment的实例env来设定实例变量Configuration所需的数据源
+          .AddJsonFile($&quot;appsettings.{env.EnvironmentName}.json&quot;, optional: true);
+
+      if (env.IsDevelopment())
+      {
+          // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
+          builder.AddUserSecrets();
+      }
+
+      builder.AddEnvironmentVariables();
+      Configuration = builder.Build();
+  }
+</code></pre>
 </li>
 <li><p><code>Configure</code>方法</p>
 <p><code>Startup</code>类必须包含一个<code>Configure</code>方法，应用在启动时会先调用<code>ConfigureService</code>然后再调用<code>Configure</code>方法。<br><code>Configure</code>方法用来定义应用如何响应<code>HTTP</code>请求。通过向<code>IApplicationBuilder</code>实例中添加<a href="#">中间件</a>组件来配置请求管道，可以看到下面示例代码中通过调用<code>IApplicationBuilde</code>的扩展方法来配置执行管道以获得中间件的支持如error pages、BrowserLink、static files、ASP.NET MVC和Identity，调用<code>use</code>为前缀的扩展方将每一个中间件加入到执行管道中，例如用<code>UseMVC</code>扩展方法把路由中间件加入到请求管道中，并用MVC为默认的路由处理器。还有一些服务例如<code>IHostingEnvironment</code>和<code>ILoggerFactory</code>可以通过方法签名以参数方式注入。</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Configure</span>(<span class="params">IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory</span>)</span></div><div class="line">&#123;</div><div class="line">    loggerFactory.AddConsole(Configuration.GetSection(<span class="string">"Logging"</span>));</div><div class="line">    loggerFactory.AddDebug();</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (env.IsDevelopment())</div><div class="line">    &#123;</div><div class="line">        app.UseDeveloperExceptionPage();</div><div class="line">        app.UseDatabaseErrorPage();</div><div class="line">        app.UseBrowserLink();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        app.UseExceptionHandler(<span class="string">"/Home/Error"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    app.UseStaticFiles();</div><div class="line"></div><div class="line">    app.UseIdentity();</div><div class="line"></div><div class="line">    <span class="comment">// Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715</span></div><div class="line"></div><div class="line">    app.UseMvc(routes =&gt;</div><div class="line">    &#123;</div><div class="line">        routes.MapRoute(</div><div class="line">            name: <span class="string">"default"</span>,</div><div class="line">            template: <span class="string">"&#123;controller=Home&#125;/&#123;action=Index&#125;/&#123;id?&#125;"</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="brush:csharp">  // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+  public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+  {
+      loggerFactory.AddConsole(Configuration.GetSection(&quot;Logging&quot;));
+      loggerFactory.AddDebug();
+
+      if (env.IsDevelopment())
+      {
+          app.UseDeveloperExceptionPage();
+          app.UseDatabaseErrorPage();
+          app.UseBrowserLink();
+      }
+      else
+      {
+          app.UseExceptionHandler(&quot;/Home/Error&quot;);
+      }
+
+      app.UseStaticFiles();
+
+      app.UseIdentity();
+
+      // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
+
+      app.UseMvc(routes =&gt;
+      {
+          routes.MapRoute(
+              name: &quot;default&quot;,
+              template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+      });
+  }
+</code></pre>
 </li>
 <li><p><code>ConfigureService</code>方法</p>
 <p><code>ConfigureService</code>方法是可选的，应用在启动时会先于<code>Configure</code>方法被调用，因为功能要在被绑定到执行管道之前注册进来。方法中通过调用<code>IServiceCollection</code>的扩展方法<code>Add[Something]</code>来配置应用需要使用到的服务如Entity Framework、Identity和MVC。通过依赖注入可以使加入到服务容器中服务在应用中可用。</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// This method gets called by the runtime. Use this method to add services to the container.</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ConfigureServices</span>(<span class="params">IServiceCollection services</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// Add framework services.</span></div><div class="line">    services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;</div><div class="line">        options.UseSqlite(Configuration.GetConnectionString(<span class="string">"DefaultConnection"</span>)));</div><div class="line"></div><div class="line">    services.AddIdentity&lt;ApplicationUser, IdentityRole&gt;()</div><div class="line">        .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;()</div><div class="line">        .AddDefaultTokenProviders();</div><div class="line"></div><div class="line">    services.AddMvc();</div><div class="line"></div><div class="line">    <span class="comment">// Add application services.</span></div><div class="line">    services.AddTransient&lt;IEmailSender, AuthMessageSender&gt;();</div><div class="line">    services.AddTransient&lt;ISmsSender, AuthMessageSender&gt;();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="brush:csharp">  // This method gets called by the runtime. Use this method to add services to the container.
+  public void ConfigureServices(IServiceCollection services)
+  {
+      // Add framework services.
+      services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;
+          options.UseSqlite(Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
+
+      services.AddIdentity&lt;ApplicationUser, IdentityRole&gt;()
+          .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;()
+          .AddDefaultTokenProviders();
+
+      services.AddMvc();
+
+      // Add application services.
+      services.AddTransient&lt;IEmailSender, AuthMessageSender&gt;();
+      services.AddTransient&lt;ISmsSender, AuthMessageSender&gt;();
+  }
+</code></pre>
 <p>可以看到ASP.NET Corez在应用启动时通过依赖注入提供服务给应用程序，用户可以通过在<code>Startup</code>类构造函数或<code>Configure</code>和<code>ConfigureService</code>方法中以参数的方式得到需要使用的服务。上面代码中方法的执行顺序如下：</p>
 </li>
 </ul>
@@ -80,20 +160,39 @@
     <link href="http://sharecode.cc/2016/12/06/Aspnet-Core-Trouble-Shooting/"/>
     <id>http://sharecode.cc/2016/12/06/Aspnet-Core-Trouble-Shooting/</id>
     <published>2016-12-06T06:08:45.000Z</published>
-    <updated>2016-12-06T07:27:07.000Z</updated>
+    <updated>2016-12-14T07:58:33.752Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><p><strong>使用VS Code 调试 ASP.NET Core Web 应用常见问题</strong></p>
 <ul>
 <li><p>Error - Could not find the preLaunchTask ‘build’.<br><img src="http://og24yrsh2.bkt.clouddn.com/AspnetcoreNoPreLanchTaskBuild.png" alt="AspnetcoreNoPreLanchTaskBuild"><br>问题原因是在launch.json里配置了在应用执行前预先执行的任务，但找不到相应的任务。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">"preLaunchTask": "build"</div></pre></td></tr></table></figure>
+<pre><code class="brush:js">  &quot;preLaunchTask&quot;: &quot;build&quot;
+</code></pre>
 <p>点击’Confiure Task Runner’，然后在下图中选择’.NET Core’<br><img src="http://og24yrsh2.bkt.clouddn.com/AspnetcoreTaskRunner.png" alt="AspnetcoreTaskRunner"></p>
 <p>在.vscode文件夹下生成tasks.json文件，内容如下，用于编译应用</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    // See https://go.microsoft.com/fwlink/?LinkId=733558</div><div class="line">    // for the documentation about the tasks.json format</div><div class="line">    "version": "0.1.0",</div><div class="line">    "command": "dotnet",</div><div class="line">    "isShellCommand": true,</div><div class="line">    "args": [],</div><div class="line">    "tasks": [</div><div class="line">        &#123;</div><div class="line">            "taskName": "build",</div><div class="line">            "args": [ ],</div><div class="line">            "isBuildCommand": true,</div><div class="line">            "showOutput": "silent",</div><div class="line">            "problemMatcher": "$msCompile"</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="brush:js">  {
+      // See https://go.microsoft.com/fwlink/?LinkId=733558
+      // for the documentation about the tasks.json format
+      &quot;version&quot;: &quot;0.1.0&quot;,
+      &quot;command&quot;: &quot;dotnet&quot;,
+      &quot;isShellCommand&quot;: true,
+      &quot;args&quot;: [],
+      &quot;tasks&quot;: [
+          {
+              &quot;taskName&quot;: &quot;build&quot;,
+              &quot;args&quot;: [ ],
+              &quot;isBuildCommand&quot;: true,
+              &quot;showOutput&quot;: &quot;silent&quot;,
+              &quot;problemMatcher&quot;: &quot;$msCompile&quot;
+          }
+      ]
+  }
+</code></pre>
 </li>
 <li><p>Error- launch: launch.json must be configured. Change ‘program’ to the path to the executable file that you would like to debug.<br><img src="http://og24yrsh2.bkt.clouddn.com/AspnetcoreNoExecutableFile.png" alt="AspnetcoreNoExecutableFile"><br>问题的原因是找不到可执行文件</p>
 <p>点击’open launch.json’可以看到节点</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">"program": "$&#123;workspaceRoot&#125;/bin/Debug/&lt;target-framework&gt;/&lt;project-name.dll&gt;"</div></pre></td></tr></table></figure>
+<pre><code class="brush:js">  &quot;program&quot;: &quot;${workspaceRoot}/bin/Debug/&lt;target-framework&gt;/&lt;project-name.dll&gt;&quot;
+</code></pre>
 <p>将其中<target-framework>和<project-name.dll>替换成工程中bin目录下的真实目录即可。</project-name.dll></target-framework></p>
 </li>
 </ul>
@@ -120,7 +219,7 @@
     <link href="http://sharecode.cc/2016/11/08/Write-Class-Diagram-PlantUML/"/>
     <id>http://sharecode.cc/2016/11/08/Write-Class-Diagram-PlantUML/</id>
     <published>2016-11-08T08:58:37.000Z</published>
-    <updated>2016-12-05T05:23:57.759Z</updated>
+    <updated>2016-12-14T08:07:25.423Z</updated>
     
     <content type="html"><![CDATA[<h3 id="类图-Class-Diagram-表示类与类之间的关系，利用PlantUML来描述这些关系的基本用法如下："><a href="#类图-Class-Diagram-表示类与类之间的关系，利用PlantUML来描述这些关系的基本用法如下：" class="headerlink" title="类图(Class Diagram)表示类与类之间的关系，利用PlantUML来描述这些关系的基本用法如下："></a>类图(Class Diagram)表示类与类之间的关系，利用PlantUML来描述这些关系的基本用法如下：</h3><ol>
 <li><p>泛化(Generalization)</p>
@@ -132,7 +231,40 @@
 </ol>
 <ul>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Extend &lt;&lt;Folder&gt;&gt; &#123;</div><div class="line">        class Animal &#123;</div><div class="line">            +name string</div><div class="line">            +void breathe()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class Human&#123;</div><div class="line">            +name string</div><div class="line">            +void breathe()</div><div class="line">            +void Inovate()</div><div class="line">            +void Drive(ICar car)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    package implement &lt;&lt;Folder&gt;&gt; &#123;</div><div class="line">        interface ICar &#123;</div><div class="line">            +name string</div><div class="line">            +void Run()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class BMW &#123;</div><div class="line">            +name string</div><div class="line">            +void Run()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /&apos;泛化 - 继承类&apos;/</div><div class="line">    Human -up--|&gt; Animal : extends</div><div class="line"></div><div class="line">    /&apos;泛化 - 实现接口&apos;/</div><div class="line">    BMW -up..|&gt; ICar : implements</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:text">  @startuml
+      package Extend &lt;&lt;Folder&gt;&gt; {
+          class Animal {
+              +name string
+              +void breathe()
+          }
+
+          class Human{
+              +name string
+              +void breathe()
+              +void Inovate()
+              +void Drive(ICar car)
+          }
+      }
+
+      package implement &lt;&lt;Folder&gt;&gt; {
+          interface ICar {
+              +name string
+              +void Run()
+          }
+
+          class BMW {
+              +name string
+              +void Run()
+          }
+      }
+
+      /&#39;泛化 - 继承类&#39;/
+      Human -up--|&gt; Animal : extends
+
+      /&#39;泛化 - 实现接口&#39;/
+      BMW -up..|&gt; ICar : implements
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Generalization.png" alt="Generalization"></p>
 </li>
@@ -144,7 +276,17 @@
 </ol>
 <ul>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    class Person &#123;</div><div class="line">        +void Call(Phone phone)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    Class Phone</div><div class="line"></div><div class="line">    /&apos;依赖关系用虚线单项箭头表示..&gt;箭头指向被依赖对象&apos;/</div><div class="line">    Person -right..&gt; Phone : use</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      class Person {
+          +void Call(Phone phone)
+      }
+
+      Class Phone
+
+      /&#39;依赖关系用虚线单项箭头表示..&gt;箭头指向被依赖对象&#39;/
+      Person -right..&gt; Phone : use
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Dependency.png" alt="Dependency"></p>
 </li>
@@ -159,7 +301,16 @@
 </ol>
 <ul>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Unidirectional &lt;&lt;cloud&gt;&gt; &#123;</div><div class="line">        class person</div><div class="line">        class TV</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /&apos;单项关联用实线箭头表示--&gt;&apos;/</div><div class="line">    person -right--&gt; TV : watch</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      package Unidirectional &lt;&lt;cloud&gt;&gt; {
+          class person
+          class TV
+      }
+
+      /&#39;单项关联用实线箭头表示--&gt;&#39;/
+      person -right--&gt; TV : watch
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/UnidirectionalAssociation.png" alt="UnidirectionalAssociation"></p>
 <ul>
@@ -167,7 +318,16 @@
 </ul>
 </li>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Bidirectional &lt;&lt;Frame&gt;&gt; &#123;</div><div class="line">        class boyfriend</div><div class="line">        class girlfirend</div><div class="line"></div><div class="line">        /&apos;双向关联的对象用实线连接--&apos;/</div><div class="line">        boyfriend -right--girlfirend : marry</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      package Bidirectional &lt;&lt;Frame&gt;&gt; {
+          class boyfriend
+          class girlfirend
+
+          /&#39;双向关联的对象用实线连接--&#39;/
+          boyfriend -right--girlfirend : marry
+      }
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/BidirectionalAssociation.png" alt="BidirectionalAssociation"></p>
 <ul>
@@ -175,7 +335,19 @@
 </ul>
 </li>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package N-ary &lt;&lt;Association&gt;&gt; &#123;</div><div class="line">        class owner</div><div class="line">        class buyer</div><div class="line">        class agent &#123;</div><div class="line">            void coordinate()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        owner -- buyer</div><div class="line">        (owner,buyer) -- agent</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      package N-ary &lt;&lt;Association&gt;&gt; {
+          class owner
+          class buyer
+          class agent {
+              void coordinate()
+          }
+
+          owner -- buyer
+          (owner,buyer) -- agent
+      }
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/N-aryAssociation.png" alt="N-aryAssociation"></p>
 <ul>
@@ -183,7 +355,12 @@
 </ul>
 </li>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    class bug</div><div class="line"></div><div class="line">    bug &quot;0..*&quot; -up-- &quot;1..*&quot; bug : propagate</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      class bug
+
+      bug &quot;0..*&quot; -up-- &quot;1..*&quot; bug : propagate
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/SelfAssociation.png" alt="SelfAssociation"></p>
 </li>
@@ -195,7 +372,19 @@
 </ol>
 <ul>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Aggregation &lt;&lt;Frame&gt;&gt;&#123;</div><div class="line">        class crowd &#123;</div><div class="line">            ~List&lt;person&gt; people</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class person</div><div class="line"></div><div class="line">        /&apos;聚合用空心菱形实线表示o--&apos;/</div><div class="line">        crowd o---right person : have</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      package Aggregation &lt;&lt;Frame&gt;&gt;{
+          class crowd {
+              ~List&lt;person&gt; people
+          }
+
+          class person
+
+          /&#39;聚合用空心菱形实线表示o--&#39;/
+          crowd o---right person : have
+      }
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Aggregation.png" alt="Aggregation"></p>
 </li>
@@ -207,7 +396,22 @@
 </ol>
 <ul>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Composition &lt;&lt;frame&gt;&gt; &#123;</div><div class="line">        class Human &#123;</div><div class="line">            -Heart heart</div><div class="line">            -Lung lung </div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class Heart</div><div class="line">        class Lung</div><div class="line"></div><div class="line">        /&apos;组合用实心菱形实线表示*--&apos;/</div><div class="line">        Human *-- Heart : contains</div><div class="line">        Human *-- Lung</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      package Composition &lt;&lt;frame&gt;&gt; {
+          class Human {
+              -Heart heart
+              -Lung lung 
+          }
+
+          class Heart
+          class Lung
+
+          /&#39;组合用实心菱形实线表示*--&#39;/
+          Human *-- Heart : contains
+          Human *-- Lung
+      }
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Composition.png" alt="Composition"></p>
 </li>
@@ -234,7 +438,7 @@
     <link href="http://sharecode.cc/2016/11/04/React-Native-Picker/"/>
     <id>http://sharecode.cc/2016/11/04/React-Native-Picker/</id>
     <published>2016-11-04T09:27:37.000Z</published>
-    <updated>2016-11-07T07:53:13.946Z</updated>
+    <updated>2016-12-14T08:09:08.816Z</updated>
     
     <content type="html"><![CDATA[<h3 id="选择框"><a href="#选择框" class="headerlink" title="选择框"></a>选择框</h3><ul>
 <li><p>selectedValue 当前选中值</p>
@@ -254,7 +458,97 @@
 </ol>
 </li>
 </ul>
-<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">    View,</div><div class="line">    StyleSheet,</div><div class="line">    Picker,</div><div class="line">    ToastAndroid,</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'react-native'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">PickerDemo</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentWillMount() &#123;</div><div class="line">        <span class="keyword">this</span>.City = [<span class="string">'Beijing'</span>,<span class="string">'ShangHai'</span>];</div><div class="line">        <span class="keyword">this</span>.BeijingDist = [<span class="string">'东城'</span>,<span class="string">'崇文'</span>, <span class="string">'西城'</span>,<span class="string">'宣武'</span>];</div><div class="line">        <span class="keyword">this</span>.ShangHaiDist = [<span class="string">'黄浦'</span>,<span class="string">'卢湾'</span>,<span class="string">'徐汇'</span>,<span class="string">'长宁'</span>,<span class="string">'静安'</span>];</div><div class="line"></div><div class="line">        <span class="keyword">this</span>.state = &#123;</div><div class="line">            <span class="attr">selectedCity</span>: <span class="keyword">this</span>.City[<span class="number">0</span>],</div><div class="line">            <span class="attr">selectedDistrict</span>: <span class="keyword">this</span>.BeijingDist[<span class="number">0</span>],</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">let</span> CityOption = <span class="keyword">this</span>.City.map(<span class="function"><span class="keyword">function</span>(<span class="params">city</span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> (</div><div class="line">                &lt;Picker.Item label = &#123;city&#125; value = &#123;city&#125;/&gt;</div><div class="line">            );</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        let District = null;</div><div class="line"></div><div class="line">        if (this.state.selectedCity === this.City[0]) &#123;</div><div class="line">            District = this.BeijingDist;</div><div class="line">        &#125; else &#123;</div><div class="line">            District = this.ShangHaiDist;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        let DistOption = District.map(function (dist) &#123;</div><div class="line">            return (</div><div class="line">                &lt;Picker.Item label=&#123;dist&#125; value=&#123;dist&#125; /&gt;</div><div class="line">            );</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        return (</div><div class="line">            &lt;View style=&#123;styles.flex&#125;&gt;</div><div class="line">                &lt;Picker</div><div class="line">                    selectedValue = &#123;this.state.selectedCity&#125;</div><div class="line">                    onValueChange = &#123;(city) =&gt; &#123;this.setState(&#123;selectedCity:city&#125;)&#125;&#125;</div><div class="line">                    mode = 'dropdown'</div><div class="line">                &gt;</div><div class="line">                    &#123;CityOption&#125;</div><div class="line">                &lt;/Picker&gt;</div><div class="line">                &lt;Picker</div><div class="line">                    selectedValue = &#123;this.state.selectedDistrict&#125;</div><div class="line">                    onValueChange = &#123;this.onDistrictChange&#125;</div><div class="line">                    mode = 'dialog'</div><div class="line">                    prompt = '选择区'</div><div class="line">                &gt;</div><div class="line">                    &#123;DistOption&#125;</div><div class="line">                &lt;/Picker&gt;</div><div class="line">            &lt;/View&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    onDistrictChange = (itemValue, itemPosition) =&gt; &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">            selectedDistrict: itemValue,</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        ToastAndroid.showWithGravity(`Selected index is $&#123;itemPosition&#125;`,ToastAndroid.SHORT,ToastAndroid.CENTER);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentWillUpdate(nextProps, nextStates) &#123;</div><div class="line">        //只变换区时执行一次。</div><div class="line">        //变换城市是执行两次，因为selectedCity和selectedDistrict相继发生变化，引起重新render()</div><div class="line">        ToastAndroid.showWithGravity(`City changed from $&#123;this.state.selectedDistrict&#125; to $&#123;nextStates.selectedDistrict&#125;`,ToastAndroid.SHORT,ToastAndroid.CENTER);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const styles = StyleSheet.create(&#123;</div><div class="line">    flex: &#123;</div><div class="line">        flex:1,</div><div class="line">        justifyContent: 'center'</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><pre><code class="brush:js">    &#39;use strict&#39;
+
+    import React, { Component } from &#39;react&#39;;
+
+    import {
+        View,
+        StyleSheet,
+        Picker,
+        ToastAndroid,
+    } from &#39;react-native&#39;
+
+    export default class PickerDemo extends Component {
+        constructor(props) {
+            super(props);
+        }
+
+        componentWillMount() {
+            this.City = [&#39;Beijing&#39;,&#39;ShangHai&#39;];
+            this.BeijingDist = [&#39;东城&#39;,&#39;崇文&#39;, &#39;西城&#39;,&#39;宣武&#39;];
+            this.ShangHaiDist = [&#39;黄浦&#39;,&#39;卢湾&#39;,&#39;徐汇&#39;,&#39;长宁&#39;,&#39;静安&#39;];
+
+            this.state = {
+                selectedCity: this.City[0],
+                selectedDistrict: this.BeijingDist[0],
+            };
+        }
+
+        render() {
+            let CityOption = this.City.map(function(city) {
+                return (
+                    &lt;Picker.Item label = {city} value = {city}/&gt;
+                );
+            });
+
+            let District = null;
+
+            if (this.state.selectedCity === this.City[0]) {
+                District = this.BeijingDist;
+            } else {
+                District = this.ShangHaiDist;
+            }
+
+            let DistOption = District.map(function (dist) {
+                return (
+                    &lt;Picker.Item label={dist} value={dist} /&gt;
+                );
+            });
+
+            return (
+                &lt;View style={styles.flex}&gt;
+                    &lt;Picker
+                        selectedValue = {this.state.selectedCity}
+                        onValueChange = {(city) =&gt; {this.setState({selectedCity:city})}}
+                        mode = &#39;dropdown&#39;
+                    &gt;
+                        {CityOption}
+                    &lt;/Picker&gt;
+                    &lt;Picker
+                        selectedValue = {this.state.selectedDistrict}
+                        onValueChange = {this.onDistrictChange}
+                        mode = &#39;dialog&#39;
+                        prompt = &#39;选择区&#39;
+                    &gt;
+                        {DistOption}
+                    &lt;/Picker&gt;
+                &lt;/View&gt;
+            );
+        }
+
+        onDistrictChange = (itemValue, itemPosition) =&gt; {
+            this.setState({
+                selectedDistrict: itemValue,
+            });
+
+            ToastAndroid.showWithGravity(`Selected index is ${itemPosition}`,ToastAndroid.SHORT,ToastAndroid.CENTER);
+        }
+
+        componentWillUpdate(nextProps, nextStates) {
+            //只变换区时执行一次。
+            //变换城市是执行两次，因为selectedCity和selectedDistrict相继发生变化，引起重新render()
+            ToastAndroid.showWithGravity(`City changed from ${this.state.selectedDistrict} to ${nextStates.selectedDistrict}`,ToastAndroid.SHORT,ToastAndroid.CENTER);
+        }
+    }
+
+    const styles = StyleSheet.create({
+        flex: {
+            flex:1,
+            justifyContent: &#39;center&#39;
+        }
+    });
+</code></pre>
 <h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="http://og24yrsh2.bkt.clouddn.com/Picker.gif" alt="Picker Demo"></p>
 ]]></content>
     
@@ -277,7 +571,7 @@
     <link href="http://sharecode.cc/2016/11/03/Hexo_Hightlight/"/>
     <id>http://sharecode.cc/2016/11/03/Hexo_Hightlight/</id>
     <published>2016-11-03T07:39:27.000Z</published>
-    <updated>2016-12-08T08:04:03.760Z</updated>
+    <updated>2016-12-14T08:10:43.011Z</updated>
     
     <content type="html"><![CDATA[<p><em>It’s not recommended way to do hightlight since it breaks rule <a href="https://github.com/DavidAnson/markdownlint/blob/v0.2.0/doc/Rules.md#md033---inline-html" target="_blank" rel="external">no-inline-html</a></em></p>
 <h3 id="Download-Prettify"><a href="#Download-Prettify" class="headerlink" title="Download Prettify"></a>Download Prettify</h3><ol>
@@ -288,10 +582,16 @@
 </ol>
 <h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><ol>
 <li><p>Add below code at the bottom of layout_partial\after-footer.ejs</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;%- js(<span class="string">'js/script'</span>,<span class="string">'js/run_prettify'</span>) %&gt;</div><div class="line">&lt;%- css('css/prettify/prettify') %&gt;</div></pre></td></tr></table></figure>
+<pre><code class="brush:js"> &lt;%- js(&#39;js/script&#39;,&#39;js/run_prettify&#39;) %&gt;
+ &lt;%- css(&#39;css/prettify/prettify&#39;) %&gt;
+</code></pre>
 </li>
 <li><p>Using raw HTML <code>&lt;PRE&gt;</code> block in MD file as below</p>
- <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">pre</span> <span class="attr">class</span>=<span class="string">"prettyprint linenums lang-cs"</span>&gt;</span></div><div class="line">int a = 0;</div><div class="line">string s = string.empty</div><div class="line"><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></div></pre></td></tr></table></figure>
+<pre><code class="brush:html"> &lt;pre class=&quot;prettyprint linenums lang-cs&quot;&gt;
+ int a = 0;
+ string s = string.empty
+ &lt;/pre&gt;
+</code></pre>
 </li>
 <li><p>Above markdown will display C# code as expectation</p>
 <pre class="prettyprint linenums lang-cs">
@@ -325,7 +625,7 @@ string s = string.empty
     <link href="http://sharecode.cc/2016/11/03/Design-Pattern-Observer/"/>
     <id>http://sharecode.cc/2016/11/03/Design-Pattern-Observer/</id>
     <published>2016-11-03T07:39:27.000Z</published>
-    <updated>2016-11-08T06:59:42.676Z</updated>
+    <updated>2016-12-14T08:11:25.222Z</updated>
     
     <content type="html"><![CDATA[<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><ol>
 <li><p>当一个对象的行为或状态变化引起另外一组对象的行为或状态变化时，或者说一组对象需要关心某一个对象的变化而作出相应的变化时，可以使用观察者模式。</p>
@@ -335,7 +635,106 @@ string s = string.empty
 <li><p>观察者模式可以实现观察者和被观察对象之间的解耦，各自对立变化不会影响彼此，被观察对象只需知晓观察着的抽象接口(行为)，不用关心观察者的具体行为，也不用关心观察着的数量。</p>
 </li>
 </ol>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> System;</div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">Observer</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">class</span> <span class="title">Program</span></div><div class="line">    &#123;</div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">//定义观察者即读者</span></div><div class="line">            Subscriber objSA = <span class="keyword">new</span> Subscriber(<span class="string">"Subscriber A"</span>);</div><div class="line">            Subscriber objSB = <span class="keyword">new</span> Subscriber(<span class="string">"Subscriber B"</span>);</div><div class="line"></div><div class="line">            <span class="comment">//定义被观察对象即订阅号</span></div><div class="line">            WeChatSubscrptionAccount objWSA = <span class="keyword">new</span> WeChatSubscrptionAccount(<span class="string">"WeChatSubscrption"</span>);</div><div class="line"></div><div class="line">            <span class="comment">//通过委托让订阅号知道需要通知哪些读者</span></div><div class="line">            objWSA.AddObserver(<span class="keyword">new</span> NotifyObserver(objSA.DoSomething));</div><div class="line">            objWSA.AddObserver(<span class="keyword">new</span> NotifyObserver(objSB.DoSomething));</div><div class="line"></div><div class="line">            <span class="comment">//被观察者行为即订阅号发布新文章</span></div><div class="line">            objWSA.CreateNewArticle(<span class="keyword">new</span> EventArgs());</div><div class="line">            Console.Read();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//委托用来引用观察者抽象行为，即读、不读、退订或其它</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">delegate</span> <span class="keyword">void</span> <span class="title">NotifyObserver</span>(<span class="params">Subject Sender, EventArgs e</span>)</span>;</div><div class="line"></div><div class="line">    <span class="comment">//抽象被观察对象</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Subject</span> &#123;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">string</span> Name;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Subject</span>(<span class="params"><span class="keyword">string</span> strName</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.Name = strName;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//定义被观察对象的行为</span></div><div class="line">        <span class="keyword">public</span> <span class="keyword">event</span> NotifyObserver SubjectAct;</div><div class="line"></div><div class="line">        <span class="comment">//当被观察对象的行为发生时，观察者会做出相应的反应</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnSubjectAct</span>(<span class="params">EventArgs e</span>)</span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">//如果已经有观察者</span></div><div class="line">            <span class="keyword">if</span> (SubjectAct != <span class="literal">null</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="comment">//观察者的具体行为</span></div><div class="line">                SubjectAct(<span class="keyword">this</span>, e);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//被观察对象保持观察者的抽象行为</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">AddObserver</span>(<span class="params">NotifyObserver objObserverAct</span>)</span></div><div class="line">        &#123;</div><div class="line">            SubjectAct += objObserverAct;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//被观察对象移除观察者的抽象行为</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">RemoveObserver</span>(<span class="params">NotifyObserver objObserverAct</span>)</span></div><div class="line">        &#123;</div><div class="line">            SubjectAct -= objObserverAct;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//具体被观察对象，微信订阅号</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">WeChatSubscrptionAccount</span> : <span class="title">Subject</span> &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">WeChatSubscrptionAccount</span>(<span class="params"><span class="keyword">string</span> strName</span>) : <span class="title">base</span>(<span class="params">strName</span>) </span>&#123; &#125;</div><div class="line"></div><div class="line">        <span class="comment">//当新文章创建后要通知所有订阅者</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CreateNewArticle</span>(<span class="params">EventArgs e</span>)</span></div><div class="line">        &#123;</div><div class="line">            Console.WriteLine(<span class="string">"Send new article."</span>);</div><div class="line"></div><div class="line">            <span class="comment">//通知所有订阅者</span></div><div class="line">            <span class="keyword">this</span>.OnSubjectAct(e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//观察者</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">Observer</span> &#123;</div><div class="line">        <span class="comment">//观察者抽象行为</span></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">DoSomething</span>(<span class="params">Subject Sender, EventArgs e</span>)</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//具体观察者，读者</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Subscriber</span> : <span class="title">Observer</span> &#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">string</span> Name;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Subscriber</span>(<span class="params"><span class="keyword">string</span> strName</span>)</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">this</span>.Name = strName;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//读者具体行为</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DoSomething</span>(<span class="params">Subject Sender, EventArgs e</span>) </span>&#123;</div><div class="line">            Console.WriteLine(<span class="string">$"<span class="subst">&#123;<span class="keyword">this</span>.Name&#125;</span> is going to do something about <span class="subst">&#123;Sender.Name&#125;</span>."</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+<pre><code class="brush:c#">    using System;
+
+    namespace Observer
+    {
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                //定义观察者即读者
+                Subscriber objSA = new Subscriber(&quot;Subscriber A&quot;);
+                Subscriber objSB = new Subscriber(&quot;Subscriber B&quot;);
+
+                //定义被观察对象即订阅号
+                WeChatSubscrptionAccount objWSA = new WeChatSubscrptionAccount(&quot;WeChatSubscrption&quot;);
+
+                //通过委托让订阅号知道需要通知哪些读者
+                objWSA.AddObserver(new NotifyObserver(objSA.DoSomething));
+                objWSA.AddObserver(new NotifyObserver(objSB.DoSomething));
+
+                //被观察者行为即订阅号发布新文章
+                objWSA.CreateNewArticle(new EventArgs());
+                Console.Read();
+            }
+        }
+
+        //委托用来引用观察者抽象行为，即读、不读、退订或其它
+        public delegate void NotifyObserver(Subject Sender, EventArgs e);
+
+        //抽象被观察对象
+        public class Subject {
+            public string Name;
+
+            public Subject(string strName) {
+                this.Name = strName;
+            }
+
+            //定义被观察对象的行为
+            public event NotifyObserver SubjectAct;
+
+            //当被观察对象的行为发生时，观察者会做出相应的反应
+            public void OnSubjectAct(EventArgs e)
+            {
+                //如果已经有观察者
+                if (SubjectAct != null)
+                {
+                    //观察者的具体行为
+                    SubjectAct(this, e);
+                }
+            }
+
+            //被观察对象保持观察者的抽象行为
+            public void AddObserver(NotifyObserver objObserverAct)
+            {
+                SubjectAct += objObserverAct;
+            }
+
+            //被观察对象移除观察者的抽象行为
+            public void RemoveObserver(NotifyObserver objObserverAct)
+            {
+                SubjectAct -= objObserverAct;
+            }
+        }
+
+        //具体被观察对象，微信订阅号
+        public class WeChatSubscrptionAccount : Subject {
+            public WeChatSubscrptionAccount(string strName) : base(strName) { }
+
+            //当新文章创建后要通知所有订阅者
+            public void CreateNewArticle(EventArgs e)
+            {
+                Console.WriteLine(&quot;Send new article.&quot;);
+
+                //通知所有订阅者
+                this.OnSubjectAct(e);
+            }
+        }
+
+        //观察者
+        public interface Observer {
+            //观察者抽象行为
+            void DoSomething(Subject Sender, EventArgs e);
+        }
+
+        //具体观察者，读者
+        public class Subscriber : Observer {
+            private string Name;
+
+            public Subscriber(string strName)
+            {
+                this.Name = strName;
+            }
+
+            //读者具体行为
+            public void DoSomething(Subject Sender, EventArgs e) {
+                Console.WriteLine($&quot;{this.Name} is going to do something about {Sender.Name}.&quot;);
+            }
+        }
+    }
+</code></pre>
+]]></content>
     
     <summary type="html">
     
@@ -354,7 +753,7 @@ string s = string.empty
     <link href="http://sharecode.cc/2016/10/13/React-Native-DrawerLayoutAndroid/"/>
     <id>http://sharecode.cc/2016/10/13/React-Native-DrawerLayoutAndroid/</id>
     <published>2016-10-13T04:15:42.000Z</published>
-    <updated>2016-11-07T07:00:48.876Z</updated>
+    <updated>2016-12-14T08:14:31.286Z</updated>
     
     <content type="html"><![CDATA[<p>DrawerLayout又称抽屉，一般用于显示或隐藏屏幕侧方的导航条(View)，用户通过手势滑动屏幕或点击按钮调用openDrawer()或closeDrawer()控制导航条(View)的显示。</p>
 <p>属性如下：</p>
@@ -390,7 +789,98 @@ string s = string.empty
 <p><img src="http://og24yrsh2.bkt.clouddn.com/DrawerLayoutAndroid.gif" alt="onDrawerStateChanged"></p>
 <p>DrawerLayoutAndroid方法有两个openDrawer()和closeDrawer()用于程序控制导航条开关。</p>
 <p>Demo完整代码如下:</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">    View,</div><div class="line">    Text,</div><div class="line">    StyleSheet,</div><div class="line">    DrawerLayoutAndroid,</div><div class="line">    Dimensions,</div><div class="line">    TouchableOpacity,</div><div class="line">    TextInput,</div><div class="line">    ToastAndroid,</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">DLAExample</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line"></div><div class="line">        <span class="keyword">this</span>.state = &#123;</div><div class="line">            <span class="attr">position</span>: DrawerLayoutAndroid.positions.Left,</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        <span class="keyword">this</span>.Naview = (</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">View</span> <span class="attr">style</span>=<span class="string">&#123;styles.NavigationView&#125;</span>&gt;</span></span></div><div class="line">                <span class="tag">&lt;<span class="name">Text</span>&gt;</span>Menu1<span class="tag">&lt;/<span class="name">Text</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">Text</span>&gt;</span>Menu2<span class="tag">&lt;/<span class="name">Text</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">Text</span>&gt;</span>Menu3<span class="tag">&lt;/<span class="name">Text</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">View</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">let</span> &#123; width &#125; = Dimensions.get(<span class="string">'window'</span>);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> (</div><div class="line">                <span class="xml"><span class="tag">&lt;<span class="name">DrawerLayoutAndroid</span></span></span></div><div class="line">                    <span class="attr">ref</span>=<span class="string">"DrawerLayout"</span></div><div class="line">                    <span class="attr">drawerWidth</span>=<span class="string">&#123;width</span> / <span class="attr">2</span>&#125;</div><div class="line">                    <span class="attr">drawerBackgroundColor</span>=<span class="string">'rgba(255,255,255,0.8)'</span></div><div class="line">                    <span class="attr">renderNavigationView</span>=<span class="string">&#123;()</span> =&gt; this.Naview&#125;</div><div class="line">                    drawerPosition=&#123;this.state.position&#125;</div><div class="line">                    keyboardDismissMode='on-drag'</div><div class="line">                    drawerLockMode='unlocked'</div><div class="line">                    statusBarBackgroundColor='#1e90ff'</div><div class="line">                    onDrawerClose=&#123;() =&gt; ToastAndroid.showWithGravity('Drawer Closed',ToastAndroid.SHORT, ToastAndroid.BOTTOM)&#125;</div><div class="line">                    onDrawerOpen=&#123;() =&gt; ToastAndroid.showWithGravity('Drawer Opened',ToastAndroid.SHORT, ToastAndroid.TOP)&#125;</div><div class="line">                    onDrawerStateChanged=&#123;() =&gt; ToastAndroid.showWithGravity('State Changed',ToastAndroid.SHORT, ToastAndroid.CENTER)&#125;</div><div class="line">                &gt;</div><div class="line">                    <span class="tag">&lt;<span class="name">View</span> <span class="attr">style</span> = <span class="string">&#123;styles.container&#125;</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">TouchableOpacity</span> </span></div><div class="line">                            <span class="attr">style</span>=<span class="string">&#123;styles.Button&#125;</span> </div><div class="line">                            <span class="attr">onPress</span>=<span class="string">&#123;()</span> =&gt; &#123;</div><div class="line">                                    this.refs['DrawerLayout'].openDrawer();</div><div class="line">                                &#125;</div><div class="line">                            &#125;</div><div class="line">                        &gt;</div><div class="line">                            <span class="tag">&lt;<span class="name">Text</span>&gt;</span>Setting<span class="tag">&lt;/<span class="name">Text</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;/<span class="name">TouchableOpacity</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">TextInput</span> <span class="attr">style</span>=<span class="string">&#123;&#123;width:200&#125;&#125;</span>&gt;</span>keyboard dismiss on drag<span class="tag">&lt;/<span class="name">TextInput</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">View</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">DrawerLayoutAndroid</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> styles = StyleSheet.create(&#123;</div><div class="line">    <span class="attr">container</span>: &#123;</div><div class="line">        <span class="attr">flex</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">justifyContent</span>: <span class="string">'center'</span>,</div><div class="line">        <span class="attr">alignItems</span>: <span class="string">'center'</span>,</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    <span class="attr">NavigationView</span>: &#123;</div><div class="line">        <span class="attr">flex</span>:<span class="number">1</span>,</div><div class="line">        <span class="attr">justifyContent</span>: <span class="string">'space-around'</span>,</div><div class="line">        <span class="attr">alignItems</span>: <span class="string">'center'</span>, </div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    <span class="attr">Button</span>: &#123;</div><div class="line">        <span class="attr">height</span>:<span class="number">100</span>,</div><div class="line">        <span class="attr">width</span>:<span class="number">100</span>,</div><div class="line">        <span class="attr">margin</span>:<span class="number">20</span>,</div><div class="line">        <span class="attr">backgroundColor</span>:<span class="string">'#90ee90'</span>,</div><div class="line">        <span class="attr">borderRadius</span>: <span class="number">50</span>,</div><div class="line">        <span class="attr">justifyContent</span>: <span class="string">'center'</span>,</div><div class="line">        <span class="attr">alignItems</span>: <span class="string">'center'</span>,</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>]]></content>
+<pre><code class="brush:js">    &#39;use strict&#39;;
+
+    import React, { Component } from &#39;react&#39;;
+
+    import {
+        View,
+        Text,
+        StyleSheet,
+        DrawerLayoutAndroid,
+        Dimensions,
+        TouchableOpacity,
+        TextInput,
+        ToastAndroid,
+    } from &#39;react-native&#39;;
+
+    export default class DLAExample extends Component {
+        constructor(props) {
+            super(props);
+
+            this.state = {
+                position: DrawerLayoutAndroid.positions.Left,
+            };
+
+            this.Naview = (
+                &lt;View style={styles.NavigationView}&gt;
+                    &lt;Text&gt;Menu1&lt;/Text&gt;
+                    &lt;Text&gt;Menu2&lt;/Text&gt;
+                    &lt;Text&gt;Menu3&lt;/Text&gt;
+                &lt;/View&gt;
+            );
+        }
+
+        render() {
+            let { width } = Dimensions.get(&#39;window&#39;);
+
+            return (
+                    &lt;DrawerLayoutAndroid
+                        ref=&quot;DrawerLayout&quot;
+                        drawerWidth={width / 2}
+                        drawerBackgroundColor=&#39;rgba(255,255,255,0.8)&#39;
+                        renderNavigationView={() =&gt; this.Naview}
+                        drawerPosition={this.state.position}
+                        keyboardDismissMode=&#39;on-drag&#39;
+                        drawerLockMode=&#39;unlocked&#39;
+                        statusBarBackgroundColor=&#39;#1e90ff&#39;
+                        onDrawerClose={() =&gt; ToastAndroid.showWithGravity(&#39;Drawer Closed&#39;,ToastAndroid.SHORT, ToastAndroid.BOTTOM)}
+                        onDrawerOpen={() =&gt; ToastAndroid.showWithGravity(&#39;Drawer Opened&#39;,ToastAndroid.SHORT, ToastAndroid.TOP)}
+                        onDrawerStateChanged={() =&gt; ToastAndroid.showWithGravity(&#39;State Changed&#39;,ToastAndroid.SHORT, ToastAndroid.CENTER)}
+                    &gt;
+                        &lt;View style = {styles.container}&gt;
+                            &lt;TouchableOpacity 
+                                style={styles.Button} 
+                                onPress={() =&gt; {
+                                        this.refs[&#39;DrawerLayout&#39;].openDrawer();
+                                    }
+                                }
+                            &gt;
+                                &lt;Text&gt;Setting&lt;/Text&gt;
+                            &lt;/TouchableOpacity&gt;
+                            &lt;TextInput style={{width:200}}&gt;keyboard dismiss on drag&lt;/TextInput&gt;
+                        &lt;/View&gt;
+                    &lt;/DrawerLayoutAndroid&gt;
+            );
+        }
+
+    }
+
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            justifyContent: &#39;center&#39;,
+            alignItems: &#39;center&#39;,
+        },
+
+        NavigationView: {
+            flex:1,
+            justifyContent: &#39;space-around&#39;,
+            alignItems: &#39;center&#39;, 
+        },
+
+        Button: {
+            height:100,
+            width:100,
+            margin:20,
+            backgroundColor:&#39;#90ee90&#39;,
+            borderRadius: 50,
+            justifyContent: &#39;center&#39;,
+            alignItems: &#39;center&#39;,
+        }
+    });
+</code></pre>
+]]></content>
     
     <summary type="html">
     
@@ -415,7 +905,9 @@ string s = string.empty
     </summary>
     
     
-      <category term="React Native Android" scheme="http://sharecode.cc/tags/React-Native-Android/"/>
+      <category term="React Native" scheme="http://sharecode.cc/tags/React-Native/"/>
+    
+      <category term="Android" scheme="http://sharecode.cc/tags/Android/"/>
     
   </entry>
   
@@ -424,7 +916,7 @@ string s = string.empty
     <link href="http://sharecode.cc/2016/10/09/React-Native-ActivityIndicator/"/>
     <id>http://sharecode.cc/2016/10/09/React-Native-ActivityIndicator/</id>
     <published>2016-10-09T09:34:22.000Z</published>
-    <updated>2016-11-07T07:00:47.386Z</updated>
+    <updated>2016-12-14T08:10:30.323Z</updated>
     
     <content type="html"><![CDATA[<p>ActivityIndicator 用来在应用进行一些耗时操作时显示一个旋转的圆形指示器，有以下属性。</p>
 <ol>
@@ -436,7 +928,77 @@ string s = string.empty
 </li>
 </ol>
 <p>下面代码简单展示组件及其属性如何使用。<br><a id="more"></a></p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">    View,</div><div class="line">    StyleSheet,</div><div class="line">    ActivityIndicator,</div><div class="line">    Text,</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">ActivityIndicatorExample</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="comment">//_timer用于保存setInterval函数返回定时器的ID</span></div><div class="line">    _timer: React.PropTypes.number;</div><div class="line"></div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentWillMount() &#123;</div><div class="line">        <span class="comment">//组建渲染前初始化组建状态，默认显示Indicator及其下面文字。</span></div><div class="line">        <span class="keyword">this</span>.setState(&#123;</div><div class="line">            <span class="attr">animating</span>: <span class="literal">true</span>,</div><div class="line">            <span class="attr">opacity</span>: <span class="number">1</span></div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span>(</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">View</span> <span class="attr">style</span>=<span class="string">&#123;styles.container&#125;</span>&gt;</span></span></div><div class="line">                <span class="tag">&lt;<span class="name">ActivityIndicator</span></span></div><div class="line">                    <span class="attr">animating</span>=<span class="string">&#123;this.state.animating&#125;</span></div><div class="line">                    <span class="attr">color</span>=<span class="string">'mediumspringgreen'</span></div><div class="line">                    <span class="attr">size</span>=<span class="string">&#123;200&#125;</span></div><div class="line">                /&gt;</div><div class="line">                <span class="tag">&lt;<span class="name">View</span> <span class="attr">style</span>=<span class="string">&#123;&#123;opacity:</span> <span class="attr">this.state.opacity</span>&#125;&#125;&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">Text</span>&gt;</span>loading<span class="tag">&lt;/<span class="name">Text</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">View</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">View</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentDidMount() &#123;</div><div class="line">        //组建加载完成后设定定时函数</div><div class="line">        this.ToggleIndicator();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    ToggleIndicator() &#123;</div><div class="line">        //每隔两秒切换Indicator显示的状态</div><div class="line">        this._timer = setInterval(() =&gt; &#123;</div><div class="line">            this.setState(&#123;</div><div class="line">                animating: !this.state.animating,</div><div class="line">                opacity: this.state.opacity === 1 ? 0 : 1,</div><div class="line">            &#125;);</div><div class="line">        &#125;, 2000);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentWillUnmount() &#123;</div><div class="line">        //组件卸载前取消由setInterval()方法设置的定时器</div><div class="line">        clearInterval(this._timer);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const styles = StyleSheet.create(&#123;</div><div class="line">    container: &#123;</div><div class="line">        flex: 1,</div><div class="line">        justifyContent: 'center',</div><div class="line">        alignItems: 'center',</div><div class="line">    &#125;,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<pre><code class="brush:js">    &#39;use strict&#39;;
+
+    import React, { Component } from &#39;react&#39;;
+    import {
+        View,
+        StyleSheet,
+        ActivityIndicator,
+        Text,
+    } from &#39;react-native&#39;;
+
+
+    export default class ActivityIndicatorExample extends Component {
+        //_timer用于保存setInterval函数返回定时器的ID
+        _timer: React.PropTypes.number;
+
+        constructor(props) {
+            super(props);
+        }
+
+        componentWillMount() {
+            //组建渲染前初始化组建状态，默认显示Indicator及其下面文字。
+            this.setState({
+                animating: true,
+                opacity: 1
+            });
+        }
+
+        render() {
+            return(
+                &lt;View style={styles.container}&gt;
+                    &lt;ActivityIndicator
+                        animating={this.state.animating}
+                        color=&#39;mediumspringgreen&#39;
+                        size={200}
+                    /&gt;
+                    &lt;View style={{opacity: this.state.opacity}}&gt;
+                        &lt;Text&gt;loading&lt;/Text&gt;
+                    &lt;/View&gt;
+                &lt;/View&gt;
+            );
+        }
+
+        componentDidMount() {
+            //组建加载完成后设定定时函数
+            this.ToggleIndicator();
+        }
+
+        ToggleIndicator() {
+            //每隔两秒切换Indicator显示的状态
+            this._timer = setInterval(() =&gt; {
+                this.setState({
+                    animating: !this.state.animating,
+                    opacity: this.state.opacity === 1 ? 0 : 1,
+                });
+            }, 2000);
+        }
+
+        componentWillUnmount() {
+            //组件卸载前取消由setInterval()方法设置的定时器
+            clearInterval(this._timer);
+        }
+    }
+
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            justifyContent: &#39;center&#39;,
+            alignItems: &#39;center&#39;,
+        },
+    });
+</code></pre>
 <p>代码运行效果：<br><img src="http://og24yrsh2.bkt.clouddn.com/ezgif.com-gif-maker.gif" alt="ActivityIndicator Running"></p>
 ]]></content>
     
@@ -465,13 +1027,68 @@ string s = string.empty
     <link href="http://sharecode.cc/2016/09/07/Data-Struct-Stack-CS/"/>
     <id>http://sharecode.cc/2016/09/07/Data-Struct-Stack-CS/</id>
     <published>2016-09-07T02:58:05.000Z</published>
-    <updated>2016-11-07T09:22:09.439Z</updated>
+    <updated>2016-12-14T08:12:44.668Z</updated>
     
-    <content type="html"><![CDATA[<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">public static class Stack&lt;T&gt; &#123;</div><div class="line">    private static T[] values;</div><div class="line">    private static int capacity = 10;</div><div class="line">    private static int size = 0;</div><div class="line">    private static readonly Object objSync;</div><div class="line"></div><div class="line">    static Stack()&#123;</div><div class="line">        objSync = new object();</div><div class="line"></div><div class="line">        if (values == null) &#123;</div><div class="line">            lock (objSync) &#123;</div><div class="line">                if (values == null) &#123;</div><div class="line">                    values = new T[capacity];</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    internal static void Push(T item) &#123;</div><div class="line">        if (values.Length == size) &#123;</div><div class="line">            T[] newValues = new T[values.Length + (values.Length /2)];</div><div class="line">            Array.Copy(values, newValues, values.Length);</div><div class="line">            values = newValues;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        values[size++] = item;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    internal static T Pop() &#123;</div><div class="line">        if (size &gt; 0) &#123;</div><div class="line">            return values[--size];</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return default(T);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    internal static T Peek() &#123;</div><div class="line">        if (size &gt; 0)</div><div class="line">            return values[size - 1];</div><div class="line"></div><div class="line">        return default(T);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    internal static string ShowStack() &#123;</div><div class="line">        StringBuilder sb = new StringBuilder();</div><div class="line"></div><div class="line">        for (int i = size -1;i &gt; 0;i--)</div><div class="line">            sb.Append(values[i]==null? string.Empty: values[i].ToString() + " | ");</div><div class="line"></div><div class="line">        return sb.ToString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<pre><code class="brush:c#">    public static class Stack&lt;T&gt; {
+        private static T[] values;
+        private static int capacity = 10;
+        private static int size = 0;
+        private static readonly Object objSync;
+
+        static Stack(){
+            objSync = new object();
+
+            if (values == null) {
+                lock (objSync) {
+                    if (values == null) {
+                        values = new T[capacity];
+                    }
+                }
+            }
+        }
+
+        internal static void Push(T item) {
+            if (values.Length == size) {
+                T[] newValues = new T[values.Length + (values.Length /2)];
+                Array.Copy(values, newValues, values.Length);
+                values = newValues;
+            }
+
+            values[size++] = item;
+        }
+
+        internal static T Pop() {
+            if (size &gt; 0) {
+                return values[--size];
+            }
+
+            return default(T);
+        }
+
+        internal static T Peek() {
+            if (size &gt; 0)
+                return values[size - 1];
+
+            return default(T);
+        }
+
+        internal static string ShowStack() {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = size -1;i &gt; 0;i--)
+                sb.Append(values[i]==null? string.Empty: values[i].ToString() + &quot; | &quot;);
+
+            return sb.ToString();
+        }
+    }
+</code></pre>
+]]></content>
     
     <summary type="html">
     
-      &lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div
+      &lt;pre&gt;&lt;code class=&quot;brush:c#&quot;&gt;    public static class Stack&amp;lt;T&amp;gt; {
+        private static T[] values;
+        private static int capacity 
     
     </summary>
     
@@ -485,16 +1102,98 @@ string s = string.empty
     <link href="http://sharecode.cc/2016/09/01/BF-Algorithm-for-Pattern-Matching-in-String/"/>
     <id>http://sharecode.cc/2016/09/01/BF-Algorithm-for-Pattern-Matching-in-String/</id>
     <published>2016-09-01T01:22:51.000Z</published>
-    <updated>2016-11-07T09:22:09.437Z</updated>
+    <updated>2016-12-14T08:12:50.767Z</updated>
     
-    <content type="html"><![CDATA[<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">string</span> s = <span class="string">"abcdefg"</span>;</div><div class="line">    <span class="keyword">string</span> p = <span class="string">"ddc"</span>;</div><div class="line"></div><div class="line">    Stopwatch a =  Stopwatch.StartNew();</div><div class="line"></div><div class="line">    <span class="keyword">int</span> index = BFIndexOf(s, p);</div><div class="line"></div><div class="line">    a.Stop();</div><div class="line"></div><div class="line">    Console.WriteLine(<span class="string">"The index of &#123;0&#125; in &#123;1&#125; is &#123;2&#125;, time elapsed &#123;3&#125;"</span>, p, s, index, a.Elapsed.TotalMilliseconds);</div><div class="line"></div><div class="line">    a.Restart();</div><div class="line"></div><div class="line">    index = BFIndexOf2(s, p);</div><div class="line"></div><div class="line">    a.Stop();</div><div class="line"></div><div class="line">    Console.WriteLine(<span class="string">"The index of &#123;0&#125; in &#123;1&#125; is &#123;2&#125;, time elapsed &#123;3&#125;"</span>, p, s, index, a.Elapsed.TotalMilliseconds);</div><div class="line"></div><div class="line">    Console.ReadKey();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">BFIndexOf</span>(<span class="params"><span class="keyword">string</span> s, <span class="keyword">string</span> p</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> sLength = s.Length;</div><div class="line">    <span class="keyword">int</span> pLength = p.Length;</div><div class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="keyword">while</span> (i &lt; sLength)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</div><div class="line"></div><div class="line">        <span class="keyword">while</span> (j &lt; pLength &amp;&amp; s[i] == p[j])</div><div class="line">        &#123;</div><div class="line">            i++;</div><div class="line">            j++;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (j == pLength)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> i - j;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            i++;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">BFIndexOf2</span>(<span class="params"><span class="keyword">string</span> s, <span class="keyword">string</span> p</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> sLength = s.Length;</div><div class="line">    <span class="keyword">int</span> pLength = p.Length;</div><div class="line">    <span class="keyword">int</span> i = <span class="number">0</span>,j = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="keyword">while</span> (i &lt; sLength &amp;&amp; j &lt; pLength)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (s[i] == p[j])</div><div class="line">        &#123;</div><div class="line">            i++;</div><div class="line">            j++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            i = i - j + <span class="number">1</span>;</div><div class="line">            j = <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (j == pLength)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> i - j;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+    <content type="html"><![CDATA[<pre><code class="brush:c#">    static void Main(string[] args)
+    {
+        string s = &quot;abcdefg&quot;;
+        string p = &quot;ddc&quot;;
+
+        Stopwatch a =  Stopwatch.StartNew();
+
+        int index = BFIndexOf(s, p);
+
+        a.Stop();
+
+        Console.WriteLine(&quot;The index of {0} in {1} is {2}, time elapsed {3}&quot;, p, s, index, a.Elapsed.TotalMilliseconds);
+
+        a.Restart();
+
+        index = BFIndexOf2(s, p);
+
+        a.Stop();
+
+        Console.WriteLine(&quot;The index of {0} in {1} is {2}, time elapsed {3}&quot;, p, s, index, a.Elapsed.TotalMilliseconds);
+
+        Console.ReadKey();
+    }
+
+    public static int BFIndexOf(string s, string p)
+    {
+        int sLength = s.Length;
+        int pLength = p.Length;
+        int i = 0;
+
+        while (i &lt; sLength)
+        {
+            int j = 0;
+
+            while (j &lt; pLength &amp;&amp; s[i] == p[j])
+            {
+                i++;
+                j++;
+            }
+
+            if (j == pLength)
+            {
+                return i - j;
+            }
+            else {
+                i++;
+            }
+        }
+
+        return -1;
+    }
+
+    public static int BFIndexOf2(string s, string p)
+    {
+        int sLength = s.Length;
+        int pLength = p.Length;
+        int i = 0,j = 0;
+
+        while (i &lt; sLength &amp;&amp; j &lt; pLength)
+        {
+            if (s[i] == p[j])
+            {
+                i++;
+                j++;
+            }
+            else {
+                i = i - j + 1;
+                j = 0;
+            }
+        }
+
+        if (j == pLength)
+        {
+            return i - j;
+        }
+        else {
+            return -1;
+        }
+    }
+</code></pre>
 <pre><code>The index of cde in abcdefg is 2, time elapsed in BFIndexOf 0.3359 
 The index of cde in abcdefg is 2, time elapsed in BFIndexOf2 0.298
 </code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;figure class=&quot;highlight csharp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/d
+      &lt;pre&gt;&lt;code class=&quot;brush:c#&quot;&gt;    static void Main(string[] args)
+    {
+        string s = &amp;quot;abcdefg&amp;quot;;
+        string p = &amp;quot;ddc&amp;q
     
     </summary>
     
@@ -508,10 +1207,64 @@ The index of cde in abcdefg is 2, time elapsed in BFIndexOf2 0.298
     <link href="http://sharecode.cc/2016/08/26/Algorithm-Insertion-Sort-CS/"/>
     <id>http://sharecode.cc/2016/08/26/Algorithm-Insertion-Sort-CS/</id>
     <published>2016-08-26T08:38:04.000Z</published>
-    <updated>2016-11-07T09:22:09.437Z</updated>
+    <updated>2016-12-14T08:13:10.642Z</updated>
     
     <content type="html"><![CDATA[<h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h4><p>Pick up item one by one from unordered list to insert to ordered list.<br><a id="more"></a></p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">public class InsertionSort&lt;T&gt; where T: IComparer&lt;T&gt;</div><div class="line">&#123;</div><div class="line">    /// &lt;summary&gt;</div><div class="line">    /// Pick up item one by one from unordered list to insert to ordered list.</div><div class="line">    /// &lt;/summary&gt;</div><div class="line">    /// &lt;typeparam name="list"&gt;</div><div class="line">    /// List waiting for sort, item in it must be something implemented IComparer</div><div class="line">    /// &lt;/typeparam&gt;</div><div class="line">    public static void Sort(T[] list) &#123;</div><div class="line">        T temp;</div><div class="line">        int i, j;</div><div class="line"></div><div class="line">        for (i = 1; i &lt; list.Length; i++) &#123;</div><div class="line">            //Pick up one item by order in unordered list</div><div class="line">            temp = list[i];</div><div class="line">            //Index of the end of ordered list</div><div class="line">            j = i - 1;</div><div class="line"></div><div class="line">            //Start loop from the end of ordered list to find the right position for item in temp</div><div class="line">            //Loop until J reached the start of ordered list or temp is larger than </div><div class="line">            //or equal to some item in ordered list</div><div class="line">            while (j &gt;= 0 &amp;&amp; list[j].Compare(temp, list[j]) &lt; 0) &#123;</div><div class="line">                list[j + 1] = list[j];</div><div class="line">                j--;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            //Set item in temp to right postion</div><div class="line">            list[j + 1] = temp;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void ShowList(T[] list) &#123;</div><div class="line">        foreach (T item in list)</div><div class="line">            Console.WriteLine(item.ToString());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class Ball : IComparer&lt;Ball&gt; &#123;</div><div class="line">    public int Size &#123; get; set; &#125;</div><div class="line">    public string Name &#123; get; set; &#125;</div><div class="line"></div><div class="line">    public Ball(int size, string name) &#123;</div><div class="line">        this.Size = size;</div><div class="line">        this.Name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int Compare(Ball x, Ball y) &#123;</div><div class="line">        return x.Size.CompareTo(y.Size);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public override string ToString() &#123;</div><div class="line">        return this.Name;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><pre><code class="brush:c#">    public class InsertionSort&lt;T&gt; where T: IComparer&lt;T&gt;
+    {
+        /// &lt;summary&gt;
+        /// Pick up item one by one from unordered list to insert to ordered list.
+        /// &lt;/summary&gt;
+        /// &lt;typeparam name=&quot;list&quot;&gt;
+        /// List waiting for sort, item in it must be something implemented IComparer
+        /// &lt;/typeparam&gt;
+        public static void Sort(T[] list) {
+            T temp;
+            int i, j;
+
+            for (i = 1; i &lt; list.Length; i++) {
+                //Pick up one item by order in unordered list
+                temp = list[i];
+                //Index of the end of ordered list
+                j = i - 1;
+
+                //Start loop from the end of ordered list to find the right position for item in temp
+                //Loop until J reached the start of ordered list or temp is larger than 
+                //or equal to some item in ordered list
+                while (j &gt;= 0 &amp;&amp; list[j].Compare(temp, list[j]) &lt; 0) {
+                    list[j + 1] = list[j];
+                    j--;
+                }
+
+                //Set item in temp to right postion
+                list[j + 1] = temp;
+            }
+        }
+
+        public static void ShowList(T[] list) {
+            foreach (T item in list)
+                Console.WriteLine(item.ToString());
+        }
+    }
+
+    public class Ball : IComparer&lt;Ball&gt; {
+        public int Size { get; set; }
+        public string Name { get; set; }
+
+        public Ball(int size, string name) {
+            this.Size = size;
+            this.Name = name;
+        }
+
+        public int Compare(Ball x, Ball y) {
+            return x.Size.CompareTo(y.Size);
+        }
+
+        public override string ToString() {
+            return this.Name;
+        }
+    }
+</code></pre>
 ]]></content>
     
     <summary type="html">
@@ -530,20 +1283,62 @@ The index of cde in abcdefg is 2, time elapsed in BFIndexOf2 0.298
     <link href="http://sharecode.cc/2016/08/15/Reload-JS-Does-Not-Work/"/>
     <id>http://sharecode.cc/2016/08/15/Reload-JS-Does-Not-Work/</id>
     <published>2016-08-15T07:35:12.000Z</published>
-    <updated>2016-11-07T07:00:50.168Z</updated>
+    <updated>2016-12-14T08:15:12.120Z</updated>
     
     <content type="html"><![CDATA[<p>Js change does not reflect on device/simulator when you try reload JS from packager.</p>
 <p>Try below solution might help.</p>
 <ol>
 <li><p>Increase the const MAX_WAIT_TIME in %yourproject%\node_modules\react-native\node_modules\node-haste\lib\FileWatcher\index.js<br>or %yourproject%node_modules\react-native\packager\react-packager\src\node-haste\FileWatcher\index.js</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> MAX_WAIT_TIME = <span class="number">360000</span>;</div></pre></td></tr></table></figure>
+<pre><code class="brush:js"> var MAX_WAIT_TIME = 360000;
+</code></pre>
 <p> Try blew if step 1 does not work</p>
 </li>
 <li><p>Change function ‘_createWatcher’</p>
 <p> From:</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">key: <span class="string">'_createWatcher'</span>,</div><div class="line">    <span class="attr">value</span>: <span class="function"><span class="keyword">function</span> _createWatcher(<span class="params">rootConfig</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> watcher = <span class="keyword">new</span> WatcherClass(rootConfig.dir, &#123;</div><div class="line">        <span class="attr">glob</span>: rootConfig.globs,</div><div class="line">        <span class="attr">dot</span>: <span class="literal">false</span></div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> rejectTimeout = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> reject(<span class="keyword">new</span> <span class="built_in">Error</span>(timeoutMessage(WatcherClass)));</div><div class="line">        &#125;, MAX_WAIT_TIME);</div><div class="line"></div><div class="line">        watcher.once(<span class="string">'ready'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        clearTimeout(rejectTimeout);</div><div class="line">        resolve(watcher);</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<pre><code class="brush:js">     key: &#39;_createWatcher&#39;,
+         value: function _createWatcher(rootConfig) {
+         var watcher = new WatcherClass(rootConfig.dir, {
+             glob: rootConfig.globs,
+             dot: false
+         });
+
+         return new Promise(function (resolve, reject) {
+             var rejectTimeout = setTimeout(function () {
+             return reject(new Error(timeoutMessage(WatcherClass)));
+             }, MAX_WAIT_TIME);
+
+             watcher.once(&#39;ready&#39;, function () {
+             clearTimeout(rejectTimeout);
+             resolve(watcher);
+             });
+         });
+         }
+</code></pre>
 <p> To:</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">key: <span class="string">'_createWatcher'</span>,</div><div class="line">    <span class="attr">value</span>: <span class="function"><span class="keyword">function</span> _createWatcher(<span class="params">rootConfig</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> watcher = <span class="keyword">new</span> WatcherClass(rootConfig.dir, &#123;</div><div class="line">        <span class="attr">glob</span>: rootConfig.globs,</div><div class="line">        <span class="attr">dot</span>: <span class="literal">false</span></div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">const</span> rejectTimeout = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        reject(<span class="keyword">new</span> <span class="built_in">Error</span>([</div><div class="line">            <span class="string">'Watcher took too long to load'</span>,</div><div class="line">            <span class="string">'Try running `watchman version` from your terminal'</span>,</div><div class="line">            <span class="string">'https://facebook.github.io/watchman/docs/troubleshooting.html'</span>,</div><div class="line">        ].join(<span class="string">'\n'</span>)));</div><div class="line">        &#125;, MAX_WAIT_TIME);</div><div class="line"></div><div class="line">        watcher.once(<span class="string">'ready'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        clearTimeout(rejectTimeout);</div><div class="line">        resolve(watcher);</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<pre><code class="brush:js">     key: &#39;_createWatcher&#39;,
+         value: function _createWatcher(rootConfig) {
+         var watcher = new WatcherClass(rootConfig.dir, {
+             glob: rootConfig.globs,
+             dot: false
+         });
+
+         return new Promise(function (resolve, reject) {
+
+             const rejectTimeout = setTimeout(function() {
+             reject(new Error([
+                 &#39;Watcher took too long to load&#39;,
+                 &#39;Try running `watchman version` from your terminal&#39;,
+                 &#39;https://facebook.github.io/watchman/docs/troubleshooting.html&#39;,
+             ].join(&#39;\n&#39;)));
+             }, MAX_WAIT_TIME);
+
+             watcher.once(&#39;ready&#39;, function () {
+             clearTimeout(rejectTimeout);
+             resolve(watcher);
+             });
+         });
+         }
+</code></pre>
 </li>
 </ol>
 <p>Referrence:<em><a href="https://github.com/facebook/react-native/issues/7257" target="_blank" rel="external">https://github.com/facebook/react-native/issues/7257</a></em></p>
@@ -559,7 +1354,9 @@ The index of cde in abcdefg is 2, time elapsed in BFIndexOf2 0.298
     </summary>
     
     
-      <category term="React Native Android" scheme="http://sharecode.cc/tags/React-Native-Android/"/>
+      <category term="React Native" scheme="http://sharecode.cc/tags/React-Native/"/>
+    
+      <category term="Android" scheme="http://sharecode.cc/tags/Android/"/>
     
   </entry>
   
@@ -568,18 +1365,101 @@ The index of cde in abcdefg is 2, time elapsed in BFIndexOf2 0.298
     <link href="http://sharecode.cc/2016/08/09/Algorithm-Selection-Sort-CS/"/>
     <id>http://sharecode.cc/2016/08/09/Algorithm-Selection-Sort-CS/</id>
     <published>2016-08-09T08:38:04.000Z</published>
-    <updated>2016-11-07T09:22:09.436Z</updated>
+    <updated>2016-12-14T08:13:00.535Z</updated>
     
     <content type="html"><![CDATA[<h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h4><p>Pick up one item from unordered list each loop, then set it to the end of orderred list.</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">Sort</span> &#123;</div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line">    <span class="comment"><span class="doctag">///</span> Direct Selection Sort</span></div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;typeparam name="T"&gt;</span>Implement interface IComaparable to support Generics<span class="doctag">&lt;/typeparam&gt;</span></span></div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name="list"&gt;</span>list contains value or object waiting for sort<span class="doctag">&lt;/param&gt;</span></span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> DirectSelectionSort&lt;T&gt;(<span class="keyword">params</span> T[] list) <span class="keyword">where</span> T : IComparable</div><div class="line">    &#123;</div><div class="line">        <span class="comment">//Set deault value of object or value type</span></div><div class="line">        T temp = <span class="keyword">default</span>(T);</div><div class="line">        <span class="comment">//Keep the index of the smallest item</span></div><div class="line">        <span class="keyword">int</span> iMinIndex;</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.Length - <span class="number">1</span>; i++) &#123;</div><div class="line">            iMinIndex = i;</div><div class="line"></div><div class="line">            <span class="comment">//Pick up the smallest item to the end of the orderred list, then length of ordered list +1, length of unordered list -1</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; list.Length; j++) &#123;</div><div class="line">                <span class="keyword">if</span> (list[j].CompareTo(list[iMinIndex]) &lt; <span class="number">0</span>)</div><div class="line">                &#123;</div><div class="line">                    <span class="comment">//Update the index of the smallest item</span></div><div class="line">                    iMinIndex = j;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="comment">//Move the smallest item to the end of the orderred list if index changed.</span></div><div class="line">            <span class="keyword">if</span> (iMinIndex != i)</div><div class="line">            &#123;</div><div class="line">                temp = list[i];</div><div class="line">                list[i] = list[iMinIndex];</div><div class="line">                list[iMinIndex] = temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> ShowList&lt;T&gt;(T[] list) &#123;</div><div class="line">        Console.WriteLine(<span class="string">"Items in list:"</span>);</div><div class="line"></div><div class="line">        <span class="keyword">foreach</span> (T t <span class="keyword">in</span> list)</div><div class="line">            Console.Write(t.ToString() + <span class="string">" "</span>);</div><div class="line"></div><div class="line">        Console.WriteLine();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Animal</span> : <span class="title">IComparable</span> &#123;</div><div class="line">    <span class="keyword">public</span>  <span class="keyword">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> Weight &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Animal</span>(<span class="params"><span class="keyword">string</span> name, <span class="keyword">int</span> weight</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.Name = name;</div><div class="line">        <span class="keyword">this</span>.Weight = weight;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">CompareTo</span>(<span class="params"><span class="keyword">object</span> other</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.Weight.CompareTo((other <span class="keyword">as</span> Animal).Weight);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">string</span> <span class="title">ToString</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.Name + <span class="string">"'s weight is "</span> + <span class="keyword">this</span>.Weight;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> <span class="title">Program</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span>[] lstWaitforSelectionSorting = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>] &#123; <span class="number">23</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">98</span>, <span class="number">45</span>, <span class="number">23</span>, <span class="number">11</span>, <span class="number">87</span> &#125;;</div><div class="line"></div><div class="line">        Sort.ShowList(lstWaitforSelectionSorting);</div><div class="line">        Sort.DirectSelectionSort(lstWaitforSelectionSorting);</div><div class="line">        Sort.ShowList(lstWaitforSelectionSorting);</div><div class="line"></div><div class="line">        Animal[] animals = <span class="keyword">new</span> Animal[] &#123; <span class="keyword">new</span> Animal(<span class="string">"Cow"</span>, <span class="number">200</span>), <span class="keyword">new</span> Animal(<span class="string">"Sheep"</span>, <span class="number">100</span>), <span class="keyword">new</span> Animal(<span class="string">"Fox"</span>, <span class="number">50</span>) &#125;;</div><div class="line"></div><div class="line">        Sort.ShowList(animals);</div><div class="line">        Sort.DirectSelectionSort(animals);</div><div class="line">        Sort.ShowList(animals);</div><div class="line"></div><div class="line">        Console.WriteLine();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><pre><code class="brush:c#">    class Sort {
+        /// &lt;summary&gt;
+        /// Direct Selection Sort
+        /// &lt;/summary&gt;
+        /// &lt;typeparam name=&quot;T&quot;&gt;Implement interface IComaparable to support Generics&lt;/typeparam&gt;
+        /// &lt;param name=&quot;list&quot;&gt;list contains value or object waiting for sort&lt;/param&gt;
+        public static void DirectSelectionSort&lt;T&gt;(params T[] list) where T : IComparable
+        {
+            //Set deault value of object or value type
+            T temp = default(T);
+            //Keep the index of the smallest item
+            int iMinIndex;
+
+            for (int i = 0; i &lt; list.Length - 1; i++) {
+                iMinIndex = i;
+
+                //Pick up the smallest item to the end of the orderred list, then length of ordered list +1, length of unordered list -1
+                for (int j = i + 1; j &lt; list.Length; j++) {
+                    if (list[j].CompareTo(list[iMinIndex]) &lt; 0)
+                    {
+                        //Update the index of the smallest item
+                        iMinIndex = j;
+                    }
+                }
+
+                //Move the smallest item to the end of the orderred list if index changed.
+                if (iMinIndex != i)
+                {
+                    temp = list[i];
+                    list[i] = list[iMinIndex];
+                    list[iMinIndex] = temp;
+                }
+            }
+        }
+
+        public static void ShowList&lt;T&gt;(T[] list) {
+            Console.WriteLine(&quot;Items in list:&quot;);
+
+            foreach (T t in list)
+                Console.Write(t.ToString() + &quot; &quot;);
+
+            Console.WriteLine();
+        }
+    }
+
+    public class Animal : IComparable {
+        public  string Name { get; set; }
+        public int Weight { get; set; }
+
+        public Animal(string name, int weight) {
+            this.Name = name;
+            this.Weight = weight;
+        }
+
+        public int CompareTo(object other)
+        {
+            return this.Weight.CompareTo((other as Animal).Weight);
+        }
+
+        public override string ToString()
+        {
+            return this.Name + &quot;&#39;s weight is &quot; + this.Weight;
+        }
+    }
+
+    class Program {
+        static void Main(string[] args)
+        {
+            int[] lstWaitforSelectionSorting = new int[10] { 23, 11, 3, 5, 6, 98, 45, 23, 11, 87 };
+
+            Sort.ShowList(lstWaitforSelectionSorting);
+            Sort.DirectSelectionSort(lstWaitforSelectionSorting);
+            Sort.ShowList(lstWaitforSelectionSorting);
+
+            Animal[] animals = new Animal[] { new Animal(&quot;Cow&quot;, 200), new Animal(&quot;Sheep&quot;, 100), new Animal(&quot;Fox&quot;, 50) };
+
+            Sort.ShowList(animals);
+            Sort.DirectSelectionSort(animals);
+            Sort.ShowList(animals);
+
+            Console.WriteLine();
+        }
+    }
+</code></pre>
 <h4 id="Result-in-Console"><a href="#Result-in-Console" class="headerlink" title="Result in Console"></a>Result in Console</h4><pre><code>Items in list:
 23 11 3 5 6 98 45 23 11 87
 Items in list:
 3 5 6 11 11 23 23 45 87 98
 Items in list:
-Cow&apos;s weight is 200 Sheep&apos;s weight is 100 Fox&apos;s weight is 50
+Cow&#39;s weight is 200 Sheep&#39;s weight is 100 Fox&#39;s weight is 50
 Items in list:
-Fox&apos;s weight is 50 Sheep&apos;s weight is 100 Cow&apos;s weight is 200
+Fox&#39;s weight is 50 Sheep&#39;s weight is 100 Cow&#39;s weight is 200
 </code></pre>]]></content>
     
     <summary type="html">
@@ -598,18 +1478,104 @@ Fox&apos;s weight is 50 Sheep&apos;s weight is 100 Cow&apos;s weight is 200
     <link href="http://sharecode.cc/2016/08/08/Algorithm-Bubble-Sort-C/"/>
     <id>http://sharecode.cc/2016/08/08/Algorithm-Bubble-Sort-C/</id>
     <published>2016-08-08T07:40:18.000Z</published>
-    <updated>2016-11-07T09:22:09.437Z</updated>
+    <updated>2016-12-14T08:13:23.286Z</updated>
     
     <content type="html"><![CDATA[<h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h4><p>Compare two adjacent item in array, then swap the position if they are in inverse order. Pick up the biggest item and put it to the end of the array each loop.</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BubbleSort</span> &#123;</div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line">    <span class="comment"><span class="doctag">///</span> Bubble Sort</span></div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;typeparam name="T"&gt;</span>Implement interface IComaparable to support Generics<span class="doctag">&lt;/typeparam&gt;</span></span></div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name="list"&gt;</span>list contains value or object waiting for sort<span class="doctag">&lt;/param&gt;</span></span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> Sort&lt;T&gt;(T[] list) <span class="keyword">where</span> T : IComparable &#123;</div><div class="line">        T temp = <span class="keyword">default</span>(T);</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.Length - <span class="number">1</span>; i++) &#123;</div><div class="line">            <span class="comment">//A flag indicate whether need to swap items, if it is false means list is in order.</span></div><div class="line">            <span class="keyword">bool</span>  bolSwap = <span class="literal">false</span>;</div><div class="line"></div><div class="line">            <span class="comment">//Move the largest item to the end of unordered list each loop, then length of ordered list +1, length of unordered list -1</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; list.Length - <span class="number">1</span> - i; j++)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (list[j].CompareTo(list[j + <span class="number">1</span>]) &gt; <span class="number">0</span>)</div><div class="line">                &#123;</div><div class="line">                    temp = list[j + <span class="number">1</span>];</div><div class="line">                    list[j + <span class="number">1</span>] = list[j];</div><div class="line">                    list[j] = temp;</div><div class="line"></div><div class="line">                    <span class="comment">//Swapped</span></div><div class="line">                    bolSwap = <span class="literal">true</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (!bolSwap)</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> ShowList&lt;T&gt;(T[] list) &#123;</div><div class="line">        Console.WriteLine(<span class="string">"Items in list:"</span>);</div><div class="line"></div><div class="line">        <span class="keyword">foreach</span> (T t <span class="keyword">in</span> list)</div><div class="line">            Console.Write(t.ToString() + <span class="string">" "</span>);</div><div class="line"></div><div class="line">        Console.WriteLine();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Animal</span> : <span class="title">IComparable</span> &#123;</div><div class="line">    <span class="keyword">public</span>  <span class="keyword">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> Weight &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Animal</span>(<span class="params"><span class="keyword">string</span> name, <span class="keyword">int</span> weight</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.Name = name;</div><div class="line">        <span class="keyword">this</span>.Weight = weight;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">CompareTo</span>(<span class="params"><span class="keyword">object</span> other</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.Weight.CompareTo((other <span class="keyword">as</span> Animal).Weight);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">string</span> <span class="title">ToString</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.Name + <span class="string">"'s weight is "</span> + <span class="keyword">this</span>.Weight;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> <span class="title">Program</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span>[] intWaitforSorting = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; <span class="number">23</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">98</span>, <span class="number">45</span>, <span class="number">23</span>, <span class="number">11</span>, <span class="number">87</span> &#125;;</div><div class="line"></div><div class="line">        Animal cat = <span class="keyword">new</span> Animal(<span class="string">"Cat"</span>, <span class="number">10</span>);</div><div class="line">        Animal dog = <span class="keyword">new</span> Animal(<span class="string">"Dog"</span>, <span class="number">20</span>);</div><div class="line">        Animal tiger = <span class="keyword">new</span> Animal(<span class="string">"Tiger"</span>, <span class="number">200</span>);</div><div class="line"></div><div class="line">        Animal[] animalForSorting = <span class="keyword">new</span> Animal[]&#123;dog,cat,tiger&#125;;</div><div class="line"></div><div class="line">        BubbleSort objBubbleSort = <span class="keyword">new</span> BubbleSort();</div><div class="line"></div><div class="line">        objBubbleSort.ShowList(intWaitforSorting);</div><div class="line">        objBubbleSort.Sort(intWaitforSorting);</div><div class="line">        objBubbleSort.ShowList(intWaitforSorting);</div><div class="line"></div><div class="line">        objBubbleSort.ShowList(animalForSorting);</div><div class="line">        objBubbleSort.Sort(animalForSorting);</div><div class="line">        objBubbleSort.ShowList(animalForSorting);</div><div class="line"></div><div class="line">        Console.WriteLine();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><pre><code class="brush:c#">    public class BubbleSort {
+        /// &lt;summary&gt;
+        /// Bubble Sort
+        /// &lt;/summary&gt;
+        /// &lt;typeparam name=&quot;T&quot;&gt;Implement interface IComaparable to support Generics&lt;/typeparam&gt;
+        /// &lt;param name=&quot;list&quot;&gt;list contains value or object waiting for sort&lt;/param&gt;
+        public void Sort&lt;T&gt;(T[] list) where T : IComparable {
+            T temp = default(T);
+
+            for (int i = 0; i &lt; list.Length - 1; i++) {
+                //A flag indicate whether need to swap items, if it is false means list is in order.
+                bool  bolSwap = false;
+
+                //Move the largest item to the end of unordered list each loop, then length of ordered list +1, length of unordered list -1
+                for (int j = 0; j &lt; list.Length - 1 - i; j++)
+                {
+                    if (list[j].CompareTo(list[j + 1]) &gt; 0)
+                    {
+                        temp = list[j + 1];
+                        list[j + 1] = list[j];
+                        list[j] = temp;
+
+                        //Swapped
+                        bolSwap = true;
+                    }
+                }
+
+                if (!bolSwap)
+                    break;
+            }
+        }
+
+        public void ShowList&lt;T&gt;(T[] list) {
+            Console.WriteLine(&quot;Items in list:&quot;);
+
+            foreach (T t in list)
+                Console.Write(t.ToString() + &quot; &quot;);
+
+            Console.WriteLine();
+        }
+    }
+
+    public class Animal : IComparable {
+        public  string Name { get; set; }
+        public int Weight { get; set; }
+
+        public Animal(string name, int weight) {
+            this.Name = name;
+            this.Weight = weight;
+        }
+
+        public int CompareTo(object other)
+        {
+            return this.Weight.CompareTo((other as Animal).Weight);
+        }
+
+        public override string ToString()
+        {
+            return this.Name + &quot;&#39;s weight is &quot; + this.Weight;
+        }
+    }
+
+    class Program {
+        static void Main(string[] args)
+        {
+            int[] intWaitforSorting = new int[] { 23, 11, 3, 5, 6, 98, 45, 23, 11, 87 };
+
+            Animal cat = new Animal(&quot;Cat&quot;, 10);
+            Animal dog = new Animal(&quot;Dog&quot;, 20);
+            Animal tiger = new Animal(&quot;Tiger&quot;, 200);
+
+            Animal[] animalForSorting = new Animal[]{dog,cat,tiger};
+
+            BubbleSort objBubbleSort = new BubbleSort();
+
+            objBubbleSort.ShowList(intWaitforSorting);
+            objBubbleSort.Sort(intWaitforSorting);
+            objBubbleSort.ShowList(intWaitforSorting);
+
+            objBubbleSort.ShowList(animalForSorting);
+            objBubbleSort.Sort(animalForSorting);
+            objBubbleSort.ShowList(animalForSorting);
+
+            Console.WriteLine();
+        }
+    }
+</code></pre>
 <h4 id="Result-in-Console"><a href="#Result-in-Console" class="headerlink" title="Result in Console"></a>Result in Console</h4><pre><code>Items in list:
 23 11 3 5 6 98 45 23 11 87
 Items in list:
 3 5 6 11 11 23 23 45 87 98
 Items in list:
-Dog&apos;s weight is 20 Cat&apos;s weight is 10 Tiger&apos;s weight is 200
+Dog&#39;s weight is 20 Cat&#39;s weight is 10 Tiger&#39;s weight is 200
 Items in list:
-Cat&apos;s weight is 10 Dog&apos;s weight is 20 Tiger&apos;s weight is 200
+Cat&#39;s weight is 10 Dog&#39;s weight is 20 Tiger&#39;s weight is 200
 </code></pre>]]></content>
     
     <summary type="html">

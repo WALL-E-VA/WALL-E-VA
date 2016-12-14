@@ -15,7 +15,9 @@
 
 
 Demo
-123456789101112131415161718192021222324252627282930313233@startuml    p">
+  @startuml
+      package Extend &amp;lt;&amp;lt;Folder&amp;gt;&amp;gt; {
+          cla">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用PlantUML画类图">
 <meta property="og:url" content="http://sharecode.cc/2016/11/08/Write-Class-Diagram-PlantUML/index.html">
@@ -30,7 +32,9 @@ Demo
 
 
 Demo
-123456789101112131415161718192021222324252627282930313233@startuml    p">
+  @startuml
+      package Extend &amp;lt;&amp;lt;Folder&amp;gt;&amp;gt; {
+          cla">
 <meta property="og:image" content="http://og24yrsh2.bkt.clouddn.com/Generalization.png">
 <meta property="og:image" content="http://og24yrsh2.bkt.clouddn.com/Dependency.png">
 <meta property="og:image" content="http://og24yrsh2.bkt.clouddn.com/UnidirectionalAssociation.png">
@@ -39,7 +43,7 @@ Demo
 <meta property="og:image" content="http://og24yrsh2.bkt.clouddn.com/SelfAssociation.png">
 <meta property="og:image" content="http://og24yrsh2.bkt.clouddn.com/Aggregation.png">
 <meta property="og:image" content="http://og24yrsh2.bkt.clouddn.com/Composition.png">
-<meta property="og:updated_time" content="2016-12-05T05:23:57.759Z">
+<meta property="og:updated_time" content="2016-12-14T08:07:25.423Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用PlantUML画类图">
 <meta name="twitter:description" content="类图(Class Diagram)表示类与类之间的关系，利用PlantUML来描述这些关系的基本用法如下：
@@ -52,7 +56,9 @@ Demo
 
 
 Demo
-123456789101112131415161718192021222324252627282930313233@startuml    p">
+  @startuml
+      package Extend &amp;lt;&amp;lt;Folder&amp;gt;&amp;gt; {
+          cla">
 <meta name="twitter:image" content="http://og24yrsh2.bkt.clouddn.com/Generalization.png">
   
     <link rel="alternate" href="/atom.xml" title="萝卜就着茶" type="application/atom+xml">
@@ -60,8 +66,6 @@ Demo
   
     <link rel="icon" href="/favicon.png">
   
-  
-    
   
   <link rel="stylesheet" href="/css/style.css">
   
@@ -142,7 +146,40 @@ Demo
 </ol>
 <ul>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Extend &lt;&lt;Folder&gt;&gt; &#123;</div><div class="line">        class Animal &#123;</div><div class="line">            +name string</div><div class="line">            +void breathe()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class Human&#123;</div><div class="line">            +name string</div><div class="line">            +void breathe()</div><div class="line">            +void Inovate()</div><div class="line">            +void Drive(ICar car)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    package implement &lt;&lt;Folder&gt;&gt; &#123;</div><div class="line">        interface ICar &#123;</div><div class="line">            +name string</div><div class="line">            +void Run()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class BMW &#123;</div><div class="line">            +name string</div><div class="line">            +void Run()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /&apos;泛化 - 继承类&apos;/</div><div class="line">    Human -up--|&gt; Animal : extends</div><div class="line"></div><div class="line">    /&apos;泛化 - 实现接口&apos;/</div><div class="line">    BMW -up..|&gt; ICar : implements</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:text">  @startuml
+      package Extend &lt;&lt;Folder&gt;&gt; {
+          class Animal {
+              +name string
+              +void breathe()
+          }
+
+          class Human{
+              +name string
+              +void breathe()
+              +void Inovate()
+              +void Drive(ICar car)
+          }
+      }
+
+      package implement &lt;&lt;Folder&gt;&gt; {
+          interface ICar {
+              +name string
+              +void Run()
+          }
+
+          class BMW {
+              +name string
+              +void Run()
+          }
+      }
+
+      /&#39;泛化 - 继承类&#39;/
+      Human -up--|&gt; Animal : extends
+
+      /&#39;泛化 - 实现接口&#39;/
+      BMW -up..|&gt; ICar : implements
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Generalization.png" alt="Generalization"></p>
 </li>
@@ -154,7 +191,17 @@ Demo
 </ol>
 <ul>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    class Person &#123;</div><div class="line">        +void Call(Phone phone)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    Class Phone</div><div class="line"></div><div class="line">    /&apos;依赖关系用虚线单项箭头表示..&gt;箭头指向被依赖对象&apos;/</div><div class="line">    Person -right..&gt; Phone : use</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      class Person {
+          +void Call(Phone phone)
+      }
+
+      Class Phone
+
+      /&#39;依赖关系用虚线单项箭头表示..&gt;箭头指向被依赖对象&#39;/
+      Person -right..&gt; Phone : use
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Dependency.png" alt="Dependency"></p>
 </li>
@@ -169,7 +216,16 @@ Demo
 </ol>
 <ul>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Unidirectional &lt;&lt;cloud&gt;&gt; &#123;</div><div class="line">        class person</div><div class="line">        class TV</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /&apos;单项关联用实线箭头表示--&gt;&apos;/</div><div class="line">    person -right--&gt; TV : watch</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      package Unidirectional &lt;&lt;cloud&gt;&gt; {
+          class person
+          class TV
+      }
+
+      /&#39;单项关联用实线箭头表示--&gt;&#39;/
+      person -right--&gt; TV : watch
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/UnidirectionalAssociation.png" alt="UnidirectionalAssociation"></p>
 <ul>
@@ -177,7 +233,16 @@ Demo
 </ul>
 </li>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Bidirectional &lt;&lt;Frame&gt;&gt; &#123;</div><div class="line">        class boyfriend</div><div class="line">        class girlfirend</div><div class="line"></div><div class="line">        /&apos;双向关联的对象用实线连接--&apos;/</div><div class="line">        boyfriend -right--girlfirend : marry</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      package Bidirectional &lt;&lt;Frame&gt;&gt; {
+          class boyfriend
+          class girlfirend
+
+          /&#39;双向关联的对象用实线连接--&#39;/
+          boyfriend -right--girlfirend : marry
+      }
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/BidirectionalAssociation.png" alt="BidirectionalAssociation"></p>
 <ul>
@@ -185,7 +250,19 @@ Demo
 </ul>
 </li>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package N-ary &lt;&lt;Association&gt;&gt; &#123;</div><div class="line">        class owner</div><div class="line">        class buyer</div><div class="line">        class agent &#123;</div><div class="line">            void coordinate()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        owner -- buyer</div><div class="line">        (owner,buyer) -- agent</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      package N-ary &lt;&lt;Association&gt;&gt; {
+          class owner
+          class buyer
+          class agent {
+              void coordinate()
+          }
+
+          owner -- buyer
+          (owner,buyer) -- agent
+      }
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/N-aryAssociation.png" alt="N-aryAssociation"></p>
 <ul>
@@ -193,7 +270,12 @@ Demo
 </ul>
 </li>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    class bug</div><div class="line"></div><div class="line">    bug &quot;0..*&quot; -up-- &quot;1..*&quot; bug : propagate</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      class bug
+
+      bug &quot;0..*&quot; -up-- &quot;1..*&quot; bug : propagate
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/SelfAssociation.png" alt="SelfAssociation"></p>
 </li>
@@ -205,7 +287,19 @@ Demo
 </ol>
 <ul>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Aggregation &lt;&lt;Frame&gt;&gt;&#123;</div><div class="line">        class crowd &#123;</div><div class="line">            ~List&lt;person&gt; people</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class person</div><div class="line"></div><div class="line">        /&apos;聚合用空心菱形实线表示o--&apos;/</div><div class="line">        crowd o---right person : have</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      package Aggregation &lt;&lt;Frame&gt;&gt;{
+          class crowd {
+              ~List&lt;person&gt; people
+          }
+
+          class person
+
+          /&#39;聚合用空心菱形实线表示o--&#39;/
+          crowd o---right person : have
+      }
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Aggregation.png" alt="Aggregation"></p>
 </li>
@@ -217,7 +311,22 @@ Demo
 </ol>
 <ul>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Composition &lt;&lt;frame&gt;&gt; &#123;</div><div class="line">        class Human &#123;</div><div class="line">            -Heart heart</div><div class="line">            -Lung lung </div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class Heart</div><div class="line">        class Lung</div><div class="line"></div><div class="line">        /&apos;组合用实心菱形实线表示*--&apos;/</div><div class="line">        Human *-- Heart : contains</div><div class="line">        Human *-- Lung</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      package Composition &lt;&lt;frame&gt;&gt; {
+          class Human {
+              -Heart heart
+              -Lung lung 
+          }
+
+          class Heart
+          class Lung
+
+          /&#39;组合用实心菱形实线表示*--&#39;/
+          Human *-- Heart : contains
+          Human *-- Lung
+      }
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Composition.png" alt="Composition"></p>
 </li>
@@ -226,7 +335,7 @@ Demo
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sharecode.cc/2016/11/08/Write-Class-Diagram-PlantUML/" data-id="ciwg3xuvx000nmwge7cik3hrv" class="article-share-link">分享</a>
+      <a data-url="http://sharecode.cc/2016/11/08/Write-Class-Diagram-PlantUML/" data-id="ciwonydix000pc0geyc9pw6hy" class="article-share-link">分享</a>
       
         <a href="http://sharecode.cc/2016/11/08/Write-Class-Diagram-PlantUML/#ds-thread" class="article-comment-link">留言</a>
       
@@ -290,7 +399,7 @@ var duoshuoQuery = {short_name:"wall-e-va"};
   <div class="widget-wrap">
     <h3 class="widget-title tagcloud">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/React-Native-Android/" style="font-size: 15px;">React Native Android</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
+      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
     </div>
   </div>
 
@@ -399,6 +508,18 @@ var duoshuoQuery = {short_name:"wall-e-va"};
 
 <script src="/js/script.js"></script>
 
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushXml.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushCSharp.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/styles/shCoreEclipse.min.css"/>
+
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "code";
+  SyntaxHighlighter.all();
+</script>
   </div>
 </body>
 </html>

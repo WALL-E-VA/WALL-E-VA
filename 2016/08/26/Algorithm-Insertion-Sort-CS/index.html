@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://sharecode.cc/2016/08/26/Algorithm-Insertion-Sort-CS/index.html">
 <meta property="og:site_name" content="萝卜就着茶">
 <meta property="og:description" content="SummaryPick up item one by one from unordered list to insert to ordered list.">
-<meta property="og:updated_time" content="2016-11-07T09:22:09.437Z">
+<meta property="og:updated_time" content="2016-12-14T08:13:10.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Algorithm - Insertion Sort - C#">
 <meta name="twitter:description" content="SummaryPick up item one by one from unordered list to insert to ordered list.">
@@ -21,8 +21,6 @@
   
     <link rel="icon" href="/favicon.png">
   
-  
-    
   
   <link rel="stylesheet" href="/css/style.css">
   
@@ -94,12 +92,66 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h4><p>Pick up item one by one from unordered list to insert to ordered list.<br><a id="more"></a></p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">public class InsertionSort&lt;T&gt; where T: IComparer&lt;T&gt;</div><div class="line">&#123;</div><div class="line">    /// &lt;summary&gt;</div><div class="line">    /// Pick up item one by one from unordered list to insert to ordered list.</div><div class="line">    /// &lt;/summary&gt;</div><div class="line">    /// &lt;typeparam name="list"&gt;</div><div class="line">    /// List waiting for sort, item in it must be something implemented IComparer</div><div class="line">    /// &lt;/typeparam&gt;</div><div class="line">    public static void Sort(T[] list) &#123;</div><div class="line">        T temp;</div><div class="line">        int i, j;</div><div class="line"></div><div class="line">        for (i = 1; i &lt; list.Length; i++) &#123;</div><div class="line">            //Pick up one item by order in unordered list</div><div class="line">            temp = list[i];</div><div class="line">            //Index of the end of ordered list</div><div class="line">            j = i - 1;</div><div class="line"></div><div class="line">            //Start loop from the end of ordered list to find the right position for item in temp</div><div class="line">            //Loop until J reached the start of ordered list or temp is larger than </div><div class="line">            //or equal to some item in ordered list</div><div class="line">            while (j &gt;= 0 &amp;&amp; list[j].Compare(temp, list[j]) &lt; 0) &#123;</div><div class="line">                list[j + 1] = list[j];</div><div class="line">                j--;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            //Set item in temp to right postion</div><div class="line">            list[j + 1] = temp;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void ShowList(T[] list) &#123;</div><div class="line">        foreach (T item in list)</div><div class="line">            Console.WriteLine(item.ToString());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class Ball : IComparer&lt;Ball&gt; &#123;</div><div class="line">    public int Size &#123; get; set; &#125;</div><div class="line">    public string Name &#123; get; set; &#125;</div><div class="line"></div><div class="line">    public Ball(int size, string name) &#123;</div><div class="line">        this.Size = size;</div><div class="line">        this.Name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int Compare(Ball x, Ball y) &#123;</div><div class="line">        return x.Size.CompareTo(y.Size);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public override string ToString() &#123;</div><div class="line">        return this.Name;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><pre><code class="brush:c#">    public class InsertionSort&lt;T&gt; where T: IComparer&lt;T&gt;
+    {
+        /// &lt;summary&gt;
+        /// Pick up item one by one from unordered list to insert to ordered list.
+        /// &lt;/summary&gt;
+        /// &lt;typeparam name=&quot;list&quot;&gt;
+        /// List waiting for sort, item in it must be something implemented IComparer
+        /// &lt;/typeparam&gt;
+        public static void Sort(T[] list) {
+            T temp;
+            int i, j;
+
+            for (i = 1; i &lt; list.Length; i++) {
+                //Pick up one item by order in unordered list
+                temp = list[i];
+                //Index of the end of ordered list
+                j = i - 1;
+
+                //Start loop from the end of ordered list to find the right position for item in temp
+                //Loop until J reached the start of ordered list or temp is larger than 
+                //or equal to some item in ordered list
+                while (j &gt;= 0 &amp;&amp; list[j].Compare(temp, list[j]) &lt; 0) {
+                    list[j + 1] = list[j];
+                    j--;
+                }
+
+                //Set item in temp to right postion
+                list[j + 1] = temp;
+            }
+        }
+
+        public static void ShowList(T[] list) {
+            foreach (T item in list)
+                Console.WriteLine(item.ToString());
+        }
+    }
+
+    public class Ball : IComparer&lt;Ball&gt; {
+        public int Size { get; set; }
+        public string Name { get; set; }
+
+        public Ball(int size, string name) {
+            this.Size = size;
+            this.Name = name;
+        }
+
+        public int Compare(Ball x, Ball y) {
+            return x.Size.CompareTo(y.Size);
+        }
+
+        public override string ToString() {
+            return this.Name;
+        }
+    }
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sharecode.cc/2016/08/26/Algorithm-Insertion-Sort-CS/" data-id="ciwg3xuuk0004mwgeorn6ouls" class="article-share-link">分享</a>
+      <a data-url="http://sharecode.cc/2016/08/26/Algorithm-Insertion-Sort-CS/" data-id="ciwonydgy0000c0ge17tgmfbg" class="article-share-link">分享</a>
       
         <a href="http://sharecode.cc/2016/08/26/Algorithm-Insertion-Sort-CS/#ds-thread" class="article-comment-link">留言</a>
       
@@ -163,7 +215,7 @@ var duoshuoQuery = {short_name:"wall-e-va"};
   <div class="widget-wrap">
     <h3 class="widget-title tagcloud">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/React-Native-Android/" style="font-size: 15px;">React Native Android</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
+      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
     </div>
   </div>
 
@@ -272,6 +324,18 @@ var duoshuoQuery = {short_name:"wall-e-va"};
 
 <script src="/js/script.js"></script>
 
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushXml.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushCSharp.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/styles/shCoreEclipse.min.css"/>
+
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "code";
+  SyntaxHighlighter.all();
+</script>
   </div>
 </body>
 </html>

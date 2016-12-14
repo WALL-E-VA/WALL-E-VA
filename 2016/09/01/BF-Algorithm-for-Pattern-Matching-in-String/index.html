@@ -5,24 +5,43 @@
   
   <title>Algorithm BF for Pattern Matching in String | 萝卜就着茶</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879static void Main(string[] args)&amp;#123;    string s =">
+  <meta name="description" content="static void Main(string[] args)
+    {
+        string s = &amp;quot;abcdefg&amp;quot;;
+        string p = &amp;quot;ddc&amp;quot;;
+
+        Stopwatch a =  Stopwatch.StartNew();
+
+        int index = BFIndexOf(s, p)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Algorithm BF for Pattern Matching in String">
 <meta property="og:url" content="http://sharecode.cc/2016/09/01/BF-Algorithm-for-Pattern-Matching-in-String/index.html">
 <meta property="og:site_name" content="萝卜就着茶">
-<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879static void Main(string[] args)&amp;#123;    string s =">
-<meta property="og:updated_time" content="2016-11-07T09:22:09.437Z">
+<meta property="og:description" content="static void Main(string[] args)
+    {
+        string s = &amp;quot;abcdefg&amp;quot;;
+        string p = &amp;quot;ddc&amp;quot;;
+
+        Stopwatch a =  Stopwatch.StartNew();
+
+        int index = BFIndexOf(s, p)">
+<meta property="og:updated_time" content="2016-12-14T08:12:50.767Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Algorithm BF for Pattern Matching in String">
-<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879static void Main(string[] args)&amp;#123;    string s =">
+<meta name="twitter:description" content="static void Main(string[] args)
+    {
+        string s = &amp;quot;abcdefg&amp;quot;;
+        string p = &amp;quot;ddc&amp;quot;;
+
+        Stopwatch a =  Stopwatch.StartNew();
+
+        int index = BFIndexOf(s, p)">
   
     <link rel="alternate" href="/atom.xml" title="萝卜就着茶" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    
   
   <link rel="stylesheet" href="/css/style.css">
   
@@ -93,14 +112,93 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">string</span> s = <span class="string">"abcdefg"</span>;</div><div class="line">    <span class="keyword">string</span> p = <span class="string">"ddc"</span>;</div><div class="line"></div><div class="line">    Stopwatch a =  Stopwatch.StartNew();</div><div class="line"></div><div class="line">    <span class="keyword">int</span> index = BFIndexOf(s, p);</div><div class="line"></div><div class="line">    a.Stop();</div><div class="line"></div><div class="line">    Console.WriteLine(<span class="string">"The index of &#123;0&#125; in &#123;1&#125; is &#123;2&#125;, time elapsed &#123;3&#125;"</span>, p, s, index, a.Elapsed.TotalMilliseconds);</div><div class="line"></div><div class="line">    a.Restart();</div><div class="line"></div><div class="line">    index = BFIndexOf2(s, p);</div><div class="line"></div><div class="line">    a.Stop();</div><div class="line"></div><div class="line">    Console.WriteLine(<span class="string">"The index of &#123;0&#125; in &#123;1&#125; is &#123;2&#125;, time elapsed &#123;3&#125;"</span>, p, s, index, a.Elapsed.TotalMilliseconds);</div><div class="line"></div><div class="line">    Console.ReadKey();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">BFIndexOf</span>(<span class="params"><span class="keyword">string</span> s, <span class="keyword">string</span> p</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> sLength = s.Length;</div><div class="line">    <span class="keyword">int</span> pLength = p.Length;</div><div class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="keyword">while</span> (i &lt; sLength)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</div><div class="line"></div><div class="line">        <span class="keyword">while</span> (j &lt; pLength &amp;&amp; s[i] == p[j])</div><div class="line">        &#123;</div><div class="line">            i++;</div><div class="line">            j++;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (j == pLength)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> i - j;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            i++;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">BFIndexOf2</span>(<span class="params"><span class="keyword">string</span> s, <span class="keyword">string</span> p</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> sLength = s.Length;</div><div class="line">    <span class="keyword">int</span> pLength = p.Length;</div><div class="line">    <span class="keyword">int</span> i = <span class="number">0</span>,j = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="keyword">while</span> (i &lt; sLength &amp;&amp; j &lt; pLength)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (s[i] == p[j])</div><div class="line">        &#123;</div><div class="line">            i++;</div><div class="line">            j++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            i = i - j + <span class="number">1</span>;</div><div class="line">            j = <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (j == pLength)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> i - j;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <pre><code class="brush:c#">    static void Main(string[] args)
+    {
+        string s = &quot;abcdefg&quot;;
+        string p = &quot;ddc&quot;;
+
+        Stopwatch a =  Stopwatch.StartNew();
+
+        int index = BFIndexOf(s, p);
+
+        a.Stop();
+
+        Console.WriteLine(&quot;The index of {0} in {1} is {2}, time elapsed {3}&quot;, p, s, index, a.Elapsed.TotalMilliseconds);
+
+        a.Restart();
+
+        index = BFIndexOf2(s, p);
+
+        a.Stop();
+
+        Console.WriteLine(&quot;The index of {0} in {1} is {2}, time elapsed {3}&quot;, p, s, index, a.Elapsed.TotalMilliseconds);
+
+        Console.ReadKey();
+    }
+
+    public static int BFIndexOf(string s, string p)
+    {
+        int sLength = s.Length;
+        int pLength = p.Length;
+        int i = 0;
+
+        while (i &lt; sLength)
+        {
+            int j = 0;
+
+            while (j &lt; pLength &amp;&amp; s[i] == p[j])
+            {
+                i++;
+                j++;
+            }
+
+            if (j == pLength)
+            {
+                return i - j;
+            }
+            else {
+                i++;
+            }
+        }
+
+        return -1;
+    }
+
+    public static int BFIndexOf2(string s, string p)
+    {
+        int sLength = s.Length;
+        int pLength = p.Length;
+        int i = 0,j = 0;
+
+        while (i &lt; sLength &amp;&amp; j &lt; pLength)
+        {
+            if (s[i] == p[j])
+            {
+                i++;
+                j++;
+            }
+            else {
+                i = i - j + 1;
+                j = 0;
+            }
+        }
+
+        if (j == pLength)
+        {
+            return i - j;
+        }
+        else {
+            return -1;
+        }
+    }
+</code></pre>
 <pre><code>The index of cde in abcdefg is 2, time elapsed in BFIndexOf 0.3359 
 The index of cde in abcdefg is 2, time elapsed in BFIndexOf2 0.298
 </code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sharecode.cc/2016/09/01/BF-Algorithm-for-Pattern-Matching-in-String/" data-id="ciwg3xuvg000emwgexeykngr1" class="article-share-link">分享</a>
+      <a data-url="http://sharecode.cc/2016/09/01/BF-Algorithm-for-Pattern-Matching-in-String/" data-id="ciwonydhr0006c0gem9idpsyc" class="article-share-link">分享</a>
       
         <a href="http://sharecode.cc/2016/09/01/BF-Algorithm-for-Pattern-Matching-in-String/#ds-thread" class="article-comment-link">留言</a>
       
@@ -164,7 +262,7 @@ var duoshuoQuery = {short_name:"wall-e-va"};
   <div class="widget-wrap">
     <h3 class="widget-title tagcloud">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/React-Native-Android/" style="font-size: 15px;">React Native Android</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
+      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
     </div>
   </div>
 
@@ -273,6 +371,18 @@ var duoshuoQuery = {short_name:"wall-e-va"};
 
 <script src="/js/script.js"></script>
 
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushXml.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushCSharp.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/styles/shCoreEclipse.min.css"/>
+
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "code";
+  SyntaxHighlighter.all();
+</script>
   </div>
 </body>
 </html>

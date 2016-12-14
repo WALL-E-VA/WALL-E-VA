@@ -6,26 +6,24 @@
   <title>Algorithm - Bubble Sort - C# | 萝卜就着茶</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="SummaryCompare two adjacent item in array, then swap the position if they are in inverse order. Pick up the biggest item and put it to the end of the array each loop.
-Implementation1234567891011121314">
+Implementation    public class Bu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Algorithm - Bubble Sort - C#">
 <meta property="og:url" content="http://sharecode.cc/2016/08/08/Algorithm-Bubble-Sort-C/index.html">
 <meta property="og:site_name" content="萝卜就着茶">
 <meta property="og:description" content="SummaryCompare two adjacent item in array, then swap the position if they are in inverse order. Pick up the biggest item and put it to the end of the array each loop.
-Implementation1234567891011121314">
-<meta property="og:updated_time" content="2016-11-07T09:22:09.437Z">
+Implementation    public class Bu">
+<meta property="og:updated_time" content="2016-12-14T08:13:23.286Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Algorithm - Bubble Sort - C#">
 <meta name="twitter:description" content="SummaryCompare two adjacent item in array, then swap the position if they are in inverse order. Pick up the biggest item and put it to the end of the array each loop.
-Implementation1234567891011121314">
+Implementation    public class Bu">
   
     <link rel="alternate" href="/atom.xml" title="萝卜就着茶" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    
   
   <link rel="stylesheet" href="/css/style.css">
   
@@ -97,20 +95,106 @@ Implementation1234567891011121314">
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h4><p>Compare two adjacent item in array, then swap the position if they are in inverse order. Pick up the biggest item and put it to the end of the array each loop.</p>
-<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BubbleSort</span> &#123;</div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line">    <span class="comment"><span class="doctag">///</span> Bubble Sort</span></div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;typeparam name="T"&gt;</span>Implement interface IComaparable to support Generics<span class="doctag">&lt;/typeparam&gt;</span></span></div><div class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name="list"&gt;</span>list contains value or object waiting for sort<span class="doctag">&lt;/param&gt;</span></span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> Sort&lt;T&gt;(T[] list) <span class="keyword">where</span> T : IComparable &#123;</div><div class="line">        T temp = <span class="keyword">default</span>(T);</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.Length - <span class="number">1</span>; i++) &#123;</div><div class="line">            <span class="comment">//A flag indicate whether need to swap items, if it is false means list is in order.</span></div><div class="line">            <span class="keyword">bool</span>  bolSwap = <span class="literal">false</span>;</div><div class="line"></div><div class="line">            <span class="comment">//Move the largest item to the end of unordered list each loop, then length of ordered list +1, length of unordered list -1</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; list.Length - <span class="number">1</span> - i; j++)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (list[j].CompareTo(list[j + <span class="number">1</span>]) &gt; <span class="number">0</span>)</div><div class="line">                &#123;</div><div class="line">                    temp = list[j + <span class="number">1</span>];</div><div class="line">                    list[j + <span class="number">1</span>] = list[j];</div><div class="line">                    list[j] = temp;</div><div class="line"></div><div class="line">                    <span class="comment">//Swapped</span></div><div class="line">                    bolSwap = <span class="literal">true</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (!bolSwap)</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> ShowList&lt;T&gt;(T[] list) &#123;</div><div class="line">        Console.WriteLine(<span class="string">"Items in list:"</span>);</div><div class="line"></div><div class="line">        <span class="keyword">foreach</span> (T t <span class="keyword">in</span> list)</div><div class="line">            Console.Write(t.ToString() + <span class="string">" "</span>);</div><div class="line"></div><div class="line">        Console.WriteLine();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Animal</span> : <span class="title">IComparable</span> &#123;</div><div class="line">    <span class="keyword">public</span>  <span class="keyword">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> Weight &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Animal</span>(<span class="params"><span class="keyword">string</span> name, <span class="keyword">int</span> weight</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.Name = name;</div><div class="line">        <span class="keyword">this</span>.Weight = weight;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">CompareTo</span>(<span class="params"><span class="keyword">object</span> other</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.Weight.CompareTo((other <span class="keyword">as</span> Animal).Weight);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">string</span> <span class="title">ToString</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.Name + <span class="string">"'s weight is "</span> + <span class="keyword">this</span>.Weight;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> <span class="title">Program</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span>[] intWaitforSorting = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; <span class="number">23</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">98</span>, <span class="number">45</span>, <span class="number">23</span>, <span class="number">11</span>, <span class="number">87</span> &#125;;</div><div class="line"></div><div class="line">        Animal cat = <span class="keyword">new</span> Animal(<span class="string">"Cat"</span>, <span class="number">10</span>);</div><div class="line">        Animal dog = <span class="keyword">new</span> Animal(<span class="string">"Dog"</span>, <span class="number">20</span>);</div><div class="line">        Animal tiger = <span class="keyword">new</span> Animal(<span class="string">"Tiger"</span>, <span class="number">200</span>);</div><div class="line"></div><div class="line">        Animal[] animalForSorting = <span class="keyword">new</span> Animal[]&#123;dog,cat,tiger&#125;;</div><div class="line"></div><div class="line">        BubbleSort objBubbleSort = <span class="keyword">new</span> BubbleSort();</div><div class="line"></div><div class="line">        objBubbleSort.ShowList(intWaitforSorting);</div><div class="line">        objBubbleSort.Sort(intWaitforSorting);</div><div class="line">        objBubbleSort.ShowList(intWaitforSorting);</div><div class="line"></div><div class="line">        objBubbleSort.ShowList(animalForSorting);</div><div class="line">        objBubbleSort.Sort(animalForSorting);</div><div class="line">        objBubbleSort.ShowList(animalForSorting);</div><div class="line"></div><div class="line">        Console.WriteLine();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><pre><code class="brush:c#">    public class BubbleSort {
+        /// &lt;summary&gt;
+        /// Bubble Sort
+        /// &lt;/summary&gt;
+        /// &lt;typeparam name=&quot;T&quot;&gt;Implement interface IComaparable to support Generics&lt;/typeparam&gt;
+        /// &lt;param name=&quot;list&quot;&gt;list contains value or object waiting for sort&lt;/param&gt;
+        public void Sort&lt;T&gt;(T[] list) where T : IComparable {
+            T temp = default(T);
+
+            for (int i = 0; i &lt; list.Length - 1; i++) {
+                //A flag indicate whether need to swap items, if it is false means list is in order.
+                bool  bolSwap = false;
+
+                //Move the largest item to the end of unordered list each loop, then length of ordered list +1, length of unordered list -1
+                for (int j = 0; j &lt; list.Length - 1 - i; j++)
+                {
+                    if (list[j].CompareTo(list[j + 1]) &gt; 0)
+                    {
+                        temp = list[j + 1];
+                        list[j + 1] = list[j];
+                        list[j] = temp;
+
+                        //Swapped
+                        bolSwap = true;
+                    }
+                }
+
+                if (!bolSwap)
+                    break;
+            }
+        }
+
+        public void ShowList&lt;T&gt;(T[] list) {
+            Console.WriteLine(&quot;Items in list:&quot;);
+
+            foreach (T t in list)
+                Console.Write(t.ToString() + &quot; &quot;);
+
+            Console.WriteLine();
+        }
+    }
+
+    public class Animal : IComparable {
+        public  string Name { get; set; }
+        public int Weight { get; set; }
+
+        public Animal(string name, int weight) {
+            this.Name = name;
+            this.Weight = weight;
+        }
+
+        public int CompareTo(object other)
+        {
+            return this.Weight.CompareTo((other as Animal).Weight);
+        }
+
+        public override string ToString()
+        {
+            return this.Name + &quot;&#39;s weight is &quot; + this.Weight;
+        }
+    }
+
+    class Program {
+        static void Main(string[] args)
+        {
+            int[] intWaitforSorting = new int[] { 23, 11, 3, 5, 6, 98, 45, 23, 11, 87 };
+
+            Animal cat = new Animal(&quot;Cat&quot;, 10);
+            Animal dog = new Animal(&quot;Dog&quot;, 20);
+            Animal tiger = new Animal(&quot;Tiger&quot;, 200);
+
+            Animal[] animalForSorting = new Animal[]{dog,cat,tiger};
+
+            BubbleSort objBubbleSort = new BubbleSort();
+
+            objBubbleSort.ShowList(intWaitforSorting);
+            objBubbleSort.Sort(intWaitforSorting);
+            objBubbleSort.ShowList(intWaitforSorting);
+
+            objBubbleSort.ShowList(animalForSorting);
+            objBubbleSort.Sort(animalForSorting);
+            objBubbleSort.ShowList(animalForSorting);
+
+            Console.WriteLine();
+        }
+    }
+</code></pre>
 <h4 id="Result-in-Console"><a href="#Result-in-Console" class="headerlink" title="Result in Console"></a>Result in Console</h4><pre><code>Items in list:
 23 11 3 5 6 98 45 23 11 87
 Items in list:
 3 5 6 11 11 23 23 45 87 98
 Items in list:
-Dog&apos;s weight is 20 Cat&apos;s weight is 10 Tiger&apos;s weight is 200
+Dog&#39;s weight is 20 Cat&#39;s weight is 10 Tiger&#39;s weight is 200
 Items in list:
-Cat&apos;s weight is 10 Dog&apos;s weight is 20 Tiger&apos;s weight is 200
+Cat&#39;s weight is 10 Dog&#39;s weight is 20 Tiger&#39;s weight is 200
 </code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sharecode.cc/2016/08/08/Algorithm-Bubble-Sort-C/" data-id="ciwg3xuu50000mwgeeieqzv49" class="article-share-link">分享</a>
+      <a data-url="http://sharecode.cc/2016/08/08/Algorithm-Bubble-Sort-C/" data-id="ciwonydh60002c0ge6m37cula" class="article-share-link">分享</a>
       
         <a href="http://sharecode.cc/2016/08/08/Algorithm-Bubble-Sort-C/#ds-thread" class="article-comment-link">留言</a>
       
@@ -169,7 +253,7 @@ var duoshuoQuery = {short_name:"wall-e-va"};
   <div class="widget-wrap">
     <h3 class="widget-title tagcloud">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/React-Native-Android/" style="font-size: 15px;">React Native Android</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
+      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
     </div>
   </div>
 
@@ -278,6 +362,18 @@ var duoshuoQuery = {short_name:"wall-e-va"};
 
 <script src="/js/script.js"></script>
 
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushXml.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushCSharp.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/styles/shCoreEclipse.min.css"/>
+
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "code";
+  SyntaxHighlighter.all();
+</script>
   </div>
 </body>
 </html>

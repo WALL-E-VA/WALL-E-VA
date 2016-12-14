@@ -3,37 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>ASP.NET Core 开发常见问题汇总 | 萝卜就着茶</title>
+  <title>Tag: Android | 萝卜就着茶</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="使用VS Code 调试 ASP.NET Core Web 应用常见问题
-
-Error - Could not find the preLaunchTask ‘build’.问题原因是在launch.json里配置了在应用执行前预先执行的任务，但找不到相应的任务。
-  &amp;quot;preLaunchTask&amp;quot;: &amp;quot;build&amp;quot;
-
-点击’Confiure Task R">
-<meta property="og:type" content="article">
-<meta property="og:title" content="ASP.NET Core 开发常见问题汇总">
-<meta property="og:url" content="http://sharecode.cc/2016/12/06/Aspnet-Core-Trouble-Shooting/index.html">
+  <meta name="description" content="http://sharecode.cc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="萝卜就着茶">
+<meta property="og:url" content="http://sharecode.cc/tags/Android/index.html">
 <meta property="og:site_name" content="萝卜就着茶">
-<meta property="og:description" content="使用VS Code 调试 ASP.NET Core Web 应用常见问题
-
-Error - Could not find the preLaunchTask ‘build’.问题原因是在launch.json里配置了在应用执行前预先执行的任务，但找不到相应的任务。
-  &amp;quot;preLaunchTask&amp;quot;: &amp;quot;build&amp;quot;
-
-点击’Confiure Task R">
-<meta property="og:image" content="http://og24yrsh2.bkt.clouddn.com/AspnetcoreNoPreLanchTaskBuild.png">
-<meta property="og:image" content="http://og24yrsh2.bkt.clouddn.com/AspnetcoreTaskRunner.png">
-<meta property="og:image" content="http://og24yrsh2.bkt.clouddn.com/AspnetcoreNoExecutableFile.png">
-<meta property="og:updated_time" content="2016-12-14T07:58:33.752Z">
+<meta property="og:description" content="http://sharecode.cc/">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ASP.NET Core 开发常见问题汇总">
-<meta name="twitter:description" content="使用VS Code 调试 ASP.NET Core Web 应用常见问题
-
-Error - Could not find the preLaunchTask ‘build’.问题原因是在launch.json里配置了在应用执行前预先执行的任务，但找不到相应的任务。
-  &amp;quot;preLaunchTask&amp;quot;: &amp;quot;build&amp;quot;
-
-点击’Confiure Task R">
-<meta name="twitter:image" content="http://og24yrsh2.bkt.clouddn.com/AspnetcoreNoPreLanchTaskBuild.png">
+<meta name="twitter:title" content="萝卜就着茶">
+<meta name="twitter:description" content="http://sharecode.cc/">
   
     <link rel="alternate" href="/atom.xml" title="萝卜就着茶" type="application/atom+xml">
   
@@ -88,121 +68,59 @@ Error - Could not find the preLaunchTask ‘build’.问题原因是在launch.js
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Aspnet-Core-Trouble-Shooting" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/12/06/Aspnet-Core-Trouble-Shooting/" class="article-date">
-  <time datetime="2016-12-06T06:08:45.000Z" itemprop="datePublished">2016-12-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      ASP.NET Core 开发常见问题汇总
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/10/13/React-Native-DrawerLayoutAndroid/" class="archive-article-date">
+  <time datetime="2016-10-13T04:15:42.000Z" itemprop="datePublished">Oct 13</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/10/13/React-Native-DrawerLayoutAndroid/">React Native DrawerLayoutAndroid(抽屉) 组件的使用</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><p><strong>使用VS Code 调试 ASP.NET Core Web 应用常见问题</strong></p>
-<ul>
-<li><p>Error - Could not find the preLaunchTask ‘build’.<br><img src="http://og24yrsh2.bkt.clouddn.com/AspnetcoreNoPreLanchTaskBuild.png" alt="AspnetcoreNoPreLanchTaskBuild"><br>问题原因是在launch.json里配置了在应用执行前预先执行的任务，但找不到相应的任务。</p>
-<pre><code class="brush:js">  &quot;preLaunchTask&quot;: &quot;build&quot;
-</code></pre>
-<p>点击’Confiure Task Runner’，然后在下图中选择’.NET Core’<br><img src="http://og24yrsh2.bkt.clouddn.com/AspnetcoreTaskRunner.png" alt="AspnetcoreTaskRunner"></p>
-<p>在.vscode文件夹下生成tasks.json文件，内容如下，用于编译应用</p>
-<pre><code class="brush:js">  {
-      // See https://go.microsoft.com/fwlink/?LinkId=733558
-      // for the documentation about the tasks.json format
-      &quot;version&quot;: &quot;0.1.0&quot;,
-      &quot;command&quot;: &quot;dotnet&quot;,
-      &quot;isShellCommand&quot;: true,
-      &quot;args&quot;: [],
-      &quot;tasks&quot;: [
-          {
-              &quot;taskName&quot;: &quot;build&quot;,
-              &quot;args&quot;: [ ],
-              &quot;isBuildCommand&quot;: true,
-              &quot;showOutput&quot;: &quot;silent&quot;,
-              &quot;problemMatcher&quot;: &quot;$msCompile&quot;
-          }
-      ]
-  }
-</code></pre>
-</li>
-<li><p>Error- launch: launch.json must be configured. Change ‘program’ to the path to the executable file that you would like to debug.<br><img src="http://og24yrsh2.bkt.clouddn.com/AspnetcoreNoExecutableFile.png" alt="AspnetcoreNoExecutableFile"><br>问题的原因是找不到可执行文件</p>
-<p>点击’open launch.json’可以看到节点</p>
-<pre><code class="brush:js">  &quot;program&quot;: &quot;${workspaceRoot}/bin/Debug/&lt;target-framework&gt;/&lt;project-name.dll&gt;&quot;
-</code></pre>
-<p>将其中<target-framework>和<project-name.dll>替换成工程中bin目录下的真实目录即可。</project-name.dll></target-framework></p>
-</li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://sharecode.cc/2016/12/06/Aspnet-Core-Trouble-Shooting/" data-id="ciwonydhj0005c0gex09byw59" class="article-share-link">分享</a>
-      
-        <a href="http://sharecode.cc/2016/12/06/Aspnet-Core-Trouble-Shooting/#ds-thread" class="article-comment-link">留言</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ASP-NET-Core/">ASP.NET Core</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2016/12/06/Aspnet-Core-Web-GetStarted/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          ASP.NET Core中的Program和Startup类
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/11/08/Write-Class-Diagram-PlantUML/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">使用PlantUML画类图</div>
-    </a>
-  
-</nav>
-
-  
 </article>
   
-    <section id="duoshuocomments">
-<!-- 多说评论框 start -->
-  <div id="ds-thread" class="ds-thread" data-thread-key="ASP.NET Core 开发常见问题汇总" data-title="ASP.NET Core 开发常见问题汇总" data-url="http://sharecode.cc/2016/12/06/Aspnet-Core-Trouble-Shooting/"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"wall-e-va"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-   </section>
-  <!-- 多说公共JS代码 end -->
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/08/15/Reload-JS-Does-Not-Work/" class="archive-article-date">
+  <time datetime="2016-08-15T07:35:12.000Z" itemprop="datePublished">Aug 15</time>
+</a>
+      
   
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/08/15/Reload-JS-Does-Not-Work/">Reload JS Does Not Work</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
+
 </section>
         
           <aside id="sidebar">

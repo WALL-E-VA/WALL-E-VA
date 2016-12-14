@@ -10,10 +10,7 @@
 
 它定义了多对一的依赖关系，即多个观察者对一个被观察对象的依赖。
 
-观察者模式可以实现观察者和被观察对象之间的解耦，各自对立变化不会影响彼此，被观察对象只需知晓观察着的抽象接口(行为)，不用关心观察者的具体行为，也不用关心观察着的数量。
-
-
-12">
+观察者模式可以实现观察者和被观察对象之间的解耦，各自对立变化不会影响彼此，被观察对象只需知晓观察着的抽象接口(行为)，不用关心观察者的具体行为，也不用关心观察着的数量。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Design Pattern - Observer">
 <meta property="og:url" content="http://sharecode.cc/2016/11/03/Design-Pattern-Observer/index.html">
@@ -23,11 +20,8 @@
 
 它定义了多对一的依赖关系，即多个观察者对一个被观察对象的依赖。
 
-观察者模式可以实现观察者和被观察对象之间的解耦，各自对立变化不会影响彼此，被观察对象只需知晓观察着的抽象接口(行为)，不用关心观察者的具体行为，也不用关心观察着的数量。
-
-
-12">
-<meta property="og:updated_time" content="2016-11-08T06:59:42.676Z">
+观察者模式可以实现观察者和被观察对象之间的解耦，各自对立变化不会影响彼此，被观察对象只需知晓观察着的抽象接口(行为)，不用关心观察者的具体行为，也不用关心观察着的数量。">
+<meta property="og:updated_time" content="2016-12-14T08:11:25.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Design Pattern - Observer">
 <meta name="twitter:description" content="观察者模式
@@ -35,18 +29,13 @@
 
 它定义了多对一的依赖关系，即多个观察者对一个被观察对象的依赖。
 
-观察者模式可以实现观察者和被观察对象之间的解耦，各自对立变化不会影响彼此，被观察对象只需知晓观察着的抽象接口(行为)，不用关心观察者的具体行为，也不用关心观察着的数量。
-
-
-12">
+观察者模式可以实现观察者和被观察对象之间的解耦，各自对立变化不会影响彼此，被观察对象只需知晓观察着的抽象接口(行为)，不用关心观察者的具体行为，也不用关心观察着的数量。">
   
     <link rel="alternate" href="/atom.xml" title="萝卜就着茶" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  
-    
   
   <link rel="stylesheet" href="/css/style.css">
   
@@ -125,11 +114,110 @@
 <li><p>观察者模式可以实现观察者和被观察对象之间的解耦，各自对立变化不会影响彼此，被观察对象只需知晓观察着的抽象接口(行为)，不用关心观察者的具体行为，也不用关心观察着的数量。</p>
 </li>
 </ol>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> System;</div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">Observer</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">class</span> <span class="title">Program</span></div><div class="line">    &#123;</div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">//定义观察者即读者</span></div><div class="line">            Subscriber objSA = <span class="keyword">new</span> Subscriber(<span class="string">"Subscriber A"</span>);</div><div class="line">            Subscriber objSB = <span class="keyword">new</span> Subscriber(<span class="string">"Subscriber B"</span>);</div><div class="line"></div><div class="line">            <span class="comment">//定义被观察对象即订阅号</span></div><div class="line">            WeChatSubscrptionAccount objWSA = <span class="keyword">new</span> WeChatSubscrptionAccount(<span class="string">"WeChatSubscrption"</span>);</div><div class="line"></div><div class="line">            <span class="comment">//通过委托让订阅号知道需要通知哪些读者</span></div><div class="line">            objWSA.AddObserver(<span class="keyword">new</span> NotifyObserver(objSA.DoSomething));</div><div class="line">            objWSA.AddObserver(<span class="keyword">new</span> NotifyObserver(objSB.DoSomething));</div><div class="line"></div><div class="line">            <span class="comment">//被观察者行为即订阅号发布新文章</span></div><div class="line">            objWSA.CreateNewArticle(<span class="keyword">new</span> EventArgs());</div><div class="line">            Console.Read();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//委托用来引用观察者抽象行为，即读、不读、退订或其它</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">delegate</span> <span class="keyword">void</span> <span class="title">NotifyObserver</span>(<span class="params">Subject Sender, EventArgs e</span>)</span>;</div><div class="line"></div><div class="line">    <span class="comment">//抽象被观察对象</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Subject</span> &#123;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">string</span> Name;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Subject</span>(<span class="params"><span class="keyword">string</span> strName</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.Name = strName;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//定义被观察对象的行为</span></div><div class="line">        <span class="keyword">public</span> <span class="keyword">event</span> NotifyObserver SubjectAct;</div><div class="line"></div><div class="line">        <span class="comment">//当被观察对象的行为发生时，观察者会做出相应的反应</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnSubjectAct</span>(<span class="params">EventArgs e</span>)</span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">//如果已经有观察者</span></div><div class="line">            <span class="keyword">if</span> (SubjectAct != <span class="literal">null</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="comment">//观察者的具体行为</span></div><div class="line">                SubjectAct(<span class="keyword">this</span>, e);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//被观察对象保持观察者的抽象行为</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">AddObserver</span>(<span class="params">NotifyObserver objObserverAct</span>)</span></div><div class="line">        &#123;</div><div class="line">            SubjectAct += objObserverAct;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//被观察对象移除观察者的抽象行为</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">RemoveObserver</span>(<span class="params">NotifyObserver objObserverAct</span>)</span></div><div class="line">        &#123;</div><div class="line">            SubjectAct -= objObserverAct;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//具体被观察对象，微信订阅号</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">WeChatSubscrptionAccount</span> : <span class="title">Subject</span> &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">WeChatSubscrptionAccount</span>(<span class="params"><span class="keyword">string</span> strName</span>) : <span class="title">base</span>(<span class="params">strName</span>) </span>&#123; &#125;</div><div class="line"></div><div class="line">        <span class="comment">//当新文章创建后要通知所有订阅者</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CreateNewArticle</span>(<span class="params">EventArgs e</span>)</span></div><div class="line">        &#123;</div><div class="line">            Console.WriteLine(<span class="string">"Send new article."</span>);</div><div class="line"></div><div class="line">            <span class="comment">//通知所有订阅者</span></div><div class="line">            <span class="keyword">this</span>.OnSubjectAct(e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//观察者</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">Observer</span> &#123;</div><div class="line">        <span class="comment">//观察者抽象行为</span></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">DoSomething</span>(<span class="params">Subject Sender, EventArgs e</span>)</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//具体观察者，读者</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Subscriber</span> : <span class="title">Observer</span> &#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">string</span> Name;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Subscriber</span>(<span class="params"><span class="keyword">string</span> strName</span>)</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">this</span>.Name = strName;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//读者具体行为</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DoSomething</span>(<span class="params">Subject Sender, EventArgs e</span>) </span>&#123;</div><div class="line">            Console.WriteLine(<span class="string">$"<span class="subst">&#123;<span class="keyword">this</span>.Name&#125;</span> is going to do something about <span class="subst">&#123;Sender.Name&#125;</span>."</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="brush:c#">    using System;
+
+    namespace Observer
+    {
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                //定义观察者即读者
+                Subscriber objSA = new Subscriber(&quot;Subscriber A&quot;);
+                Subscriber objSB = new Subscriber(&quot;Subscriber B&quot;);
+
+                //定义被观察对象即订阅号
+                WeChatSubscrptionAccount objWSA = new WeChatSubscrptionAccount(&quot;WeChatSubscrption&quot;);
+
+                //通过委托让订阅号知道需要通知哪些读者
+                objWSA.AddObserver(new NotifyObserver(objSA.DoSomething));
+                objWSA.AddObserver(new NotifyObserver(objSB.DoSomething));
+
+                //被观察者行为即订阅号发布新文章
+                objWSA.CreateNewArticle(new EventArgs());
+                Console.Read();
+            }
+        }
+
+        //委托用来引用观察者抽象行为，即读、不读、退订或其它
+        public delegate void NotifyObserver(Subject Sender, EventArgs e);
+
+        //抽象被观察对象
+        public class Subject {
+            public string Name;
+
+            public Subject(string strName) {
+                this.Name = strName;
+            }
+
+            //定义被观察对象的行为
+            public event NotifyObserver SubjectAct;
+
+            //当被观察对象的行为发生时，观察者会做出相应的反应
+            public void OnSubjectAct(EventArgs e)
+            {
+                //如果已经有观察者
+                if (SubjectAct != null)
+                {
+                    //观察者的具体行为
+                    SubjectAct(this, e);
+                }
+            }
+
+            //被观察对象保持观察者的抽象行为
+            public void AddObserver(NotifyObserver objObserverAct)
+            {
+                SubjectAct += objObserverAct;
+            }
+
+            //被观察对象移除观察者的抽象行为
+            public void RemoveObserver(NotifyObserver objObserverAct)
+            {
+                SubjectAct -= objObserverAct;
+            }
+        }
+
+        //具体被观察对象，微信订阅号
+        public class WeChatSubscrptionAccount : Subject {
+            public WeChatSubscrptionAccount(string strName) : base(strName) { }
+
+            //当新文章创建后要通知所有订阅者
+            public void CreateNewArticle(EventArgs e)
+            {
+                Console.WriteLine(&quot;Send new article.&quot;);
+
+                //通知所有订阅者
+                this.OnSubjectAct(e);
+            }
+        }
+
+        //观察者
+        public interface Observer {
+            //观察者抽象行为
+            void DoSomething(Subject Sender, EventArgs e);
+        }
+
+        //具体观察者，读者
+        public class Subscriber : Observer {
+            private string Name;
+
+            public Subscriber(string strName)
+            {
+                this.Name = strName;
+            }
+
+            //读者具体行为
+            public void DoSomething(Subject Sender, EventArgs e) {
+                Console.WriteLine($&quot;{this.Name} is going to do something about {Sender.Name}.&quot;);
+            }
+        }
+    }
+</code></pre>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sharecode.cc/2016/11/03/Design-Pattern-Observer/" data-id="ciwg3xuv6000amwget6f1hgul" class="article-share-link">分享</a>
+      <a data-url="http://sharecode.cc/2016/11/03/Design-Pattern-Observer/" data-id="ciwonydib000fc0gekb80tnal" class="article-share-link">分享</a>
       
         <a href="http://sharecode.cc/2016/11/03/Design-Pattern-Observer/#ds-thread" class="article-comment-link">留言</a>
       
@@ -193,7 +281,7 @@ var duoshuoQuery = {short_name:"wall-e-va"};
   <div class="widget-wrap">
     <h3 class="widget-title tagcloud">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/React-Native-Android/" style="font-size: 15px;">React Native Android</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
+      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
     </div>
   </div>
 
@@ -302,6 +390,18 @@ var duoshuoQuery = {short_name:"wall-e-va"};
 
 <script src="/js/script.js"></script>
 
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushXml.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushCSharp.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/styles/shCoreEclipse.min.css"/>
+
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "code";
+  SyntaxHighlighter.all();
+</script>
   </div>
 </body>
 </html>

@@ -30,7 +30,7 @@ size 尺寸的可选值为’small’或者’large’, 默认值为’small’�
 
 下面代码简单展示组件及其属性如何使用。">
 <meta property="og:image" content="http://og24yrsh2.bkt.clouddn.com/ezgif.com-gif-maker.gif">
-<meta property="og:updated_time" content="2016-11-07T07:00:47.386Z">
+<meta property="og:updated_time" content="2016-12-14T08:10:30.323Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native ActivityIndicator 组件的使用">
 <meta name="twitter:description" content="ActivityIndicator 用来在应用进行一些耗时操作时显示一个旋转的圆形指示器，有以下属性。
@@ -50,8 +50,6 @@ size 尺寸的可选值为’small’或者’large’, 默认值为’small’�
   
     <link rel="icon" href="/favicon.png">
   
-  
-    
   
   <link rel="stylesheet" href="/css/style.css">
   
@@ -132,13 +130,83 @@ size 尺寸的可选值为’small’或者’large’, 默认值为’small’�
 </li>
 </ol>
 <p>下面代码简单展示组件及其属性如何使用。<br><a id="more"></a></p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">    View,</div><div class="line">    StyleSheet,</div><div class="line">    ActivityIndicator,</div><div class="line">    Text,</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">ActivityIndicatorExample</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="comment">//_timer用于保存setInterval函数返回定时器的ID</span></div><div class="line">    _timer: React.PropTypes.number;</div><div class="line"></div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentWillMount() &#123;</div><div class="line">        <span class="comment">//组建渲染前初始化组建状态，默认显示Indicator及其下面文字。</span></div><div class="line">        <span class="keyword">this</span>.setState(&#123;</div><div class="line">            <span class="attr">animating</span>: <span class="literal">true</span>,</div><div class="line">            <span class="attr">opacity</span>: <span class="number">1</span></div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span>(</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">View</span> <span class="attr">style</span>=<span class="string">&#123;styles.container&#125;</span>&gt;</span></span></div><div class="line">                <span class="tag">&lt;<span class="name">ActivityIndicator</span></span></div><div class="line">                    <span class="attr">animating</span>=<span class="string">&#123;this.state.animating&#125;</span></div><div class="line">                    <span class="attr">color</span>=<span class="string">'mediumspringgreen'</span></div><div class="line">                    <span class="attr">size</span>=<span class="string">&#123;200&#125;</span></div><div class="line">                /&gt;</div><div class="line">                <span class="tag">&lt;<span class="name">View</span> <span class="attr">style</span>=<span class="string">&#123;&#123;opacity:</span> <span class="attr">this.state.opacity</span>&#125;&#125;&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">Text</span>&gt;</span>loading<span class="tag">&lt;/<span class="name">Text</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">View</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">View</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentDidMount() &#123;</div><div class="line">        //组建加载完成后设定定时函数</div><div class="line">        this.ToggleIndicator();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    ToggleIndicator() &#123;</div><div class="line">        //每隔两秒切换Indicator显示的状态</div><div class="line">        this._timer = setInterval(() =&gt; &#123;</div><div class="line">            this.setState(&#123;</div><div class="line">                animating: !this.state.animating,</div><div class="line">                opacity: this.state.opacity === 1 ? 0 : 1,</div><div class="line">            &#125;);</div><div class="line">        &#125;, 2000);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentWillUnmount() &#123;</div><div class="line">        //组件卸载前取消由setInterval()方法设置的定时器</div><div class="line">        clearInterval(this._timer);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const styles = StyleSheet.create(&#123;</div><div class="line">    container: &#123;</div><div class="line">        flex: 1,</div><div class="line">        justifyContent: 'center',</div><div class="line">        alignItems: 'center',</div><div class="line">    &#125;,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<pre><code class="brush:js">    &#39;use strict&#39;;
+
+    import React, { Component } from &#39;react&#39;;
+    import {
+        View,
+        StyleSheet,
+        ActivityIndicator,
+        Text,
+    } from &#39;react-native&#39;;
+
+
+    export default class ActivityIndicatorExample extends Component {
+        //_timer用于保存setInterval函数返回定时器的ID
+        _timer: React.PropTypes.number;
+
+        constructor(props) {
+            super(props);
+        }
+
+        componentWillMount() {
+            //组建渲染前初始化组建状态，默认显示Indicator及其下面文字。
+            this.setState({
+                animating: true,
+                opacity: 1
+            });
+        }
+
+        render() {
+            return(
+                &lt;View style={styles.container}&gt;
+                    &lt;ActivityIndicator
+                        animating={this.state.animating}
+                        color=&#39;mediumspringgreen&#39;
+                        size={200}
+                    /&gt;
+                    &lt;View style={{opacity: this.state.opacity}}&gt;
+                        &lt;Text&gt;loading&lt;/Text&gt;
+                    &lt;/View&gt;
+                &lt;/View&gt;
+            );
+        }
+
+        componentDidMount() {
+            //组建加载完成后设定定时函数
+            this.ToggleIndicator();
+        }
+
+        ToggleIndicator() {
+            //每隔两秒切换Indicator显示的状态
+            this._timer = setInterval(() =&gt; {
+                this.setState({
+                    animating: !this.state.animating,
+                    opacity: this.state.opacity === 1 ? 0 : 1,
+                });
+            }, 2000);
+        }
+
+        componentWillUnmount() {
+            //组件卸载前取消由setInterval()方法设置的定时器
+            clearInterval(this._timer);
+        }
+    }
+
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            justifyContent: &#39;center&#39;,
+            alignItems: &#39;center&#39;,
+        },
+    });
+</code></pre>
 <p>代码运行效果：<br><img src="http://og24yrsh2.bkt.clouddn.com/ezgif.com-gif-maker.gif" alt="ActivityIndicator Running"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sharecode.cc/2016/10/09/React-Native-ActivityIndicator/" data-id="ciwg3xuvk000hmwgeaejpuhvc" class="article-share-link">分享</a>
+      <a data-url="http://sharecode.cc/2016/10/09/React-Native-ActivityIndicator/" data-id="ciwonydif000ic0gebu86lz5b" class="article-share-link">分享</a>
       
         <a href="http://sharecode.cc/2016/10/09/React-Native-ActivityIndicator/#ds-thread" class="article-comment-link">留言</a>
       
@@ -202,7 +270,7 @@ var duoshuoQuery = {short_name:"wall-e-va"};
   <div class="widget-wrap">
     <h3 class="widget-title tagcloud">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/React-Native-Android/" style="font-size: 15px;">React Native Android</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
+      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
     </div>
   </div>
 
@@ -311,6 +379,18 @@ var duoshuoQuery = {short_name:"wall-e-va"};
 
 <script src="/js/script.js"></script>
 
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushXml.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushCSharp.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/styles/shCoreEclipse.min.css"/>
+
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "code";
+  SyntaxHighlighter.all();
+</script>
   </div>
 </body>
 </html>

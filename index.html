@@ -21,8 +21,6 @@
     <link rel="icon" href="/favicon.png">
   
   
-    
-  
   <link rel="stylesheet" href="/css/style.css">
   
 
@@ -101,22 +99,102 @@
 </li>
 <li><p><strong>Program类</strong></p>
 <p> 这个类在应用的根目下，是一个控制台程序，其中<code>Main</code>方法来构建Web服务器,使用<code>WebHostBuilder</code>来创建Web应用的宿主，这一过程使用建造者模式。方法中指定使用什么Web服务器，可以指定多个选项如<code>UseKestrel()</code>和<code>UseIISIntegration</code>,时用<code>UseStartup&lt;TStartup&gt;()</code>方法来指定应用的启动类，在TStartup类中配置应用的请求管道，用<code>UseContentRoo()</code>方法指定应用的根目录。<code>Build()</code>方法创建Web应用的宿主，<code>Run()</code>方法运行Web应用并开始监听HTTP请求。其中以<code>Use</code>为前缀的方法都由<code>IWebHostBuilder</code>接口的扩展方法来提供。</p>
- <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Program</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">var</span> host = <span class="keyword">new</span> WebHostBuilder()</div><div class="line">            .UseKestrel()</div><div class="line">            .UseContentRoot(Directory.GetCurrentDirectory())</div><div class="line">            .UseIISIntegration()</div><div class="line">            .UseStartup&lt;Startup&gt;()</div><div class="line">            .Build();</div><div class="line"></div><div class="line">        host.Run();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="brush:csharp">     public class Program
+     {
+         public static void Main(string[] args)
+         {
+             var host = new WebHostBuilder()
+                 .UseKestrel()
+                 .UseContentRoot(Directory.GetCurrentDirectory())
+                 .UseIISIntegration()
+                 .UseStartup&lt;Startup&gt;()
+                 .Build();
+
+             host.Run();
+         }
+     }
+</code></pre>
 </li>
 <li><p><strong>Startup类</strong></p>
 <p> <code>Startup</code>类用来定义请求的处理管道、配置应用所需要时用的服务。ASP.NET应用最少要包含一个<code>Startup</code>类，当一个应用启动时，ASP.NET会在主程序集的所有命名空间中检索名字为<code>Startup</code>的类。<code>Startup</code>类不必须是公有的。如果有多个<code>Startup</code>类的情况，ASP.NET将会在工程的根命名空间中寻找一个，如果没有找到将继续按命名空间的字母顺序寻找。可以为不同的<a href="#">环境</a>分别定义<code>Startup</code>类，在运行时会根据不同的环境在挑选一个合适的。</p>
 <ul>
 <li><p><code>Startup</code>类的构造函数</p>
 <p><code>Startup</code>可以进行构造函数依赖注入，依赖通过<a href="#">内置的依赖注入容器<code>dependency injection</code></a>来提供，通过<code>IHostingEnvironment</code>的实例<code>env</code>来设定<a href="#">IConfigurationRoot</a>实例变量<code>Configuration</code>所需的数据源以便在<code>ConfigureService</code>和<code>Configure</code>方法中读取。</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> IConfigurationRoot Configuration &#123; <span class="keyword">get</span>; &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Startup</span>(<span class="params">IHostingEnvironment env</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> builder = <span class="keyword">new</span> ConfigurationBuilder()</div><div class="line">        .SetBasePath(env.ContentRootPath)</div><div class="line">        .AddJsonFile(<span class="string">"appsettings.json"</span>, optional: <span class="literal">true</span>, reloadOnChange: <span class="literal">true</span>)</div><div class="line">        <span class="comment">//通过IHostingEnvironment的实例env来设定实例变量Configuration所需的数据源</span></div><div class="line">        .AddJsonFile(<span class="string">$"appsettings.<span class="subst">&#123;env.EnvironmentName&#125;</span>.json"</span>, optional: <span class="literal">true</span>);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (env.IsDevelopment())</div><div class="line">    &#123;</div><div class="line">        <span class="comment">// For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709</span></div><div class="line">        builder.AddUserSecrets();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    builder.AddEnvironmentVariables();</div><div class="line">    Configuration = builder.Build();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="brush:csharp">  public IConfigurationRoot Configuration { get; }
+
+  public Startup(IHostingEnvironment env)
+  {
+      var builder = new ConfigurationBuilder()
+          .SetBasePath(env.ContentRootPath)
+          .AddJsonFile(&quot;appsettings.json&quot;, optional: true, reloadOnChange: true)
+          //通过IHostingEnvironment的实例env来设定实例变量Configuration所需的数据源
+          .AddJsonFile($&quot;appsettings.{env.EnvironmentName}.json&quot;, optional: true);
+
+      if (env.IsDevelopment())
+      {
+          // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
+          builder.AddUserSecrets();
+      }
+
+      builder.AddEnvironmentVariables();
+      Configuration = builder.Build();
+  }
+</code></pre>
 </li>
 <li><p><code>Configure</code>方法</p>
 <p><code>Startup</code>类必须包含一个<code>Configure</code>方法，应用在启动时会先调用<code>ConfigureService</code>然后再调用<code>Configure</code>方法。<br><code>Configure</code>方法用来定义应用如何响应<code>HTTP</code>请求。通过向<code>IApplicationBuilder</code>实例中添加<a href="#">中间件</a>组件来配置请求管道，可以看到下面示例代码中通过调用<code>IApplicationBuilde</code>的扩展方法来配置执行管道以获得中间件的支持如error pages、BrowserLink、static files、ASP.NET MVC和Identity，调用<code>use</code>为前缀的扩展方将每一个中间件加入到执行管道中，例如用<code>UseMVC</code>扩展方法把路由中间件加入到请求管道中，并用MVC为默认的路由处理器。还有一些服务例如<code>IHostingEnvironment</code>和<code>ILoggerFactory</code>可以通过方法签名以参数方式注入。</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Configure</span>(<span class="params">IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory</span>)</span></div><div class="line">&#123;</div><div class="line">    loggerFactory.AddConsole(Configuration.GetSection(<span class="string">"Logging"</span>));</div><div class="line">    loggerFactory.AddDebug();</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (env.IsDevelopment())</div><div class="line">    &#123;</div><div class="line">        app.UseDeveloperExceptionPage();</div><div class="line">        app.UseDatabaseErrorPage();</div><div class="line">        app.UseBrowserLink();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        app.UseExceptionHandler(<span class="string">"/Home/Error"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    app.UseStaticFiles();</div><div class="line"></div><div class="line">    app.UseIdentity();</div><div class="line"></div><div class="line">    <span class="comment">// Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715</span></div><div class="line"></div><div class="line">    app.UseMvc(routes =&gt;</div><div class="line">    &#123;</div><div class="line">        routes.MapRoute(</div><div class="line">            name: <span class="string">"default"</span>,</div><div class="line">            template: <span class="string">"&#123;controller=Home&#125;/&#123;action=Index&#125;/&#123;id?&#125;"</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="brush:csharp">  // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+  public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+  {
+      loggerFactory.AddConsole(Configuration.GetSection(&quot;Logging&quot;));
+      loggerFactory.AddDebug();
+
+      if (env.IsDevelopment())
+      {
+          app.UseDeveloperExceptionPage();
+          app.UseDatabaseErrorPage();
+          app.UseBrowserLink();
+      }
+      else
+      {
+          app.UseExceptionHandler(&quot;/Home/Error&quot;);
+      }
+
+      app.UseStaticFiles();
+
+      app.UseIdentity();
+
+      // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
+
+      app.UseMvc(routes =&gt;
+      {
+          routes.MapRoute(
+              name: &quot;default&quot;,
+              template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+      });
+  }
+</code></pre>
 </li>
 <li><p><code>ConfigureService</code>方法</p>
 <p><code>ConfigureService</code>方法是可选的，应用在启动时会先于<code>Configure</code>方法被调用，因为功能要在被绑定到执行管道之前注册进来。方法中通过调用<code>IServiceCollection</code>的扩展方法<code>Add[Something]</code>来配置应用需要使用到的服务如Entity Framework、Identity和MVC。通过依赖注入可以使加入到服务容器中服务在应用中可用。</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// This method gets called by the runtime. Use this method to add services to the container.</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ConfigureServices</span>(<span class="params">IServiceCollection services</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// Add framework services.</span></div><div class="line">    services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;</div><div class="line">        options.UseSqlite(Configuration.GetConnectionString(<span class="string">"DefaultConnection"</span>)));</div><div class="line"></div><div class="line">    services.AddIdentity&lt;ApplicationUser, IdentityRole&gt;()</div><div class="line">        .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;()</div><div class="line">        .AddDefaultTokenProviders();</div><div class="line"></div><div class="line">    services.AddMvc();</div><div class="line"></div><div class="line">    <span class="comment">// Add application services.</span></div><div class="line">    services.AddTransient&lt;IEmailSender, AuthMessageSender&gt;();</div><div class="line">    services.AddTransient&lt;ISmsSender, AuthMessageSender&gt;();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="brush:csharp">  // This method gets called by the runtime. Use this method to add services to the container.
+  public void ConfigureServices(IServiceCollection services)
+  {
+      // Add framework services.
+      services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;
+          options.UseSqlite(Configuration.GetConnectionString(&quot;DefaultConnection&quot;)));
+
+      services.AddIdentity&lt;ApplicationUser, IdentityRole&gt;()
+          .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;()
+          .AddDefaultTokenProviders();
+
+      services.AddMvc();
+
+      // Add application services.
+      services.AddTransient&lt;IEmailSender, AuthMessageSender&gt;();
+      services.AddTransient&lt;ISmsSender, AuthMessageSender&gt;();
+  }
+</code></pre>
 <p>可以看到ASP.NET Corez在应用启动时通过依赖注入提供服务给应用程序，用户可以通过在<code>Startup</code>类构造函数或<code>Configure</code>和<code>ConfigureService</code>方法中以参数的方式得到需要使用的服务。上面代码中方法的执行顺序如下：</p>
 </li>
 </ul>
@@ -136,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sharecode.cc/2016/12/06/Aspnet-Core-Web-GetStarted/" data-id="ciwg3xuur0005mwgevvgaiobd" class="article-share-link">分享</a>
+      <a data-url="http://sharecode.cc/2016/12/06/Aspnet-Core-Web-GetStarted/" data-id="ciwonydhx0009c0gev8hy3keq" class="article-share-link">分享</a>
       
         <a href="http://sharecode.cc/2016/12/06/Aspnet-Core-Web-GetStarted/#ds-thread" class="article-comment-link">留言</a>
       
@@ -177,14 +255,33 @@
 <li><p><strong>使用VS Code 调试 ASP.NET Core Web 应用常见问题</strong></p>
 <ul>
 <li><p>Error - Could not find the preLaunchTask ‘build’.<br><img src="http://og24yrsh2.bkt.clouddn.com/AspnetcoreNoPreLanchTaskBuild.png" alt="AspnetcoreNoPreLanchTaskBuild"><br>问题原因是在launch.json里配置了在应用执行前预先执行的任务，但找不到相应的任务。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">"preLaunchTask": "build"</div></pre></td></tr></table></figure>
+<pre><code class="brush:js">  &quot;preLaunchTask&quot;: &quot;build&quot;
+</code></pre>
 <p>点击’Confiure Task Runner’，然后在下图中选择’.NET Core’<br><img src="http://og24yrsh2.bkt.clouddn.com/AspnetcoreTaskRunner.png" alt="AspnetcoreTaskRunner"></p>
 <p>在.vscode文件夹下生成tasks.json文件，内容如下，用于编译应用</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    // See https://go.microsoft.com/fwlink/?LinkId=733558</div><div class="line">    // for the documentation about the tasks.json format</div><div class="line">    "version": "0.1.0",</div><div class="line">    "command": "dotnet",</div><div class="line">    "isShellCommand": true,</div><div class="line">    "args": [],</div><div class="line">    "tasks": [</div><div class="line">        &#123;</div><div class="line">            "taskName": "build",</div><div class="line">            "args": [ ],</div><div class="line">            "isBuildCommand": true,</div><div class="line">            "showOutput": "silent",</div><div class="line">            "problemMatcher": "$msCompile"</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="brush:js">  {
+      // See https://go.microsoft.com/fwlink/?LinkId=733558
+      // for the documentation about the tasks.json format
+      &quot;version&quot;: &quot;0.1.0&quot;,
+      &quot;command&quot;: &quot;dotnet&quot;,
+      &quot;isShellCommand&quot;: true,
+      &quot;args&quot;: [],
+      &quot;tasks&quot;: [
+          {
+              &quot;taskName&quot;: &quot;build&quot;,
+              &quot;args&quot;: [ ],
+              &quot;isBuildCommand&quot;: true,
+              &quot;showOutput&quot;: &quot;silent&quot;,
+              &quot;problemMatcher&quot;: &quot;$msCompile&quot;
+          }
+      ]
+  }
+</code></pre>
 </li>
 <li><p>Error- launch: launch.json must be configured. Change ‘program’ to the path to the executable file that you would like to debug.<br><img src="http://og24yrsh2.bkt.clouddn.com/AspnetcoreNoExecutableFile.png" alt="AspnetcoreNoExecutableFile"><br>问题的原因是找不到可执行文件</p>
 <p>点击’open launch.json’可以看到节点</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">"program": "$&#123;workspaceRoot&#125;/bin/Debug/&lt;target-framework&gt;/&lt;project-name.dll&gt;"</div></pre></td></tr></table></figure>
+<pre><code class="brush:js">  &quot;program&quot;: &quot;${workspaceRoot}/bin/Debug/&lt;target-framework&gt;/&lt;project-name.dll&gt;&quot;
+</code></pre>
 <p>将其中<target-framework>和<project-name.dll>替换成工程中bin目录下的真实目录即可。</project-name.dll></target-framework></p>
 </li>
 </ul>
@@ -194,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sharecode.cc/2016/12/06/Aspnet-Core-Trouble-Shooting/" data-id="ciwg3xuuw0006mwged000rfnc" class="article-share-link">分享</a>
+      <a data-url="http://sharecode.cc/2016/12/06/Aspnet-Core-Trouble-Shooting/" data-id="ciwonydhj0005c0gex09byw59" class="article-share-link">分享</a>
       
         <a href="http://sharecode.cc/2016/12/06/Aspnet-Core-Trouble-Shooting/#ds-thread" class="article-comment-link">留言</a>
       
@@ -241,7 +338,40 @@
 </ol>
 <ul>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Extend &lt;&lt;Folder&gt;&gt; &#123;</div><div class="line">        class Animal &#123;</div><div class="line">            +name string</div><div class="line">            +void breathe()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class Human&#123;</div><div class="line">            +name string</div><div class="line">            +void breathe()</div><div class="line">            +void Inovate()</div><div class="line">            +void Drive(ICar car)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    package implement &lt;&lt;Folder&gt;&gt; &#123;</div><div class="line">        interface ICar &#123;</div><div class="line">            +name string</div><div class="line">            +void Run()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class BMW &#123;</div><div class="line">            +name string</div><div class="line">            +void Run()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /&apos;泛化 - 继承类&apos;/</div><div class="line">    Human -up--|&gt; Animal : extends</div><div class="line"></div><div class="line">    /&apos;泛化 - 实现接口&apos;/</div><div class="line">    BMW -up..|&gt; ICar : implements</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:text">  @startuml
+      package Extend &lt;&lt;Folder&gt;&gt; {
+          class Animal {
+              +name string
+              +void breathe()
+          }
+
+          class Human{
+              +name string
+              +void breathe()
+              +void Inovate()
+              +void Drive(ICar car)
+          }
+      }
+
+      package implement &lt;&lt;Folder&gt;&gt; {
+          interface ICar {
+              +name string
+              +void Run()
+          }
+
+          class BMW {
+              +name string
+              +void Run()
+          }
+      }
+
+      /&#39;泛化 - 继承类&#39;/
+      Human -up--|&gt; Animal : extends
+
+      /&#39;泛化 - 实现接口&#39;/
+      BMW -up..|&gt; ICar : implements
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Generalization.png" alt="Generalization"></p>
 </li>
@@ -253,7 +383,17 @@
 </ol>
 <ul>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    class Person &#123;</div><div class="line">        +void Call(Phone phone)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    Class Phone</div><div class="line"></div><div class="line">    /&apos;依赖关系用虚线单项箭头表示..&gt;箭头指向被依赖对象&apos;/</div><div class="line">    Person -right..&gt; Phone : use</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      class Person {
+          +void Call(Phone phone)
+      }
+
+      Class Phone
+
+      /&#39;依赖关系用虚线单项箭头表示..&gt;箭头指向被依赖对象&#39;/
+      Person -right..&gt; Phone : use
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Dependency.png" alt="Dependency"></p>
 </li>
@@ -268,7 +408,16 @@
 </ol>
 <ul>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Unidirectional &lt;&lt;cloud&gt;&gt; &#123;</div><div class="line">        class person</div><div class="line">        class TV</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /&apos;单项关联用实线箭头表示--&gt;&apos;/</div><div class="line">    person -right--&gt; TV : watch</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      package Unidirectional &lt;&lt;cloud&gt;&gt; {
+          class person
+          class TV
+      }
+
+      /&#39;单项关联用实线箭头表示--&gt;&#39;/
+      person -right--&gt; TV : watch
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/UnidirectionalAssociation.png" alt="UnidirectionalAssociation"></p>
 <ul>
@@ -276,7 +425,16 @@
 </ul>
 </li>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Bidirectional &lt;&lt;Frame&gt;&gt; &#123;</div><div class="line">        class boyfriend</div><div class="line">        class girlfirend</div><div class="line"></div><div class="line">        /&apos;双向关联的对象用实线连接--&apos;/</div><div class="line">        boyfriend -right--girlfirend : marry</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      package Bidirectional &lt;&lt;Frame&gt;&gt; {
+          class boyfriend
+          class girlfirend
+
+          /&#39;双向关联的对象用实线连接--&#39;/
+          boyfriend -right--girlfirend : marry
+      }
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/BidirectionalAssociation.png" alt="BidirectionalAssociation"></p>
 <ul>
@@ -284,7 +442,19 @@
 </ul>
 </li>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package N-ary &lt;&lt;Association&gt;&gt; &#123;</div><div class="line">        class owner</div><div class="line">        class buyer</div><div class="line">        class agent &#123;</div><div class="line">            void coordinate()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        owner -- buyer</div><div class="line">        (owner,buyer) -- agent</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      package N-ary &lt;&lt;Association&gt;&gt; {
+          class owner
+          class buyer
+          class agent {
+              void coordinate()
+          }
+
+          owner -- buyer
+          (owner,buyer) -- agent
+      }
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/N-aryAssociation.png" alt="N-aryAssociation"></p>
 <ul>
@@ -292,7 +462,12 @@
 </ul>
 </li>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    class bug</div><div class="line"></div><div class="line">    bug &quot;0..*&quot; -up-- &quot;1..*&quot; bug : propagate</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      class bug
+
+      bug &quot;0..*&quot; -up-- &quot;1..*&quot; bug : propagate
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/SelfAssociation.png" alt="SelfAssociation"></p>
 </li>
@@ -304,7 +479,19 @@
 </ol>
 <ul>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Aggregation &lt;&lt;Frame&gt;&gt;&#123;</div><div class="line">        class crowd &#123;</div><div class="line">            ~List&lt;person&gt; people</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class person</div><div class="line"></div><div class="line">        /&apos;聚合用空心菱形实线表示o--&apos;/</div><div class="line">        crowd o---right person : have</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      package Aggregation &lt;&lt;Frame&gt;&gt;{
+          class crowd {
+              ~List&lt;person&gt; people
+          }
+
+          class person
+
+          /&#39;聚合用空心菱形实线表示o--&#39;/
+          crowd o---right person : have
+      }
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Aggregation.png" alt="Aggregation"></p>
 </li>
@@ -316,7 +503,22 @@
 </ol>
 <ul>
 <li><p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">@startuml</div><div class="line">    package Composition &lt;&lt;frame&gt;&gt; &#123;</div><div class="line">        class Human &#123;</div><div class="line">            -Heart heart</div><div class="line">            -Lung lung </div><div class="line">        &#125;</div><div class="line"></div><div class="line">        class Heart</div><div class="line">        class Lung</div><div class="line"></div><div class="line">        /&apos;组合用实心菱形实线表示*--&apos;/</div><div class="line">        Human *-- Heart : contains</div><div class="line">        Human *-- Lung</div><div class="line">    &#125;</div><div class="line">@enduml</div></pre></td></tr></table></figure>
+<pre><code class="brush:plain">  @startuml
+      package Composition &lt;&lt;frame&gt;&gt; {
+          class Human {
+              -Heart heart
+              -Lung lung 
+          }
+
+          class Heart
+          class Lung
+
+          /&#39;组合用实心菱形实线表示*--&#39;/
+          Human *-- Heart : contains
+          Human *-- Lung
+      }
+  @enduml
+</code></pre>
 </li>
 <li><p>Class Diagram<br><img src="http://og24yrsh2.bkt.clouddn.com/Composition.png" alt="Composition"></p>
 </li>
@@ -325,7 +527,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sharecode.cc/2016/11/08/Write-Class-Diagram-PlantUML/" data-id="ciwg3xuvx000nmwge7cik3hrv" class="article-share-link">分享</a>
+      <a data-url="http://sharecode.cc/2016/11/08/Write-Class-Diagram-PlantUML/" data-id="ciwonydix000pc0geyc9pw6hy" class="article-share-link">分享</a>
       
         <a href="http://sharecode.cc/2016/11/08/Write-Class-Diagram-PlantUML/#ds-thread" class="article-comment-link">留言</a>
       
@@ -356,7 +558,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title tagcloud">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/React-Native-Android/" style="font-size: 15px;">React Native Android</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
+      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
     </div>
   </div>
 
@@ -465,6 +667,18 @@
 
 <script src="/js/script.js"></script>
 
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushXml.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushCSharp.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/styles/shCoreEclipse.min.css"/>
+
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "code";
+  SyntaxHighlighter.all();
+</script>
   </div>
 </body>
 </html>

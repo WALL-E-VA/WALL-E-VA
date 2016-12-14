@@ -24,7 +24,7 @@ drawerWidth - 设置滑动出的导航条(View)的宽度，">
 <meta property="og:image" content="http://og24yrsh2.bkt.clouddn.com/keyboardDismissMode.gif">
 <meta property="og:image" content="http://og24yrsh2.bkt.clouddn.com/statusBarBackgroundColor.gif">
 <meta property="og:image" content="http://og24yrsh2.bkt.clouddn.com/DrawerLayoutAndroid.gif">
-<meta property="og:updated_time" content="2016-11-07T07:00:48.876Z">
+<meta property="og:updated_time" content="2016-12-14T08:14:31.286Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native DrawerLayoutAndroid(抽屉) 组件的使用">
 <meta name="twitter:description" content="DrawerLayout又称抽屉，一般用于显示或隐藏屏幕侧方的导航条(View)，用户通过手势滑动屏幕或点击按钮调用openDrawer()或closeDrawer()控制导航条(View)的显示。
@@ -40,8 +40,6 @@ drawerWidth - 设置滑动出的导航条(View)的宽度，">
   
     <link rel="icon" href="/favicon.png">
   
-  
-    
   
   <link rel="stylesheet" href="/css/style.css">
   
@@ -146,17 +144,108 @@ drawerWidth - 设置滑动出的导航条(View)的宽度，">
 <p><img src="http://og24yrsh2.bkt.clouddn.com/DrawerLayoutAndroid.gif" alt="onDrawerStateChanged"></p>
 <p>DrawerLayoutAndroid方法有两个openDrawer()和closeDrawer()用于程序控制导航条开关。</p>
 <p>Demo完整代码如下:</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">    View,</div><div class="line">    Text,</div><div class="line">    StyleSheet,</div><div class="line">    DrawerLayoutAndroid,</div><div class="line">    Dimensions,</div><div class="line">    TouchableOpacity,</div><div class="line">    TextInput,</div><div class="line">    ToastAndroid,</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">DLAExample</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line"></div><div class="line">        <span class="keyword">this</span>.state = &#123;</div><div class="line">            <span class="attr">position</span>: DrawerLayoutAndroid.positions.Left,</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        <span class="keyword">this</span>.Naview = (</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">View</span> <span class="attr">style</span>=<span class="string">&#123;styles.NavigationView&#125;</span>&gt;</span></span></div><div class="line">                <span class="tag">&lt;<span class="name">Text</span>&gt;</span>Menu1<span class="tag">&lt;/<span class="name">Text</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">Text</span>&gt;</span>Menu2<span class="tag">&lt;/<span class="name">Text</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">Text</span>&gt;</span>Menu3<span class="tag">&lt;/<span class="name">Text</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">View</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">let</span> &#123; width &#125; = Dimensions.get(<span class="string">'window'</span>);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> (</div><div class="line">                <span class="xml"><span class="tag">&lt;<span class="name">DrawerLayoutAndroid</span></span></span></div><div class="line">                    <span class="attr">ref</span>=<span class="string">"DrawerLayout"</span></div><div class="line">                    <span class="attr">drawerWidth</span>=<span class="string">&#123;width</span> / <span class="attr">2</span>&#125;</div><div class="line">                    <span class="attr">drawerBackgroundColor</span>=<span class="string">'rgba(255,255,255,0.8)'</span></div><div class="line">                    <span class="attr">renderNavigationView</span>=<span class="string">&#123;()</span> =&gt; this.Naview&#125;</div><div class="line">                    drawerPosition=&#123;this.state.position&#125;</div><div class="line">                    keyboardDismissMode='on-drag'</div><div class="line">                    drawerLockMode='unlocked'</div><div class="line">                    statusBarBackgroundColor='#1e90ff'</div><div class="line">                    onDrawerClose=&#123;() =&gt; ToastAndroid.showWithGravity('Drawer Closed',ToastAndroid.SHORT, ToastAndroid.BOTTOM)&#125;</div><div class="line">                    onDrawerOpen=&#123;() =&gt; ToastAndroid.showWithGravity('Drawer Opened',ToastAndroid.SHORT, ToastAndroid.TOP)&#125;</div><div class="line">                    onDrawerStateChanged=&#123;() =&gt; ToastAndroid.showWithGravity('State Changed',ToastAndroid.SHORT, ToastAndroid.CENTER)&#125;</div><div class="line">                &gt;</div><div class="line">                    <span class="tag">&lt;<span class="name">View</span> <span class="attr">style</span> = <span class="string">&#123;styles.container&#125;</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">TouchableOpacity</span> </span></div><div class="line">                            <span class="attr">style</span>=<span class="string">&#123;styles.Button&#125;</span> </div><div class="line">                            <span class="attr">onPress</span>=<span class="string">&#123;()</span> =&gt; &#123;</div><div class="line">                                    this.refs['DrawerLayout'].openDrawer();</div><div class="line">                                &#125;</div><div class="line">                            &#125;</div><div class="line">                        &gt;</div><div class="line">                            <span class="tag">&lt;<span class="name">Text</span>&gt;</span>Setting<span class="tag">&lt;/<span class="name">Text</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;/<span class="name">TouchableOpacity</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">TextInput</span> <span class="attr">style</span>=<span class="string">&#123;&#123;width:200&#125;&#125;</span>&gt;</span>keyboard dismiss on drag<span class="tag">&lt;/<span class="name">TextInput</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">View</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">DrawerLayoutAndroid</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> styles = StyleSheet.create(&#123;</div><div class="line">    <span class="attr">container</span>: &#123;</div><div class="line">        <span class="attr">flex</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">justifyContent</span>: <span class="string">'center'</span>,</div><div class="line">        <span class="attr">alignItems</span>: <span class="string">'center'</span>,</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    <span class="attr">NavigationView</span>: &#123;</div><div class="line">        <span class="attr">flex</span>:<span class="number">1</span>,</div><div class="line">        <span class="attr">justifyContent</span>: <span class="string">'space-around'</span>,</div><div class="line">        <span class="attr">alignItems</span>: <span class="string">'center'</span>, </div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    <span class="attr">Button</span>: &#123;</div><div class="line">        <span class="attr">height</span>:<span class="number">100</span>,</div><div class="line">        <span class="attr">width</span>:<span class="number">100</span>,</div><div class="line">        <span class="attr">margin</span>:<span class="number">20</span>,</div><div class="line">        <span class="attr">backgroundColor</span>:<span class="string">'#90ee90'</span>,</div><div class="line">        <span class="attr">borderRadius</span>: <span class="number">50</span>,</div><div class="line">        <span class="attr">justifyContent</span>: <span class="string">'center'</span>,</div><div class="line">        <span class="attr">alignItems</span>: <span class="string">'center'</span>,</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<pre><code class="brush:js">    &#39;use strict&#39;;
+
+    import React, { Component } from &#39;react&#39;;
+
+    import {
+        View,
+        Text,
+        StyleSheet,
+        DrawerLayoutAndroid,
+        Dimensions,
+        TouchableOpacity,
+        TextInput,
+        ToastAndroid,
+    } from &#39;react-native&#39;;
+
+    export default class DLAExample extends Component {
+        constructor(props) {
+            super(props);
+
+            this.state = {
+                position: DrawerLayoutAndroid.positions.Left,
+            };
+
+            this.Naview = (
+                &lt;View style={styles.NavigationView}&gt;
+                    &lt;Text&gt;Menu1&lt;/Text&gt;
+                    &lt;Text&gt;Menu2&lt;/Text&gt;
+                    &lt;Text&gt;Menu3&lt;/Text&gt;
+                &lt;/View&gt;
+            );
+        }
+
+        render() {
+            let { width } = Dimensions.get(&#39;window&#39;);
+
+            return (
+                    &lt;DrawerLayoutAndroid
+                        ref=&quot;DrawerLayout&quot;
+                        drawerWidth={width / 2}
+                        drawerBackgroundColor=&#39;rgba(255,255,255,0.8)&#39;
+                        renderNavigationView={() =&gt; this.Naview}
+                        drawerPosition={this.state.position}
+                        keyboardDismissMode=&#39;on-drag&#39;
+                        drawerLockMode=&#39;unlocked&#39;
+                        statusBarBackgroundColor=&#39;#1e90ff&#39;
+                        onDrawerClose={() =&gt; ToastAndroid.showWithGravity(&#39;Drawer Closed&#39;,ToastAndroid.SHORT, ToastAndroid.BOTTOM)}
+                        onDrawerOpen={() =&gt; ToastAndroid.showWithGravity(&#39;Drawer Opened&#39;,ToastAndroid.SHORT, ToastAndroid.TOP)}
+                        onDrawerStateChanged={() =&gt; ToastAndroid.showWithGravity(&#39;State Changed&#39;,ToastAndroid.SHORT, ToastAndroid.CENTER)}
+                    &gt;
+                        &lt;View style = {styles.container}&gt;
+                            &lt;TouchableOpacity 
+                                style={styles.Button} 
+                                onPress={() =&gt; {
+                                        this.refs[&#39;DrawerLayout&#39;].openDrawer();
+                                    }
+                                }
+                            &gt;
+                                &lt;Text&gt;Setting&lt;/Text&gt;
+                            &lt;/TouchableOpacity&gt;
+                            &lt;TextInput style={{width:200}}&gt;keyboard dismiss on drag&lt;/TextInput&gt;
+                        &lt;/View&gt;
+                    &lt;/DrawerLayoutAndroid&gt;
+            );
+        }
+
+    }
+
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            justifyContent: &#39;center&#39;,
+            alignItems: &#39;center&#39;,
+        },
+
+        NavigationView: {
+            flex:1,
+            justifyContent: &#39;space-around&#39;,
+            alignItems: &#39;center&#39;, 
+        },
+
+        Button: {
+            height:100,
+            width:100,
+            margin:20,
+            backgroundColor:&#39;#90ee90&#39;,
+            borderRadius: 50,
+            justifyContent: &#39;center&#39;,
+            alignItems: &#39;center&#39;,
+        }
+    });
+</code></pre>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sharecode.cc/2016/10/13/React-Native-DrawerLayoutAndroid/" data-id="ciwg3xuvn000jmwgebmfdzh02" class="article-share-link">分享</a>
+      <a data-url="http://sharecode.cc/2016/10/13/React-Native-DrawerLayoutAndroid/" data-id="ciwonydij000jc0gedoabmo3q" class="article-share-link">分享</a>
       
         <a href="http://sharecode.cc/2016/10/13/React-Native-DrawerLayoutAndroid/#ds-thread" class="article-comment-link">留言</a>
       
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native-Android/">React Native Android</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React Native</a></li></ul>
 
     </footer>
   </div>
@@ -214,7 +303,7 @@ var duoshuoQuery = {short_name:"wall-e-va"};
   <div class="widget-wrap">
     <h3 class="widget-title tagcloud">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 15px;">React Native</a> <a href="/tags/React-Native-Android/" style="font-size: 15px;">React Native Android</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
+      <a href="/tags/ASP-NET-Core/" style="font-size: 15px;">ASP.NET Core</a> <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Class-Diagram/" style="font-size: 10px;">Class Diagram</a> <a href="/tags/Data-Struct/" style="font-size: 10px;">Data Struct</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/PlantUML/" style="font-size: 10px;">PlantUML</a> <a href="/tags/React-Native/" style="font-size: 20px;">React Native</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a>
     </div>
   </div>
 
@@ -323,6 +412,18 @@ var duoshuoQuery = {short_name:"wall-e-va"};
 
 <script src="/js/script.js"></script>
 
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushXml.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushCSharp.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/SyntaxHighlighter/3.0.83/styles/shCoreEclipse.min.css"/>
+
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "code";
+  SyntaxHighlighter.all();
+</script>
   </div>
 </body>
 </html>
