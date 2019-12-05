@@ -1,4 +1,4 @@
-<mxfile host="www.draw.io" modified="2019-12-05T12:49:44.864Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36" etag="dPSK4DQAi6wbXmr0ifgj" version="12.3.6" type="github" pages="1">
+<mxfile host="www.draw.io" modified="2019-12-05T13:02:51.746Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36" etag="dag02RxCSHXlfSMCxWhr" version="12.3.6" type="github" pages="1">
   <diagram name="Page-1" id="74e2e168-ea6b-b213-b513-2b3c1d86103e">
     <mxGraphModel dx="782" dy="437" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
       <root>
@@ -370,17 +370,20 @@
         <mxCell id="s-7z_2EK09W1QtDXRIaZ-157" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;endArrow=classicThin;endFill=1;" edge="1" source="s-7z_2EK09W1QtDXRIaZ-158" target="s-7z_2EK09W1QtDXRIaZ-160" parent="77e6c97f196da883-4">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="s-7z_2EK09W1QtDXRIaZ-158" value="用Dealer和Asset信息获取金融产品" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="77e6c97f196da883-4">
+        <mxCell id="s-7z_2EK09W1QtDXRIaZ-158" value="用Dealer和Asset(NST, Model Year, Company Id)信息获取金融产品" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="77e6c97f196da883-4">
           <mxGeometry x="30" y="250" width="100" height="60" as="geometry"/>
         </mxCell>
         <mxCell id="s-7z_2EK09W1QtDXRIaZ-159" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classicThin;endFill=1;" edge="1" source="s-7z_2EK09W1QtDXRIaZ-160" target="s-7z_2EK09W1QtDXRIaZ-161" parent="77e6c97f196da883-4">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
         <mxCell id="s-7z_2EK09W1QtDXRIaZ-160" value="判断是否获取到金融产品" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="77e6c97f196da883-4">
-          <mxGeometry x="30" y="442.5" width="100" height="60" as="geometry"/>
+          <mxGeometry x="30" y="350" width="100" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="s-7z_2EK09W1QtDXRIaZ-169" value="否" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classicThin;endFill=1;fontSize=8;fontColor=#000000;" edge="1" parent="77e6c97f196da883-4" source="s-7z_2EK09W1QtDXRIaZ-161" target="s-7z_2EK09W1QtDXRIaZ-168">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
         <mxCell id="s-7z_2EK09W1QtDXRIaZ-161" value="为空" style="rhombus;whiteSpace=wrap;html=1;rounded=0;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="77e6c97f196da883-4">
-          <mxGeometry x="40" y="535" width="80" height="60" as="geometry"/>
+          <mxGeometry x="40" y="450" width="80" height="60" as="geometry"/>
         </mxCell>
         <mxCell id="s-7z_2EK09W1QtDXRIaZ-162" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;labelBackgroundColor=none;startArrow=none;startFill=0;startSize=5;endArrow=classicThin;endFill=1;endSize=5;jettySize=auto;orthogonalLoop=1;strokeWidth=1;fontFamily=Verdana;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="77e6c97f196da883-4">
           <mxGeometry relative="1" as="geometry">
@@ -396,6 +399,9 @@
         </mxCell>
         <mxCell id="s-7z_2EK09W1QtDXRIaZ-166" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=8;fontColor=#FF6666;" vertex="1" parent="77e6c97f196da883-4">
           <mxGeometry x="5" y="270" width="20" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="s-7z_2EK09W1QtDXRIaZ-168" value="判断是否获取到金融产品" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="77e6c97f196da883-4">
+          <mxGeometry x="30" y="550" width="100" height="60" as="geometry"/>
         </mxCell>
         <mxCell id="s-7z_2EK09W1QtDXRIaZ-110" value="是" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;startArrow=none;startFill=0;endArrow=classicThin;endFill=1;fontSize=8;fontColor=#000000;" edge="1" parent="1" source="s-7z_2EK09W1QtDXRIaZ-108">
           <mxGeometry relative="1" as="geometry">
@@ -435,6 +441,11 @@
         <mxCell id="s-7z_2EK09W1QtDXRIaZ-155" value="是" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;startArrow=none;startFill=0;endArrow=classicThin;endFill=1;fontSize=8;fontColor=#000000;" edge="1" parent="1" source="s-7z_2EK09W1QtDXRIaZ-118">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="600" y="2786" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s-7z_2EK09W1QtDXRIaZ-167" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;endArrow=classicThin;endFill=1;fontSize=8;fontColor=#000000;" edge="1" parent="1" source="s-7z_2EK09W1QtDXRIaZ-161">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1090" y="540" as="targetPoint"/>
           </mxGeometry>
         </mxCell>
       </root>
