@@ -1,4 +1,4 @@
-<mxfile host="www.draw.io" modified="2019-12-05T09:00:25.449Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36" etag="SoduEyMwr7S-WCEK0-ZJ" version="12.3.6" type="github" pages="1">
+<mxfile host="www.draw.io" modified="2019-12-05T09:06:02.792Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36" etag="7fhwnlxvyUR_HyWZ9pxU" version="12.3.6" type="github" pages="1">
   <diagram name="Page-1" id="74e2e168-ea6b-b213-b513-2b3c1d86103e">
     <mxGraphModel dx="782" dy="437" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
       <root>
@@ -108,10 +108,18 @@
         <mxCell id="s-7z_2EK09W1QtDXRIaZ-31" value="为空" style="rhombus;whiteSpace=wrap;html=1;rounded=0;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="77e6c97f196da883-3">
           <mxGeometry x="40" y="530" width="80" height="60" as="geometry"/>
         </mxCell>
+        <mxCell id="s-7z_2EK09W1QtDXRIaZ-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classicThin;endFill=1;" edge="1" parent="77e6c97f196da883-3" source="s-7z_2EK09W1QtDXRIaZ-16" target="s-7z_2EK09W1QtDXRIaZ-40">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
         <mxCell id="s-7z_2EK09W1QtDXRIaZ-16" value="判断Asset Condition Code是否合法" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="77e6c97f196da883-3">
           <mxGeometry x="30" y="630" width="100" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="s-7z_2EK09W1QtDXRIaZ-38" value="&lt;font color=&quot;rgba(0, 0, 0, 0)&quot; face=&quot;monospace&quot;&gt;&lt;span style=&quot;font-size: 0px&quot;&gt;ffff&lt;/span&gt;&lt;/font&gt;" style="rhombus;whiteSpace=wrap;html=1;rounded=0;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="77e6c97f196da883-3">
+        <mxCell id="s-7z_2EK09W1QtDXRIaZ-44" value="是" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classicThin;endFill=1;" edge="1" parent="77e6c97f196da883-3" source="s-7z_2EK09W1QtDXRIaZ-40">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="820" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s-7z_2EK09W1QtDXRIaZ-40" value="New/Demo/Used&lt;br&gt;之一且LC申请只能是New Car" style="rhombus;whiteSpace=wrap;html=1;rounded=0;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="77e6c97f196da883-3">
           <mxGeometry x="40" y="720" width="80" height="60" as="geometry"/>
         </mxCell>
         <mxCell id="77e6c97f196da883-4" value="Financial Product" style="swimlane;html=1;startSize=20;" parent="77e6c97f196da883-1" vertex="1">
