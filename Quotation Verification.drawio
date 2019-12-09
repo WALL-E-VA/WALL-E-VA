@@ -1,4 +1,4 @@
-<mxfile host="www.draw.io" modified="2019-12-09T07:54:31.708Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36" etag="o6X1Hc00yD9RDzInNkSI" version="12.3.8" type="github" pages="1">
+<mxfile host="www.draw.io" modified="2019-12-09T08:03:16.052Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36" etag="DixKUBg1p5zCTHGwsAJJ" version="12.3.8" type="github" pages="1">
   <diagram name="Page-1" id="74e2e168-ea6b-b213-b513-2b3c1d86103e">
     <mxGraphModel dx="1182" dy="732" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
       <root>
@@ -645,35 +645,35 @@
         <mxCell id="gsIeBrp0p9jt7w0oq8Z6-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classicThin;endFill=1;fontSize=8;fontColor=#000000;" edge="1" parent="gsIeBrp0p9jt7w0oq8Z6-3" source="gsIeBrp0p9jt7w0oq8Z6-26" target="gsIeBrp0p9jt7w0oq8Z6-28">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="gsIeBrp0p9jt7w0oq8Z6-26" value="尾款产品，判断尾款是否正确" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="gsIeBrp0p9jt7w0oq8Z6-3">
+        <mxCell id="gsIeBrp0p9jt7w0oq8Z6-26" value="尾款产品，判断计算出的尾款是否和前端提交的值是否相等" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="gsIeBrp0p9jt7w0oq8Z6-3">
           <mxGeometry x="30" y="831" width="100" height="60" as="geometry"/>
         </mxCell>
         <mxCell id="gsIeBrp0p9jt7w0oq8Z6-27" value="是" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;startArrow=none;startFill=0;endArrow=classicThin;endFill=1;fontSize=8;fontColor=#000000;" edge="1" parent="gsIeBrp0p9jt7w0oq8Z6-3" source="gsIeBrp0p9jt7w0oq8Z6-28" target="gsIeBrp0p9jt7w0oq8Z6-31">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="gsIeBrp0p9jt7w0oq8Z6-28" value="正确" style="rhombus;whiteSpace=wrap;html=1;rounded=0;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="gsIeBrp0p9jt7w0oq8Z6-3">
-          <mxGeometry x="40" y="932" width="80" height="60" as="geometry"/>
+        <mxCell id="gsIeBrp0p9jt7w0oq8Z6-28" value="相等" style="rhombus;whiteSpace=wrap;html=1;rounded=0;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="gsIeBrp0p9jt7w0oq8Z6-3">
+          <mxGeometry x="40" y="925" width="80" height="60" as="geometry"/>
         </mxCell>
         <mxCell id="gsIeBrp0p9jt7w0oq8Z6-29" value="否" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;startArrow=none;startFill=0;endArrow=classicThin;endFill=1;fontSize=8;fontColor=#000000;" edge="1" parent="gsIeBrp0p9jt7w0oq8Z6-3">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="320" y="962" as="targetPoint"/>
-            <mxPoint x="120" y="961.5" as="sourcePoint"/>
+            <mxPoint x="320" y="955" as="targetPoint"/>
+            <mxPoint x="120" y="954.5" as="sourcePoint"/>
             <Array as="points">
-              <mxPoint x="270" y="962"/>
-              <mxPoint x="270" y="962"/>
+              <mxPoint x="270" y="955"/>
+              <mxPoint x="270" y="955"/>
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="gsIeBrp0p9jt7w0oq8Z6-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classicThin;endFill=1;fontSize=8;fontColor=#000000;" edge="1" parent="gsIeBrp0p9jt7w0oq8Z6-3" source="gsIeBrp0p9jt7w0oq8Z6-31" target="gsIeBrp0p9jt7w0oq8Z6-33">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="gsIeBrp0p9jt7w0oq8Z6-31" value="判断前端提交的RentalModeType是否合法" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="gsIeBrp0p9jt7w0oq8Z6-3">
+        <mxCell id="gsIeBrp0p9jt7w0oq8Z6-31" value="LC非FL产品，判断计算出的RV比例和提交的值是否相等" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="gsIeBrp0p9jt7w0oq8Z6-3">
           <mxGeometry x="30" y="1030" width="100" height="60" as="geometry"/>
         </mxCell>
         <mxCell id="gsIeBrp0p9jt7w0oq8Z6-32" value="是" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classicThin;endFill=1;fontSize=8;fontColor=#000000;" edge="1" parent="gsIeBrp0p9jt7w0oq8Z6-3" source="gsIeBrp0p9jt7w0oq8Z6-33" target="gsIeBrp0p9jt7w0oq8Z6-36">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="gsIeBrp0p9jt7w0oq8Z6-33" value="Arrear/Advance" style="rhombus;whiteSpace=wrap;html=1;rounded=0;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="gsIeBrp0p9jt7w0oq8Z6-3">
+        <mxCell id="gsIeBrp0p9jt7w0oq8Z6-33" value="相等" style="rhombus;whiteSpace=wrap;html=1;rounded=0;shadow=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=8;align=center;" vertex="1" parent="gsIeBrp0p9jt7w0oq8Z6-3">
           <mxGeometry x="40" y="1130" width="80" height="60" as="geometry"/>
         </mxCell>
         <mxCell id="gsIeBrp0p9jt7w0oq8Z6-34" value="否" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;startArrow=none;startFill=0;endArrow=classicThin;endFill=1;fontSize=8;fontColor=#000000;" edge="1" parent="gsIeBrp0p9jt7w0oq8Z6-3">
